@@ -52,13 +52,17 @@ function parse(svg) {
   return { root, paths }
 }
 
-/** Same commands in the same order, every number within the rounding error and at most 2 decimals. */
+/**
+ * Same commands in the same order, and every number within the rounding error.
+ * Most numbers have 2 decimals; a subpath whose cap would turn keeps 3 or its
+ * original data (scripts/lib/precision.mjs), still within the same error.
+ */
 function samePath(rendered, source) {
   const skeleton = (d) => d.replace(NUMBER, "#")
   if (skeleton(rendered) !== skeleton(source)) return false
   const a = rendered.match(NUMBER) ?? []
   const b = source.match(NUMBER) ?? []
-  return a.every((n, i) => Math.abs(Number(n) - Number(b[i])) <= MAX_ROUNDING_ERROR && !/\.\d{3,}/.test(n))
+  return a.every((n, i) => Math.abs(Number(n) - Number(b[i])) <= MAX_ROUNDING_ERROR)
 }
 
 /** Problems with one rendered variant, compared with its source SVG. */

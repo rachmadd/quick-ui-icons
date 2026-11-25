@@ -3,6 +3,26 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { parseSvg, roundPathData } from "../../../scripts/lib/source.mjs"
+import { roundPathSafely } from "../../../scripts/lib/precision.mjs"
+
+test("roundPathSafely keeps a tiny segment's direction (sharp brain-side's 0.02-unit stub)", () => {
+  // At 2 decimals this stub's first control point lands on its start and its
+  // direction swings from -30° to 0°, which turns its butt cap into a tick.
+  const stub = "M4.043 6.971C4.049 6.967 4.056 6.964 4.062 6.96"
+  assert.notEqual(roundPathSafely(stub).d, roundPathData(stub))
+  assert.equal(roundPathSafely(stub).kept, 1)
+})
+
+test("roundPathSafely rounds ordinary subpaths to 2 decimals, each on its own", () => {
+  const path = "M11.5386 2.8073L14.87 8.5744M4.043 6.971C4.049 6.967 4.056 6.964 4.062 6.96"
+  const { d, kept } = roundPathSafely(path)
+  assert.ok(d.startsWith("M11.54 2.81L14.87 8.57M"))
+  assert.equal(kept, 1)
+})
+
+test("roundPathSafely refuses relative commands", () => {
+  assert.throws(() => roundPathSafely("M0 0l1 1"), /absolute/)
+})
 
 test("roundPathData keeps 2 decimals and drops trailing zeros", () => {
   assert.equal(roundPathData("M11.5386 2.8073L14.87 8.5744"), "M11.54 2.81L14.87 8.57")

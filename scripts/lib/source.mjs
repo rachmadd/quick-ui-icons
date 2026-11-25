@@ -8,6 +8,7 @@
 
 import { readdir, readFile } from "node:fs/promises"
 import { join } from "node:path"
+import { roundPathData, roundPathSafely } from "./precision.mjs"
 
 /** The styles the package builds, mapped to their folder in icons/. */
 export const VARIANTS = [
@@ -16,15 +17,11 @@ export const VARIANTS = [
   { variant: "duotone", folder: "duotone" },
 ]
 
-/** Decimal places kept in path data. 0.005 units at most, 0.01px at 48px. */
-export const PRECISION = 2
-
 const VIEW_BOX = "0 0 24 24"
 /** Root attributes the shared <svg> wrapper supplies itself. */
 const ROOT_DROP = new Set(["xmlns", "width", "height", "viewBox"])
 const ATTR = /([\w:-]+)="([^"]*)"/g
 const ELEMENT = /<([a-zA-Z]+)\b([^>]*?)\/?>/g
-const NUMBER = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi
 
 /** `name="value"` pairs. Throws on anything else, so an attribute is never dropped silently. */
 function readAttrs(chunk, label) {
@@ -33,22 +30,7 @@ function readAttrs(chunk, label) {
   return [...chunk.matchAll(ATTR)].map(([, key, value]) => [key, value])
 }
 
-const countNumbers = (d) => (d.match(NUMBER) ?? []).length
-
-/**
- * Rounds every number in a path string, keeping its separators as they were.
- *
- * Throws on arcs, whose flags can be written without separators (`a1 1 0 011 1`)
- * and would be misread as one number, and on any input where rounding would
- * fuse two numbers (`0.001.5` would become `00.5`). Neither occurs in icons/
- * today; the checks keep a future export from being corrupted quietly.
- */
-export function roundPathData(d, places = PRECISION) {
-  if (/[Aa]/.test(d)) throw new Error(`arc commands aren't supported: ${d.slice(0, 40)}`)
-  const rounded = d.replace(NUMBER, (n) => String(Number(Number(n).toFixed(places))))
-  if (countNumbers(rounded) !== countNumbers(d)) throw new Error(`rounding would merge numbers in: ${d.slice(0, 40)}`)
-  return rounded
-}
+export { roundPathData }
 
 /**
  * One SVG as { root, elements }. `root` holds the presentation attributes
@@ -69,7 +51,7 @@ export function parseSvg(source, label) {
       const attrs = readAttrs(chunk, label).map(([key, value]) => {
         if (key !== "d") return [key, value]
         try {
-          return [key, roundPathData(value)]
+          return [key, roundPathSafely(value).d]
         } catch (error) {
           throw new Error(`${label}: ${error.message}`)
         }
