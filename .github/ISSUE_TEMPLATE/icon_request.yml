@@ -5,8 +5,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Check the set first at [keylineicons.com](https://keylineicons.com). Search
-        matches on names, so a glyph may be here under a word you did not try.
+        Check the set first in [`icons/stroke/`](https://github.com/rachmadd/quick-ui-icons/tree/main/icons/stroke).
+        Icons are named by what they show, so a glyph may be here under a word you did not try.
 
   - type: input
     id: name
