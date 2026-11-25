@@ -3,133 +3,44 @@
 
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
+# Quick UI Icons
 
-# Keyline Icons
+Quick UI's icon set, forked from Keyline Icons (MIT). It holds 2,013 icons on a
+24px grid, the pipeline that builds them, the site that browses them and the
+packages. `@quick-ui/icons` (`packages/react`) is the package that will ship.
+Quick UI uses the rounded `stroke` and `fill` styles.
 
-A 24×24 icon set in four styles (stroke, two-tone, duotone, fill) and two
-corner treatments, its build pipeline, the site that browses it, and its
-packages. MIT.
+## Where things live
 
-## The one rule
+- `raw/<name>/` holds the Figma exports and is the source of truth.
+- `pipeline/` builds everything else from `raw/`. `pipeline/README.md` explains
+  the build and the drawing rules.
+- These are generated, so never edit them by hand: `icons/`, `components/icons/`,
+  `packages/*/src/`, `packages/*/icons.json`, `registry.json`, `registry/` and
+  `previews/`. Change `raw/` or the generator, then rebuild.
+- `app/`, `components/` and `lib/` are the site. It still uses Keyline's name
+  and domain.
 
-**`icons/`, `components/icons/`, `packages/*/src/`, `packages/*/icons.json`,
-`registry.json` and `registry/` are generated. Never edit them.** The source of
-truth is `raw/`, which holds Figma exports, and everything downstream is built
-from it:
+Run `pnpm icons:ci` before you finish. CI also runs `pnpm lint` and
+`pnpm build`.
 
-```
-raw/<name>/*.svg  ->  icons/[sharp/]<style>/<name>.svg  ->  components/icons/index.tsx
-                                                        ->  packages/react/src/*.tsx
-                                                        ->  packages/react-native/src/*.tsx
-                                                        ->  packages/{mcp,cli,figma-plugin}/icons.json
-                                                        ->  registry.json, registry/
-                                                        ->  previews/{figma,plugin}-cover.{svg,png}
-                                                        ->  previews/social-preview.{svg,png}
-                                                        ->  previews/paper/*.html
-```
+## Rules
 
-A hand-edit to any of those passes review and is destroyed by the next build.
-`pnpm icons:ci` is what catches it.
+- Never publish a package, push a tag or create a release without the owner's
+  approval. Every package.json is `"private": true` and the publish workflow is
+  disabled. Leave both as they are unless the owner asks.
+- Keep Keyline's notice ("Copyright (c) 2026 Keyline Icons") in `LICENSE`, in
+  each `packages/*/LICENSE`, and in every generated file's header. The
+  generators don't write a header yet. When one is added, it has to carry this
+  notice.
+- Don't use "Keyline Icons" as a product or package name. Use it only to credit
+  them.
+- The `upstream` remote is Keyline's repo. Fetch from it to pick up new icons,
+  but don't merge without the owner's approval, and never push to it.
+- Ask the owner before any choice with a real trade-off.
 
-## Before you finish
+## Commits
 
-```bash
-pnpm icons:ci
-```
-
-One of the three things CI runs, beside `pnpm lint` and `pnpm build` on their
-own runners; a change that passes this alone can still fail on either. It holds
-the sync checks, the geometry linter, the demo reference check, and `tsc` three
-times: for the site, for `packages/react` and for `registry/`. The site's own
-`tsconfig.json` leaves the last two out so that `next build` does not
-type-check generated code on every deploy. The four slow checks run at once,
-after the sync checks, through `pipeline/parallel.mjs`. Three checks sit outside
-CI on purpose:
-`icons:figma` needs the Figma file, `brand:check` rasterises through headless
-Chrome where two versions disagree by a pixel, and `history:check` reads git.
-
-**Name the branch after the update it ships in.** `release/0.1.5`, not
-`grips-and-search`. The releases are numbered and the branches were not, which
-left a list (`design-file-links`, `dot-size-system`, `fix-changelog-copy`,
-`media-batch`) with nothing to sort or search by once the work had landed and
-the name had stopped meaning anything. The number is prefixed and drops the `v`
-on purpose: tags carry it, so a branch called `v0.1.5` goes ambiguous against
-the tag `v0.1.5` the day it is cut. Two branches for one release qualify after
-the number, `release/0.1.5-shields`, so the sort still runs by update.
-
-```bash
-git tag --sort=-creatordate | head -1   # the last release; the next one names the branch
-git switch -c release/0.1.5
-```
-
-`main` is never committed to directly, and the merge back is Zafar's.
-
-**Changed a drawing? Use `pnpm ship -m "..."` rather than committing by hand.**
-
-```bash
-pnpm ship -m "Draw sun"
-```
-
-It regenerates, verifies, commits, and only then rebuilds `lib/icon-history.json`
-and the Paper boards, folding both back into the same commit. That order is the
-reason it exists. The dates come off `git log`, so the commit that changes a
-drawing is the commit that makes its date stale: run the rebuild before
-committing and it is wrong the moment it lands. Paper reads those same dates, so
-it has to follow them. Neither ordering is something anyone remembers reliably,
-and both fail silently, on the icon pages rather than in a check.
-
-It pins the committer date across the amend, so `history:check` passes straight
-after. Commit an icon by hand and it will not.
-
-## Where the real documentation is
-
-Long-form reasoning lives next to the thing it explains, not here.
-
-| Topic | Read |
-| --- | --- |
-| Drawing standard, construction, variants, coverage | `pipeline/README.md` |
-| How Figma exports are laid out | `raw/README.md` |
-| Titles, canonicals, sitemap, route policy | `lib/seo.ts`, and each page's own `pageMetadata()` |
-| Site components and tokens | `components/ui/`, `app/globals.css` |
-| Contributing | `CONTRIBUTING.md` |
-
-Anything under `.claude/skills/` is private and is not published with this
-repository. Do not add it, quote it into a tracked file, or cite it as a path a
-reader can open. Everything a contributor needs is in the table above.
-
-## Traps that have already cost time
-
-- **Every name ships all four styles, but which ones are drawn is measured,
-  not chosen.** A filled style needs a face the stroke closes, from the
-  glyph's enclosed area or a square or circle container. `bar-chart` is three
-  open strokes, so its fill is its stroke and its two-tone and duotone grey two
-  of the bars: correct, not a gap to draw.
-- **`tsc` needs `next typegen` first on a clean checkout.** `next-env.d.ts` is
-  gitignored and is what declares `*.png` imports, so a fresh clone fails with
-  "Cannot find module '@/public/mockups/figma.png'" about a committed file.
-  `next dev` writes it once locally and it never comes back, which is why this
-  only ever shows up in CI. `icons:ci` and `typecheck` both run typegen now.
-- **Generated files must stay out of Prettier.** `.prettierignore` covers them.
-  Formatting one makes it disagree with its generator and fails CI on a repo
-  where all anyone did was run the formatter. This has been hit three times.
-- **JSX eats a leading space** on a text node that wraps to the next line.
-  Write it as `{" "}`. This shipped as "size-4in their variants" once.
-- **App Router metadata objects are replaced, not merged.** A page exporting
-  `openGraph` drops the layout's `og:type` and `og:site_name` silently. Use
-  `pageMetadata()` in `lib/seo.ts`.
-- **`opengraph-image` does not inherit downward.** Every segment that should
-  have a card needs its own re-export, or shared links unfurl blank.
-- **Icons in the site's own chrome come from the set**, never another library.
-  The site is the shop window; a borrowed glyph is a lie about coverage.
-
-## House style
-
-Comments explain *why*, not what, and are worth writing when the reasoning
-would not survive being rediscovered from the diff. Commit messages do the same.
-
-A subject line in the imperative saying what changed, then a body saying why,
-what it was measured against, and what was ruled out. Not a restatement of the
-diff. If a decision took an argument to reach, the message is where the argument
-lives, because the next person to touch it will not have been in the room.
-
-No spaced dashes in prose or UI copy. Commas, colons and full stops.
+Use `type: description`, where type is one of `feat`, `fix`, `refactor`, `docs`,
+`test`, `chore`, `perf` or `ci`. Write the subject in the imperative, and use
+the body to say why.
