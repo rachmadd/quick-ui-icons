@@ -10,15 +10,12 @@ pnpm icons:lint        # check icons/
 pnpm icons:react       # icons/ -> packages/react/src (eight modules)
 pnpm readmes:check     # check the counts typed into the READMEs against icons/
 pnpm readmes:fix       # rewrite those counts in place
-pnpm keywords:emit     # print the Figma snippet that reads the search tags
-pnpm keywords:build    # write its output to data/icon-keywords.json
 pnpm icons:figma       # check the Figma file against raw/ (two steps, see below)
 pnpm icons:ci          # sync checks, README counts, lint, typecheck (for CI)
 pnpm build             # compile packages/react to dist/
 ```
 
-`icons:figma` and the `keywords:*` scripts are deliberately not in `icons:ci`:
-they need the Figma file, which CI does not have. Everything else here reads
+`icons:figma` is deliberately not in `icons:ci`: it needs the Figma file, which CI does not have. Everything else here reads
 `icons/`, so a defect that exists only in the design file passes every check.
 Run `icons:figma` after a drawing session:
 
@@ -53,11 +50,8 @@ pipeline/
   lib/geom.mjs                path parsing, exact bboxes, closed-subpath detection
   lib/svg.mjs                 SVG reader + normalizer
   build.mjs                   raw/ -> icons/
-  build-sharp.mjs             one-off: derive sharp drawings from stroke
-  split-sets.mjs              one-off: split a flat Figma export into raw/<name>/
   lint.mjs                    geometry + coverage rules
   build-react.mjs             icons/ -> packages/react/src
-  build-keywords.mjs          Figma descriptions -> data/icon-keywords.json
   check-readmes.mjs           README counts against icons/
   check-figma.mjs             the Figma file against raw/
   parallel.mjs                runs the last icons:ci checks at once

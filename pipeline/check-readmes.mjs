@@ -57,8 +57,8 @@ function counts() {
     its own right; there is no `half` for it to contain.
   */
   /*
-    `data/icon-not-containers.json` is the same list lint.mjs and
-    build-keywords.mjs consult, and leaving it out was worth four sets and three published numbers:
+    `data/icon-not-containers.json` is the same list lint.mjs
+    consults, and leaving it out was worth four sets and three published numbers:
     `square-pen`, `circle-pen`, `circle-square` and `circle-square-dashed` all
     wear a prefix over a base that exists, so a bare prefix test calls them
     container forms and subtracts them from the set count. The file listing has

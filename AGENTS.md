@@ -21,8 +21,7 @@ build the prop unless the owner asks.
   Change `raw/` or the generator, then rebuild.
 - `data/` holds the icon metadata: search tags, aliases, categories,
   descriptions and renames. A future icon browser on quick-ui.com reads it.
-  Edit it by hand, except `icon-keywords.json`, which `pnpm keywords:build`
-  writes from Figma.
+  Edit it by hand.
 - `pipeline/README.md` explains the build and the drawing rules.
 
 Run `pnpm icons:ci` and `pnpm build` before you finish. CI runs both.

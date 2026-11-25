@@ -35,7 +35,6 @@ icons/               SVGs built from raw/, rounded and sharp. Don't edit them.
 packages/react/      @quick-ui/icons. Its src/ is built from icons/.
 data/                Search tags, aliases, categories and descriptions.
 pipeline/            The build, the linter and the checks.
-tools/               Scripts that drew past batches of icons.
 ```
 
 `pipeline/README.md` explains the build and the drawing rules. Before you open a
