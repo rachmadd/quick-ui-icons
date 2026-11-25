@@ -69,9 +69,24 @@ Recorded with the date and the reason, so a later phase doesn't reopen them.
   PR, and only if the owner asks. Without them, the upstream sync script
   would have to filter two-tone out of each Keyline release.
 
-Still open from the phase 0 audit (PR #2): the `size` prop, the duotone
-fallback on 79 closed icons, the deprecated aliases, the license header form,
-the file layout and where the generator lives.
+- **2026-11-25: Keyline's 10 deprecated rename aliases are dropped.**
+  `@quick-ui/icons` has no users yet, so they would only carry Keyline's
+  history. `data/icon-renames.json` stays for our own future renames.
+- **2026-11-25: generated files get a two-line `//` header.** It says the
+  file is generated and carries "Copyright (c) 2026 Keyline Icons, MIT". A
+  plain `//` comment is stripped by minifiers, while a `/*! */` or
+  `@license` comment would ship one copy of the notice per imported icon.
+  The full text stays in `packages/react/LICENSE`. The phase 3 `icons.tsx`
+  keeps the full MIT text, because the registry copies that file alone.
+- **2026-11-25: one file per icon, per entry point,** with a barrel for each:
+  `src/icons/star.tsx`, `src/sharp/icons/star.tsx`, plus a shared
+  `src/icon.tsx`. With `sideEffects: false`, an unused icon is an unused
+  module, and Next.js can rewrite barrel imports to single files in dev.
+- **2026-11-25: the generator is `scripts/generate.mjs`.** It replaces
+  `pipeline/build-react.mjs`, which is deleted once phase 1 lands.
+
+Still open from the phase 0 audit (PR #2): whether to keep the `size` prop,
+and how to handle the 79 closed icons whose duotone is the outline.
 
 ## Phases
 
