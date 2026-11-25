@@ -1,3 +1,9 @@
+# DISABLED for the Quick UI fork. Nothing publishes until the owner approves
+# a release. To turn it back on, restore the tag trigger below, delete the
+# `if: false` on the job, and set up trusted publishing for @quick-ui/icons.
+# Every package.json is also `"private": true`, so `npm publish` refuses
+# anyway.
+#
 # Publishes the four npm packages when a release tag is pushed.
 #
 # Why from here and not from a laptop: npm ends direct publishing with tokens
@@ -10,8 +16,8 @@
 # The trust is set per package on npm and names this file, so renaming it
 # breaks publishing until each package is pointed at the new name:
 #
-#   npm trust github @keyline-icons/<name> --file publish.yml \
-#     --repo keyline-icons/keyline-icons --allow-publish --allow-stage-publish
+#   npm trust github @quick-ui/<name> --file publish.yml \
+#     --repo rachmadd/quick-ui-icons --allow-publish --allow-stage-publish
 #
 # `--allow-publish` is not the default. Trust set up after 3 Sep 2026 allows
 # only `npm stage publish` unless it is asked for, and a staged version waits
@@ -21,9 +27,11 @@ name: Publish
 # A tag, not a branch: a version is released when it is tagged, and the tag
 # names a commit whose branch CI has already checked. `workflow_dispatch` is
 # for re-running after a failure without moving the tag.
+# Disabled: the tag trigger is commented out, and the job below is `if: false`,
+# so a manual run does nothing either.
 on:
-  push:
-    tags: ["v*"]
+  # push:
+  #   tags: ["v*"]
   workflow_dispatch:
 
 # Never cancel a publish half way: two of four packages out is worse than a
@@ -40,6 +48,7 @@ permissions:
 
 jobs:
   publish:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
