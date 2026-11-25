@@ -10,7 +10,7 @@ to know up front is where the rules live and which files you're allowed to edit.
 generate it. The source of truth is `raw/`, and the rest is built from it:
 
 ```
-raw/<name>/*.svg  ->  icons/[sharp/]<style>/<name>.svg  ->  packages/react/src/*.tsx
+raw/<name>/*.svg  ->  icons/[sharp/]<style>/<name>.svg  ->  packages/react/src/[sharp/]icons/<name>.tsx
 ```
 
 A hand-edit to a generated file passes review, gets committed, and is destroyed

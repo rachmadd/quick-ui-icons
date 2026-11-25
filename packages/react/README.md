@@ -82,7 +82,7 @@ over every knockout.
 tree-shake in any modern bundler, so an app importing three icons ships three.
 
 **Generated, not written.** The components come from `icons/` via
-`pipeline/build-react.mjs`, one module per style and corner treatment.
+`scripts/generate.mjs`, one module per icon.
 
 **Coming, not built yet:** a `variant` prop to choose the style, with
 `@quick-ui/icons` for rounded corners and `@quick-ui/icons/sharp` for sharp.

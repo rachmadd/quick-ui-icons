@@ -19,8 +19,9 @@ the owner.
 - `raw/<name>/` holds the Figma exports and is the source of truth.
 - `icons/` (rounded) and `icons/sharp/` are built from `raw/` by
   `pipeline/build.mjs`.
-- `packages/react/src/` is built from `icons/` by `pipeline/build-react.mjs`
-  during `pnpm build` and `pnpm icons:ci`. It's gitignored, not committed.
+- `packages/react/src/` is built from `icons/` and `icons/sharp/` by
+  `scripts/generate.mjs` during `pnpm build`, `pnpm test` and `pnpm icons:ci`.
+  It's gitignored, not committed. Tests are in `packages/react/test/`.
 - `icons/` and `packages/react/src/` are generated, so never edit them by hand.
   Change `raw/` or the generator, then rebuild.
 - `data/` holds the icon metadata: search tags, aliases, categories,
@@ -31,7 +32,8 @@ the owner.
 - `.work/` holds logs and measurements. It's gitignored, so put anything the
   owner needs into the PR as well.
 
-Run `pnpm icons:ci` and `pnpm build` before you finish. CI runs both.
+Run `pnpm icons:ci`, `pnpm build` and `pnpm test` before you finish. CI runs
+all three.
 
 ## Rules
 
@@ -39,9 +41,8 @@ Run `pnpm icons:ci` and `pnpm build` before you finish. CI runs both.
   approval. Every package.json is `"private": true` and the publish workflow is
   disabled. Leave both as they are unless the owner asks.
 - Keep Keyline's notice ("Copyright (c) 2026 Keyline Icons") in `LICENSE`, in
-  `packages/react/LICENSE`, and in every generated file's header. The
-  generators don't write a header yet. When one is added, it has to carry this
-  notice.
+  `packages/react/LICENSE`, and in every generated file's header.
+  `scripts/lib/emit.mjs` writes that header, and a test fails without it.
 - Don't use "Keyline Icons" as a product or package name. Use it only to credit
   them.
 - The `upstream` remote is Keyline's repo. Fetch from it to pick up new icons,

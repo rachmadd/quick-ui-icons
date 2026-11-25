@@ -106,9 +106,10 @@ const PRIMITIVE_ATTRS = ['cx', 'cy', 'r', 'rx', 'ry', 'x', 'y', 'width', 'height
  * Every shape is emitted as a `<path>`, including circles.
  *
  * A circle drawn in Figma exports as `<circle>` unless it is flattened, and it
- * renders identically, so nothing here fails — `build-react.mjs` handles
- * primitives, and so does the browser. The reason to convert is that a
- * primitive is a second shape of thing every consumer has to know about, and
+ * renders identically, so nothing here fails, and the browser handles
+ * primitives too. scripts/generate.mjs doesn't: it accepts only `<path>`.
+ * The reason to convert is that a primitive is a second shape of thing every
+ * consumer has to know about, and
  * only 12 of 451 files ever produced one. An exception that rare is one nobody
  * remembers to handle: path morphing, font builders and most third-party icon
  * tooling assume `d` and quietly skip what they don't recognise.
