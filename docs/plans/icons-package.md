@@ -10,7 +10,7 @@ measurements go in `.work/`, which is gitignored.
 | Phase | What | Status |
 | --- | --- | --- |
 | 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Every decision is made (see Decisions) |
-| 1 | Generator and package | Done on `phase-1-generator`. The report is in the PR, and a local copy is in `.work/phase-1.md`. Waiting on the owner |
+| 1 | Generator and package | Done on `phase-1-generator`, PR #3. The report is in the PR, and a local copy is in `.work/phase-1.md`. Waiting on the owner |
 | 2 | Tree-shaking and size | Not started |
 | 3 | Built-in subset for Quick UI | Not started |
 | 4 | "Slightly rounder" trial | Not started |
