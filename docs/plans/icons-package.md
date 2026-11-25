@@ -85,8 +85,13 @@ Recorded with the date and the reason, so a later phase doesn't reopen them.
 - **2026-11-25: the generator is `scripts/generate.mjs`.** It replaces
   `pipeline/build-react.mjs`, which is deleted once phase 1 lands.
 
-Still open from the phase 0 audit (PR #2): whether to keep the `size` prop,
-and how to handle the 79 closed icons whose duotone is the outline.
+- **2026-11-25: the 79 closed icons whose duotone is the outline ship as
+  drawn.** Examples are `star`, `circle`, `folder` and `bookmark`. They're
+  listed in `.work/phase-0-data.json` (`copies.duotoneEqualsStrokeOnly`) so
+  proper duotones can be drawn in Figma later. The generator doesn't
+  substitute the fill, because that would hide the gap instead of fixing it.
+
+Still open from the phase 0 audit (PR #2): whether to keep the `size` prop.
 
 ## Phases
 
