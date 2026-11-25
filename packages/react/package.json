@@ -1,25 +1,26 @@
 {
-  "name": "@keyline-icons/react",
+  "name": "@quick-ui/icons",
   "version": "3.0.0",
-  "description": "Icons on one 24×24 grid, as React components in four styles: stroke, two-tone, duotone and fill, each in rounded or sharp corners. Built for shadcn/ui.",
+  "description": "Quick UI's icon set as React components, on a 24px grid.",
   "license": "MIT",
+  "private": true,
   "publishConfig": {
     "access": "public"
   },
-  "author": "Keyline Icons (https://keylineicons.com)",
-  "homepage": "https://keylineicons.com",
+  "author": "Quick UI",
+  "homepage": "https://quick-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/keyline-icons/keyline-icons.git",
+    "url": "git+https://github.com/rachmadd/quick-ui-icons.git",
     "directory": "packages/react"
   },
-  "bugs": "https://github.com/keyline-icons/keyline-icons/issues",
+  "bugs": "https://github.com/rachmadd/quick-ui-icons/issues",
   "keywords": [
+    "quick-ui",
     "icons",
     "react",
     "svg",
     "shadcn",
-    "shadcn-ui",
     "icon-set",
     "tailwind"
   ],

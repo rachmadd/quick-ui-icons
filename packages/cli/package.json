@@ -1,29 +1,30 @@
 {
-  "name": "@keyline-icons/cli",
+  "name": "@quick-ui/icons-cli",
   "version": "3.0.0",
-  "description": "Search Keyline Icons and copy them into your project from the terminal.",
+  "description": "Search Quick UI's icon set and copy SVGs into your project from the terminal.",
   "license": "MIT",
+  "private": true,
   "publishConfig": {
     "access": "public"
   },
-  "author": "Keyline Icons (https://keylineicons.com)",
-  "homepage": "https://keylineicons.com",
+  "author": "Quick UI",
+  "homepage": "https://quick-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/keyline-icons/keyline-icons.git",
+    "url": "git+https://github.com/rachmadd/quick-ui-icons.git",
     "directory": "packages/cli"
   },
-  "bugs": "https://github.com/keyline-icons/keyline-icons/issues",
+  "bugs": "https://github.com/rachmadd/quick-ui-icons/issues",
   "keywords": [
+    "quick-ui",
     "icons",
     "svg",
     "cli",
-    "shadcn",
     "icon-set"
   ],
   "type": "module",
   "bin": {
-    "keyline-icons": "./src/index.mjs"
+    "quick-ui-icons": "./src/index.mjs"
   },
   "exports": {
     "./package.json": "./package.json"

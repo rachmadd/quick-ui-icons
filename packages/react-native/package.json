@@ -1,20 +1,22 @@
 {
-  "name": "@keyline-icons/react-native",
+  "name": "@quick-ui/icons-react-native",
   "version": "3.0.0",
-  "description": "Icons on one 24×24 grid, as React Native components in four styles: stroke, two-tone, duotone and fill, each in rounded or sharp corners. Drawn through react-native-svg, works in Expo.",
+  "description": "Quick UI's icon set as React Native components, drawn through react-native-svg.",
   "license": "MIT",
+  "private": true,
   "publishConfig": {
     "access": "public"
   },
-  "author": "Keyline Icons (https://keylineicons.com)",
-  "homepage": "https://keylineicons.com",
+  "author": "Quick UI",
+  "homepage": "https://quick-ui.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/keyline-icons/keyline-icons.git",
+    "url": "git+https://github.com/rachmadd/quick-ui-icons.git",
     "directory": "packages/react-native"
   },
-  "bugs": "https://github.com/keyline-icons/keyline-icons/issues",
+  "bugs": "https://github.com/rachmadd/quick-ui-icons/issues",
   "keywords": [
+    "quick-ui",
     "icons",
     "react-native",
     "expo",

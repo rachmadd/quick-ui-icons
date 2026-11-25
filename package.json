@@ -1,9 +1,23 @@
 {
-  "name": "keyline-icons",
+  "name": "quick-ui-icons",
   "version": "0.0.1",
   "type": "module",
   "private": true,
   "license": "MIT",
+  "description": "Quick UI's icon set: 24px icons, the pipeline that builds them, and the site that browses them.",
+  "keywords": [
+    "quick-ui",
+    "icons",
+    "svg",
+    "icon-set"
+  ],
+  "author": "Quick UI",
+  "homepage": "https://quick-ui.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rachmadd/quick-ui-icons.git"
+  },
+  "bugs": "https://github.com/rachmadd/quick-ui-icons/issues",
   "scripts": {
     "dev": "next dev --port 3002",
     "build": "next build",
