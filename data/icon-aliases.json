@@ -1,0 +1,3316 @@
+{
+  "$comment": "Hand-curated search aliases. Source, not generated: edit this file. `aliases` adds search terms to every icon whose name matches `match` (a JavaScript regular expression); every matching row contributes. `names` maps an icon to what other icon sets call it, matched against a whole query rather than word by word. Used together with data/icon-keywords.json, which comes first.",
+  "aliases": [
+    {
+      "match": "^activity$",
+      "note": "Families.",
+      "terms": [
+        "pulse",
+        "heartbeat",
+        "health",
+        "vitals",
+        "status",
+        "current status"
+      ]
+    },
+    {
+      "match": "^alert$",
+      "terms": [
+        "exclamation",
+        "warning",
+        "caution",
+        "attention",
+        "important",
+        "error"
+      ]
+    },
+    {
+      "match": "^align-offset",
+      "terms": [
+        "align",
+        "distribute",
+        "spacing",
+        "rows",
+        "justify"
+      ]
+    },
+    {
+      "match": "^arrow",
+      "terms": [
+        "direction",
+        "move",
+        "navigate"
+      ]
+    },
+    {
+      "match": "^(chevrons-|expand-dashed-|fullscreen$|fullscreen-exit$|git-compare-arrows$|list-collapse|list-sort|refresh-(ccw|cw)$|repeat|reply-all$|shuffle$)",
+      "note": "The plural as a concept: every drawing carrying more than one arrowhead, which is the question `arrows` is asking and the one word the name of each of these does not answer. Counted off the drawings rather than the names: `maximize` and `minimize` are corner brackets with no arrow in them, `fast-forward`, `rewind` and `skip-*` are play heads, and `rotate-ccw` and `rotate-cw` carry exactly one. `arrows` is held apart from `arrow` by the singular rule, which leaves it alone, so the two words stay two questions.",
+      "terms": [
+        "arrows"
+      ]
+    },
+    {
+      "match": "^arrow-u-turn",
+      "terms": [
+        "undo",
+        "redo",
+        "back",
+        "return"
+      ]
+    },
+    {
+      "match": "^captions$",
+      "note": "The CC form. `subtitles` is the same idea drawn as caption lines.",
+      "terms": [
+        "cc",
+        "closed captions",
+        "subtitles",
+        "text track",
+        "srt"
+      ]
+    },
+    {
+      "match": "^cast$",
+      "terms": [
+        "chromecast",
+        "airplay",
+        "screen mirror",
+        "stream",
+        "broadcast",
+        "tv"
+      ]
+    },
+    {
+      "match": "^copy-plus$",
+      "note": "Named for its base, but it is also the add-to-queue mark.",
+      "terms": [
+        "queue",
+        "add to queue",
+        "library add",
+        "duplicate",
+        "stack",
+        "add copy"
+      ]
+    },
+    {
+      "match": "dashed-panel$",
+      "terms": [
+        "move to",
+        "drop",
+        "boundary",
+        "edge",
+        "snap"
+      ]
+    },
+    {
+      "match": "^audio-lines$",
+      "terms": [
+        "waveform",
+        "sound",
+        "equalizer",
+        "audio"
+      ]
+    },
+    {
+      "match": "^award",
+      "terms": [
+        "medal",
+        "prize",
+        "ribbon",
+        "badge",
+        "achievement",
+        "recognition",
+        "honour",
+        "honor",
+        "winner"
+      ]
+    },
+    {
+      "match": "^bar-chart",
+      "terms": [
+        "analytics",
+        "statistics",
+        "stats",
+        "graph",
+        "report",
+        "data",
+        "insights",
+        "metrics"
+      ]
+    },
+    {
+      "match": "^battery",
+      "terms": [
+        "power",
+        "charge",
+        "energy",
+        "cell",
+        "level",
+        "remaining"
+      ]
+    },
+    {
+      "match": "^bell",
+      "terms": [
+        "notification",
+        "alert",
+        "reminder",
+        "ring"
+      ]
+    },
+    {
+      "match": "^bookmark$",
+      "terms": [
+        "save",
+        "favourite",
+        "favorite",
+        "read later"
+      ]
+    },
+    {
+      "match": "^bluetooth$",
+      "terms": [
+        "wireless",
+        "pair",
+        "connect",
+        "device",
+        "radio"
+      ]
+    },
+    {
+      "match": "^building$",
+      "terms": [
+        "office",
+        "company",
+        "organisation",
+        "organization",
+        "business",
+        "workplace",
+        "apartment",
+        "flat"
+      ]
+    },
+    {
+      "match": "^bracket-arrow",
+      "terms": [
+        "collapse",
+        "expand",
+        "resize",
+        "fit",
+        "inset"
+      ]
+    },
+    {
+      "match": "^log-in$",
+      "note": "The closed-up and spaced forms people type for signing in. These sat on the bracket arrows until 1.7.0 drew log-in and log-out, which own the words now, so a search for them leads with the log drawings (his ask, 5 Oct 2026).",
+      "terms": [
+        "login",
+        "signin",
+        "log in"
+      ]
+    },
+    {
+      "match": "^log-out$",
+      "note": "As log-in's row, for leaving.",
+      "terms": [
+        "logout",
+        "signout",
+        "log out"
+      ]
+    },
+    {
+      "match": "^calendar",
+      "terms": [
+        "date",
+        "schedule",
+        "event",
+        "planner",
+        "agenda"
+      ]
+    },
+    {
+      "match": "^check$",
+      "terms": [
+        "checkmark",
+        "done",
+        "complete",
+        "tick",
+        "confirm",
+        "success",
+        "approve",
+        "correct",
+        "right answer"
+      ]
+    },
+    {
+      "match": "^chevron",
+      "terms": [
+        "expand",
+        "collapse",
+        "next",
+        "previous",
+        "dropdown",
+        "accordion"
+      ]
+    },
+    {
+      "match": "^circle$",
+      "terms": [
+        "shape",
+        "round",
+        "dot",
+        "ellipse"
+      ]
+    },
+    {
+      "match": "^clock",
+      "terms": [
+        "time",
+        "hour",
+        "schedule",
+        "timer",
+        "history",
+        "alarm"
+      ]
+    },
+    {
+      "match": "^code",
+      "note": "Both angle-bracket icons, plus the markup words only the second one earns. `terminal` already answers to \"code\", so these join a word the set has.",
+      "terms": [
+        "source",
+        "developer",
+        "programming",
+        "brackets",
+        "syntax"
+      ]
+    },
+    {
+      "match": "^code-xml$",
+      "terms": [
+        "markup",
+        "html",
+        "tag",
+        "element"
+      ]
+    },
+    {
+      "match": "^compass$",
+      "terms": [
+        "direction",
+        "navigate",
+        "explore",
+        "bearing",
+        "discover",
+        "explorer"
+      ]
+    },
+    {
+      "match": "^copy$",
+      "terms": [
+        "duplicate",
+        "clipboard",
+        "clone",
+        "paste"
+      ]
+    },
+    {
+      "match": "^cursor",
+      "terms": [
+        "pointer",
+        "mouse",
+        "select",
+        "click"
+      ]
+    },
+    {
+      "match": "^cursor$",
+      "terms": [
+        "agent",
+        "agents"
+      ],
+      "note": "An agent drawn as the pointer arrow, the way some editors draw theirs. Until 20 Nov 2026 agent reached only the bots, and a separate agent drawing would have been this arrow flipped."
+    },
+    {
+      "match": "^cursor-text$",
+      "terms": [
+        "caret",
+        "input",
+        "type",
+        "insert"
+      ]
+    },
+    {
+      "match": "^dashed",
+      "terms": [
+        "placeholder",
+        "empty",
+        "draft",
+        "outline"
+      ]
+    },
+    {
+      "match": "^dice",
+      "terms": [
+        "random",
+        "chance",
+        "game",
+        "roll",
+        "luck"
+      ]
+    },
+    {
+      "match": "^double-check$",
+      "terms": [
+        "read",
+        "delivered",
+        "verified",
+        "seen",
+        "confirm"
+      ]
+    },
+    {
+      "match": "^download$",
+      "terms": [
+        "save",
+        "export",
+        "get",
+        "install"
+      ]
+    },
+    {
+      "match": "^expand-dashed",
+      "terms": [
+        "resize",
+        "fullscreen",
+        "crop",
+        "corner",
+        "scale"
+      ]
+    },
+    {
+      "match": "^fast-forward$",
+      "terms": [
+        "skip",
+        "speed",
+        "seek",
+        "faster"
+      ]
+    },
+    {
+      "match": "^file",
+      "terms": [
+        "document",
+        "page",
+        "paper"
+      ]
+    },
+    {
+      "match": "^file-text$",
+      "terms": [
+        "note",
+        "article",
+        "txt",
+        "readme"
+      ]
+    },
+    {
+      "match": "^file-spreadsheet$",
+      "terms": [
+        "excel",
+        "csv",
+        "table",
+        "sheet",
+        "numbers"
+      ]
+    },
+    {
+      "match": "^file-text$",
+      "note": "File formats answer by kind. The set draws no letters, so there is no `file-pdf` or `file-docx` to find: a document in any format is `file-text`, a sheet is `file-spreadsheet`, a picture is `file-image`. Added 7 Oct 2026; `pdf` was the most searched word that found nothing.",
+      "terms": [
+        "pdf",
+        "doc",
+        "docx"
+      ]
+    },
+    {
+      "match": "^file-spreadsheet$",
+      "note": "As the row above, for sheets.",
+      "terms": [
+        "xls",
+        "xlsx"
+      ]
+    },
+    {
+      "match": "^file-image$",
+      "note": "As the rows above, for pictures.",
+      "terms": [
+        "jpg",
+        "jpeg",
+        "png"
+      ]
+    },
+    {
+      "match": "^circles-five$",
+      "terms": [
+        "rings",
+        "dots"
+      ]
+    },
+    {
+      "match": "^folder",
+      "terms": [
+        "directory",
+        "files",
+        "storage"
+      ]
+    },
+    {
+      "match": "^folders$",
+      "terms": [
+        "directories",
+        "library",
+        "workspace"
+      ]
+    },
+    {
+      "match": "^(full|half|quarter|three-quarter)$",
+      "terms": [
+        "portion",
+        "fraction",
+        "pie",
+        "percentage",
+        "share"
+      ]
+    },
+    {
+      "match": "^fullscreen$",
+      "terms": [
+        "expand",
+        "maximize",
+        "full screen",
+        "enlarge",
+        "zoom in"
+      ]
+    },
+    {
+      "match": "^fullscreen-exit$",
+      "terms": [
+        "minimize",
+        "collapse",
+        "shrink",
+        "exit full screen",
+        "zoom out"
+      ]
+    },
+    {
+      "match": "^gallery-",
+      "note": "The family, so every member answers to these.",
+      "terms": [
+        "carousel",
+        "slideshow",
+        "slider",
+        "album",
+        "photos",
+        "frames"
+      ]
+    },
+    {
+      "match": "^gift$",
+      "terms": [
+        "present",
+        "reward",
+        "birthday",
+        "bonus"
+      ]
+    },
+    {
+      "match": "^git-",
+      "terms": [
+        "version control",
+        "repository",
+        "source control",
+        "vcs"
+      ]
+    },
+    {
+      "match": "^git-pull-request",
+      "terms": [
+        "pr",
+        "review",
+        "merge request"
+      ]
+    },
+    {
+      "match": "^git-graph$",
+      "terms": [
+        "history",
+        "log",
+        "timeline"
+      ]
+    },
+    {
+      "match": "^globe",
+      "terms": [
+        "world",
+        "internet",
+        "web",
+        "language",
+        "international"
+      ]
+    },
+    {
+      "match": "^grid-",
+      "terms": [
+        "grid",
+        "layout",
+        "tiles",
+        "cells",
+        "table",
+        "gallery",
+        "matrix",
+        "columns",
+        "rows"
+      ],
+      "note": "Named columns x rows. There is no bare `grid`: the word said nothing about which one, and it reaches the family through the name anyway."
+    },
+    {
+      "match": "^handbag$",
+      "terms": [
+        "purse",
+        "bag",
+        "shopping",
+        "store"
+      ]
+    },
+    {
+      "match": "^(headphones|headset)",
+      "terms": [
+        "audio",
+        "listen",
+        "support",
+        "call",
+        "music"
+      ]
+    },
+    {
+      "match": "^hand-heart$",
+      "terms": [
+        "heart-hand",
+        "heart hand",
+        "love",
+        "send love",
+        "donate",
+        "charity",
+        "care",
+        "support",
+        "give",
+        "giving",
+        "volunteer",
+        "kindness",
+        "gratitude"
+      ],
+      "note": "Renamed from `heart-hand` in 0.9.0: the hand holds the heart, so the hand is the base and base-first is the rule. The old name is a term here, so anything typed or pasted as `heart-hand` still lands on it."
+    },
+    {
+      "match": "^home$",
+      "terms": [
+        "house",
+        "dashboard",
+        "start",
+        "main",
+        "roof",
+        "homepage"
+      ]
+    },
+    {
+      "match": "^info$",
+      "terms": [
+        "information",
+        "help",
+        "about",
+        "details"
+      ]
+    },
+    {
+      "match": "^layout-dashboard$",
+      "terms": [
+        "dashboard",
+        "layout",
+        "widgets",
+        "tiles",
+        "overview",
+        "panels",
+        "admin"
+      ]
+    },
+    {
+      "match": "^link$",
+      "terms": [
+        "url",
+        "chain",
+        "hyperlink",
+        "connect",
+        "attach"
+      ]
+    },
+    {
+      "match": "^list",
+      "terms": [
+        "items",
+        "index",
+        "rows",
+        "todo"
+      ]
+    },
+    {
+      "match": "^list-music$",
+      "terms": [
+        "playlist",
+        "queue",
+        "tracks"
+      ]
+    },
+    {
+      "match": "^list-video$",
+      "terms": [
+        "playlist",
+        "queue",
+        "videos",
+        "watch later",
+        "episodes"
+      ]
+    },
+    {
+      "match": "^loader$",
+      "terms": [
+        "spinner",
+        "loading",
+        "busy",
+        "wait",
+        "progress",
+        "throbber"
+      ]
+    },
+    {
+      "match": "^(lock|unlock)$",
+      "terms": [
+        "secure",
+        "private",
+        "password",
+        "protected",
+        "access"
+      ]
+    },
+    {
+      "match": "^mail",
+      "terms": [
+        "email",
+        "envelope",
+        "message",
+        "inbox",
+        "letter"
+      ]
+    },
+    {
+      "match": "^map",
+      "terms": [
+        "location",
+        "place",
+        "address",
+        "gps",
+        "marker",
+        "pin"
+      ]
+    },
+    {
+      "match": "^maximize$",
+      "terms": [
+        "fullscreen",
+        "full screen",
+        "expand",
+        "enlarge",
+        "corners",
+        "resize"
+      ]
+    },
+    {
+      "match": "^megaphone$",
+      "terms": [
+        "bullhorn",
+        "announce",
+        "announcement",
+        "broadcast",
+        "shout",
+        "loudspeaker",
+        "promote",
+        "marketing",
+        "advertisement",
+        "advertising"
+      ]
+    },
+    {
+      "match": "^menu$",
+      "terms": [
+        "hamburger",
+        "nav",
+        "bars",
+        "burger"
+      ]
+    },
+    {
+      "match": "^mic$",
+      "terms": [
+        "microphone",
+        "voice",
+        "record",
+        "speak"
+      ]
+    },
+    {
+      "match": "^minimize$",
+      "terms": [
+        "exit fullscreen",
+        "shrink",
+        "collapse",
+        "restore",
+        "corners",
+        "resize"
+      ]
+    },
+    {
+      "match": "^minus$",
+      "terms": [
+        "remove",
+        "subtract",
+        "less",
+        "collapse",
+        "hide",
+        "minus sign",
+        "sign"
+      ]
+    },
+    {
+      "match": "^monitor",
+      "terms": [
+        "screen",
+        "display",
+        "desktop",
+        "computer",
+        "tv",
+        "workstation",
+        "vm",
+        "virtual machine"
+      ]
+    },
+    {
+      "match": "^monitor-off$",
+      "terms": [
+        "screen off",
+        "display off",
+        "stop sharing",
+        "no display",
+        "presentation off"
+      ]
+    },
+    {
+      "match": "^more-",
+      "terms": [
+        "ellipsis",
+        "dots",
+        "options",
+        "overflow",
+        "kebab",
+        "meatball"
+      ]
+    },
+    {
+      "match": "^music-note$",
+      "terms": [
+        "song",
+        "track",
+        "audio",
+        "media"
+      ]
+    },
+    {
+      "match": "^navigation$",
+      "terms": [
+        "direction",
+        "gps",
+        "heading",
+        "travel"
+      ]
+    },
+    {
+      "match": "^octagon-alert$",
+      "terms": [
+        "stop",
+        "error",
+        "danger",
+        "critical",
+        "blocked"
+      ]
+    },
+    {
+      "match": "^package$",
+      "terms": [
+        "box",
+        "delivery",
+        "shipping",
+        "parcel",
+        "product"
+      ]
+    },
+    {
+      "match": "^panel",
+      "terms": [
+        "sidebar",
+        "layout",
+        "drawer",
+        "dock",
+        "split"
+      ]
+    },
+    {
+      "match": "^paperclip$",
+      "terms": [
+        "attach",
+        "attachment",
+        "clip"
+      ]
+    },
+    {
+      "match": "^pause$",
+      "terms": [
+        "media",
+        "player",
+        "hold",
+        "suspend"
+      ]
+    },
+    {
+      "match": "^picture-in-picture$",
+      "terms": [
+        "pip",
+        "inset",
+        "mini player",
+        "floating window",
+        "overlay"
+      ]
+    },
+    {
+      "match": "^play$",
+      "terms": [
+        "media",
+        "player",
+        "start",
+        "resume",
+        "video",
+        "audio play",
+        "audio",
+        "execute",
+        "execution"
+      ]
+    },
+    {
+      "match": "^podcast$",
+      "terms": [
+        "broadcast",
+        "radio",
+        "rss",
+        "episode",
+        "audio show"
+      ]
+    },
+    {
+      "match": "^queue$",
+      "terms": [
+        "up next",
+        "playlist",
+        "play queue",
+        "now playing"
+      ]
+    },
+    {
+      "match": "^repeat",
+      "note": "The family, so repeat-1 answers to these too.",
+      "terms": [
+        "loop",
+        "replay",
+        "again",
+        "cycle"
+      ]
+    },
+    {
+      "match": "^repeat-1$",
+      "terms": [
+        "loop once",
+        "repeat one",
+        "repeat single",
+        "loop track"
+      ]
+    },
+    {
+      "match": "^stop$",
+      "terms": [
+        "media",
+        "player",
+        "halt",
+        "end"
+      ]
+    },
+    {
+      "match": "^record$",
+      "terms": [
+        "media",
+        "capture",
+        "rec",
+        "live"
+      ]
+    },
+    {
+      "match": "^plus$",
+      "terms": [
+        "add",
+        "new",
+        "create",
+        "increase",
+        "more",
+        "plus sign",
+        "sign"
+      ]
+    },
+    {
+      "match": "^podium",
+      "terms": [
+        "ranking",
+        "leaderboard",
+        "places",
+        "standings",
+        "results",
+        "winner",
+        "first second third"
+      ]
+    },
+    {
+      "match": "^progress",
+      "terms": [
+        "loading",
+        "status",
+        "completion",
+        "percent",
+        "ring",
+        "spinner",
+        "loader"
+      ]
+    },
+    {
+      "match": "^question$",
+      "terms": [
+        "help",
+        "ask",
+        "faq",
+        "support",
+        "unknown",
+        "what",
+        "doubt",
+        "unsure"
+      ]
+    },
+    {
+      "match": "^receipt$",
+      "terms": [
+        "invoice",
+        "bill",
+        "order",
+        "payment"
+      ]
+    },
+    {
+      "match": "^rewind$",
+      "terms": [
+        "back",
+        "replay",
+        "seek",
+        "slower"
+      ]
+    },
+    {
+      "match": "^route$",
+      "terms": [
+        "path",
+        "directions",
+        "journey",
+        "trip",
+        "trajectory"
+      ]
+    },
+    {
+      "match": "^scan-face$",
+      "terms": [
+        "face id",
+        "biometric",
+        "recognition",
+        "identity"
+      ]
+    },
+    {
+      "match": "^search$",
+      "terms": [
+        "find",
+        "magnifier",
+        "lookup",
+        "query",
+        "zoom"
+      ]
+    },
+    {
+      "match": "^settings$",
+      "terms": [
+        "gear",
+        "cog",
+        "preferences",
+        "config",
+        "options",
+        "manage",
+        "management",
+        "system",
+        "role",
+        "roles",
+        "admin"
+      ]
+    },
+    {
+      "match": "^shapes",
+      "terms": [
+        "geometry",
+        "objects",
+        "elements",
+        "design",
+        "geometric"
+      ]
+    },
+    {
+      "match": "^share$",
+      "terms": [
+        "send",
+        "export",
+        "social",
+        "forward"
+      ]
+    },
+    {
+      "match": "^shopping-",
+      "terms": [
+        "buy",
+        "checkout",
+        "ecommerce",
+        "basket",
+        "store",
+        "purchase"
+      ]
+    },
+    {
+      "match": "^shuffle$",
+      "terms": [
+        "random",
+        "mix",
+        "swap",
+        "cross"
+      ]
+    },
+    {
+      "match": "^signal",
+      "terms": [
+        "wifi",
+        "network",
+        "reception",
+        "strength",
+        "cellular"
+      ]
+    },
+    {
+      "match": "^skip-",
+      "terms": [
+        "next",
+        "previous",
+        "track",
+        "media"
+      ]
+    },
+    {
+      "match": "^smartphone",
+      "terms": [
+        "phone",
+        "mobile",
+        "device",
+        "app",
+        "iphone"
+      ]
+    },
+    {
+      "match": "^square$",
+      "terms": [
+        "shape",
+        "box",
+        "rectangle"
+      ]
+    },
+    {
+      "match": "^(sun|moon)$",
+      "note": "The theme toggle is why anyone reaches for either of these in an app, and neither drawing is named after it.",
+      "terms": [
+        "theme",
+        "dark mode",
+        "light mode",
+        "appearance",
+        "brightness"
+      ]
+    },
+    {
+      "match": "^subtitles$",
+      "terms": [
+        "captions",
+        "cc",
+        "closed captions",
+        "text track",
+        "srt"
+      ]
+    },
+    {
+      "match": "^tag",
+      "terms": [
+        "label",
+        "price",
+        "category",
+        "badge"
+      ]
+    },
+    {
+      "match": "^lightbulb",
+      "note": "The bulb is reached for as an idea, not as a lamp.",
+      "terms": [
+        "idea",
+        "tip",
+        "hint",
+        "insight",
+        "suggestion",
+        "learn",
+        "light",
+        "inspiration"
+      ]
+    },
+    {
+      "match": "^lightbulb-on$",
+      "terms": [
+        "bright",
+        "eureka",
+        "shine",
+        "lit",
+        "on"
+      ]
+    },
+    {
+      "match": "^terminal",
+      "terms": [
+        "console",
+        "command line",
+        "shell",
+        "cli",
+        "bash",
+        "code",
+        "computer terminal",
+        "computer",
+        "execute",
+        "execution",
+        "process"
+      ]
+    },
+    {
+      "match": "^bin$",
+      "terms": [
+        "delete",
+        "remove",
+        "trash",
+        "discard",
+        "trashcan",
+        "trash can"
+      ]
+    },
+    {
+      "match": "^trending",
+      "terms": [
+        "growth",
+        "decline",
+        "analytics",
+        "stocks",
+        "arrow",
+        "economy",
+        "economics"
+      ]
+    },
+    {
+      "match": "^trophy$",
+      "terms": [
+        "win",
+        "winner",
+        "champion",
+        "prize",
+        "cup",
+        "first place",
+        "achievement",
+        "victory",
+        "contest",
+        "challenge",
+        "competition"
+      ]
+    },
+    {
+      "match": "^triangle-alert$",
+      "terms": [
+        "warning",
+        "caution",
+        "attention",
+        "error",
+        "danger"
+      ]
+    },
+    {
+      "match": "^truck$",
+      "terms": [
+        "delivery",
+        "shipping",
+        "transport",
+        "logistics"
+      ]
+    },
+    {
+      "match": "^(plane|ship|train-front|tram|bus|bike|rocket|car|caravan|sailboat|stroller|truck)(-|$)",
+      "note": "Every vehicle answers to the word for the shelf it sits on, and the trucks with them, which file in Commerce for delivery but are vehicles all the same. Until 2.5.0 `transport` found three drawings and `transportation` none (his ask, 1 Nov 2026). The Transport pattern in lib/icon-taxonomy.ts less the two drawings that are not vehicles: `ev-charger`, which a car plugs into, and `train-track`.",
+      "terms": [
+        "transport",
+        "transportation",
+        "vehicle"
+      ]
+    },
+    {
+      "match": "^upload$",
+      "terms": [
+        "import",
+        "send",
+        "publish",
+        "cloud"
+      ]
+    },
+    {
+      "match": "^user",
+      "terms": [
+        "person",
+        "profile",
+        "account",
+        "avatar",
+        "member",
+        "human",
+        "people",
+        "guest"
+      ]
+    },
+    {
+      "match": "^users$",
+      "terms": [
+        "people",
+        "team",
+        "group",
+        "contacts",
+        "contact",
+        "participate",
+        "participant",
+        "gather"
+      ]
+    },
+    {
+      "match": "^volume",
+      "terms": [
+        "sound",
+        "audio",
+        "speaker",
+        "mute",
+        "loudness"
+      ]
+    },
+    {
+      "match": "^wifi",
+      "terms": [
+        "wireless",
+        "network",
+        "internet",
+        "connection",
+        "hotspot",
+        "signal",
+        "access point",
+        "router"
+      ]
+    },
+    {
+      "match": "^wifi-x$",
+      "terms": [
+        "offline",
+        "disconnected",
+        "no connection"
+      ]
+    },
+    {
+      "match": "^x$",
+      "terms": [
+        "close",
+        "cancel",
+        "dismiss",
+        "exit",
+        "times",
+        "cross",
+        "multiplication sign",
+        "multiplication",
+        "sign",
+        "wrong"
+      ]
+    },
+    {
+      "match": "-plus$",
+      "note": "Modifiers, which compose with whatever they hang off.",
+      "terms": [
+        "add",
+        "new",
+        "create"
+      ]
+    },
+    {
+      "match": "-minus$",
+      "terms": [
+        "remove",
+        "subtract"
+      ]
+    },
+    {
+      "match": "-check$",
+      "terms": [
+        "done",
+        "verified",
+        "approved",
+        "success"
+      ]
+    },
+    {
+      "match": "-x$",
+      "terms": [
+        "remove",
+        "delete",
+        "cancel",
+        "failed"
+      ]
+    },
+    {
+      "match": "-dot$",
+      "terms": [
+        "unread",
+        "badge",
+        "new",
+        "notification"
+      ]
+    },
+    {
+      "match": "-search$",
+      "terms": [
+        "find",
+        "lookup"
+      ]
+    },
+    {
+      "match": "-info$",
+      "terms": [
+        "details",
+        "about",
+        "status",
+        "learn more"
+      ]
+    },
+    {
+      "match": "-exclamation$",
+      "terms": [
+        "warning",
+        "overdue",
+        "attention"
+      ]
+    },
+    {
+      "match": "-arrow-down$",
+      "terms": [
+        "download",
+        "receive",
+        "incoming"
+      ]
+    },
+    {
+      "match": "-arrow-up$",
+      "terms": [
+        "upload",
+        "send",
+        "outgoing"
+      ]
+    },
+    {
+      "match": "-open$",
+      "terms": [
+        "browse",
+        "expanded"
+      ]
+    },
+    {
+      "match": "^calendar$",
+      "terms": [
+        "calendars",
+        "calendar days",
+        "days",
+        "date"
+      ]
+    },
+    {
+      "match": "^tag$",
+      "terms": [
+        "tags"
+      ]
+    },
+    {
+      "match": "^octagon-x$",
+      "note": "The error mark, which is what a toast reaches for. `stop` is the sign the shape comes from.",
+      "terms": [
+        "error",
+        "failed",
+        "failure",
+        "stop",
+        "cancel",
+        "abort",
+        "destructive"
+      ]
+    },
+    {
+      "match": "^grip-",
+      "note": "The words for what it does. Nobody types `grip` first.",
+      "terms": [
+        "drag",
+        "drag handle",
+        "handle",
+        "grab",
+        "reorder",
+        "resize",
+        "dots"
+      ]
+    },
+    {
+      "match": "^toolbox$",
+      "note": "The words for what it holds, and the two names other sets use.",
+      "terms": [
+        "tools",
+        "toolkit",
+        "tool box",
+        "kit",
+        "hardware",
+        "build",
+        "repair",
+        "maintenance",
+        "equipment"
+      ]
+    },
+    {
+      "match": "^wrench$",
+      "note": "`spanner` is what half the world calls it, and nobody types `wrench` looking for settings.",
+      "terms": [
+        "spanner",
+        "tool",
+        "fix",
+        "repair",
+        "adjust",
+        "configure",
+        "maintenance",
+        "service"
+      ]
+    },
+    {
+      "match": "^grid-(circles|squares)(-x|-check)?$",
+      "note": "A grid of shapes reads as a group or a selection long before anyone types its drawing.",
+      "terms": [
+        "group",
+        "select",
+        "selection",
+        "multiple",
+        "batch",
+        "items",
+        "grid",
+        "all"
+      ]
+    },
+    {
+      "match": "^sliders-2-(horizontal|vertical)$",
+      "note": "The knob form, against the plain `sliders-*` equaliser: the thumb is what people are looking for.",
+      "terms": [
+        "range",
+        "knob",
+        "thumb",
+        "adjust",
+        "volume",
+        "settings",
+        "control",
+        "level",
+        "customize",
+        "customise",
+        "personalize",
+        "personalise"
+      ]
+    },
+    {
+      "match": "^power(-off)?$",
+      "terms": [
+        "on",
+        "off",
+        "shutdown",
+        "restart",
+        "standby",
+        "boot",
+        "switch"
+      ]
+    },
+    {
+      "match": "^percent$",
+      "terms": [
+        "percentage",
+        "discount",
+        "sale",
+        "rate",
+        "interest",
+        "tax"
+      ]
+    },
+    {
+      "match": "^ban$",
+      "note": "Nobody types `ban` for the sign; they type what it means.",
+      "terms": [
+        "no",
+        "block",
+        "blocked",
+        "forbidden",
+        "prohibited",
+        "denied",
+        "cancel",
+        "not allowed",
+        "restricted",
+        "stop"
+      ]
+    },
+    {
+      "match": "^pencil-ruler$",
+      "note": "Nobody types the compound name; they type what they are doing with it.",
+      "terms": [
+        "design",
+        "draw",
+        "drafting",
+        "measure",
+        "edit",
+        "tools",
+        "ruler",
+        "pencil",
+        "sketch"
+      ]
+    },
+    {
+      "match": "^hammer$",
+      "terms": [
+        "mallet",
+        "claw hammer",
+        "tool",
+        "build",
+        "construct",
+        "nail",
+        "hit",
+        "repair"
+      ]
+    },
+    {
+      "match": "^circles$",
+      "note": "Two rings that cross: the drawing is the overlap, so the words are about the overlap. \"ring\" lives here rather than in the filename, which says circle like the other 73.",
+      "terms": [
+        "ring",
+        "rings",
+        "overlap",
+        "intersect",
+        "venn",
+        "union",
+        "combine",
+        "merge",
+        "group",
+        "diagram"
+      ]
+    },
+    {
+      "match": "^circles-dashed$",
+      "note": "The dashed ring is the one that is not there yet, so the words are about the pending half.",
+      "terms": [
+        "ring",
+        "rings",
+        "overlap",
+        "intersect",
+        "venn",
+        "placeholder",
+        "pending",
+        "draft",
+        "group",
+        "optional"
+      ]
+    },
+    {
+      "match": "^circle-square$",
+      "note": "Not a square in a circle: a ring and a rounded square crossing. Listed in lib/icon-not-containers.json for that reason.",
+      "terms": [
+        "ring",
+        "shapes",
+        "overlap",
+        "intersect",
+        "combine",
+        "merge",
+        "union",
+        "group",
+        "mixed selection",
+        "diagram"
+      ]
+    },
+    {
+      "match": "^circle-square-dashed$",
+      "note": "Same pair as circle-square with the square left dashed.",
+      "terms": [
+        "ring",
+        "shapes",
+        "overlap",
+        "intersect",
+        "placeholder",
+        "pending",
+        "draft",
+        "group",
+        "mixed selection"
+      ]
+    },
+    {
+      "match": "^plug$",
+      "note": "The software sense outweighs the wall socket: this is what an integration is drawn with.",
+      "terms": [
+        "plugin",
+        "integration",
+        "connect",
+        "connection",
+        "socket",
+        "adapter",
+        "extension",
+        "power"
+      ]
+    },
+    {
+      "match": "^shield",
+      "note": "The family, so the signs inherit it.",
+      "terms": [
+        "security",
+        "secure",
+        "protected",
+        "protection",
+        "safe",
+        "trust",
+        "privacy",
+        "guard",
+        "antivirus",
+        "insurance",
+        "cyber",
+        "cybersecurity"
+      ]
+    },
+    {
+      "match": "^crown$",
+      "terms": [
+        "king",
+        "queen",
+        "royal",
+        "premium",
+        "vip",
+        "winner",
+        "best",
+        "top",
+        "leader"
+      ]
+    },
+    {
+      "match": "^flag$",
+      "note": "The plain flag: a marker, a report and a milestone. The chequered one has its own row.",
+      "terms": [
+        "marker",
+        "report",
+        "milestone",
+        "goal",
+        "country",
+        "banner",
+        "mark"
+      ]
+    },
+    {
+      "match": "^traffic-light$",
+      "terms": [
+        "traffic",
+        "stoplight",
+        "signal",
+        "lights",
+        "stop",
+        "go",
+        "red amber green",
+        "status"
+      ]
+    },
+    {
+      "match": "^bug$",
+      "terms": [
+        "insect",
+        "beetle",
+        "debug",
+        "issue",
+        "defect",
+        "error",
+        "report a bug",
+        "pest"
+      ]
+    },
+    {
+      "match": "^search(-2)?-plus$",
+      "note": "The magnifier with a plus: zoom in, and add-to-search.",
+      "terms": [
+        "zoom in",
+        "magnify",
+        "enlarge",
+        "add filter",
+        "new search"
+      ]
+    },
+    {
+      "match": "^search(-2)?-minus$",
+      "terms": [
+        "zoom out",
+        "shrink",
+        "reduce",
+        "remove filter",
+        "narrow"
+      ]
+    },
+    {
+      "match": "^search(-2)?-check$",
+      "terms": [
+        "found",
+        "match",
+        "verified result",
+        "search complete",
+        "validated"
+      ]
+    },
+    {
+      "match": "^search(-2)?-x$",
+      "terms": [
+        "no results",
+        "not found",
+        "clear search",
+        "cancel search",
+        "empty state"
+      ]
+    },
+    {
+      "match": "^search(-2)?-list$",
+      "note": "Results, rather than the act of searching.",
+      "terms": [
+        "results",
+        "search results",
+        "matches",
+        "index",
+        "directory",
+        "browse"
+      ]
+    },
+    {
+      "match": "^flag-chequered$",
+      "note": "The finish line, not a country.",
+      "terms": [
+        "checkered",
+        "checkered flag",
+        "finish",
+        "finish line",
+        "race",
+        "racing",
+        "complete",
+        "winner",
+        "lap"
+      ]
+    },
+    {
+      "match": "^cloud-(check|x|plus|minus|alert)$",
+      "note": "The sign is inside the cloud, so these read as the state of a sync rather than of a file.",
+      "terms": [
+        "sync",
+        "backup",
+        "cloud storage",
+        "upload state",
+        "synced"
+      ]
+    },
+    {
+      "match": "^cloud-(x|alert)$",
+      "note": "Only the two that say something went wrong carry the failure words; a synced or added cloud is not an error.",
+      "terms": [
+        "sync error",
+        "warning",
+        "failed",
+        "offline"
+      ]
+    },
+    {
+      "match": "^package-(plus|minus|check|x|alert|arrow-(down|up|left|right))$",
+      "note": "The sign is on the parcel's own corner, so these read as the state of an order rather than of a file.",
+      "terms": [
+        "order",
+        "shipment",
+        "delivery",
+        "parcel",
+        "fulfilment",
+        "stock",
+        "release",
+        "inbound",
+        "outbound",
+        "dispatch",
+        "return",
+        "damaged",
+        "delayed",
+        "exception",
+        "held"
+      ]
+    },
+    {
+      "match": "^app(-|$)",
+      "note": "No bare `app`: the tile is `square`, and only the badged members carry the word.",
+      "terms": [
+        "application",
+        "tile",
+        "install",
+        "uninstall",
+        "software",
+        "launcher",
+        "badge"
+      ]
+    },
+    {
+      "match": "-alert$",
+      "note": "wifi-exclamation is the one icon that spells this mark the other way, so the word it uses has to find the rest.",
+      "terms": [
+        "exclamation",
+        "warning",
+        "attention",
+        "problem",
+        "error",
+        "caution"
+      ]
+    },
+    {
+      "match": "^move$",
+      "terms": [
+        "drag",
+        "reposition",
+        "pan",
+        "handle",
+        "four arrows",
+        "relocate"
+      ]
+    },
+    {
+      "match": "^move-(up|down|left|right|up-left|up-right|down-left|down-right|horizontal|vertical|diagonal|diagonal-flip)$",
+      "note": "The long arrows (1.8.0). Their names are the other set's and say nothing of an arrow, so `arrow` and `long arrow` have to be said here or the search for the very thing they are misses all twelve.",
+      "terms": [
+        "arrow",
+        "long arrow",
+        "long",
+        "direction"
+      ]
+    },
+    {
+      "match": "^move-(horizontal|vertical|diagonal|diagonal-flip)$",
+      "note": "One shaft, a head at each end: the plural question `arrows` asks, and the resize handle.",
+      "terms": [
+        "arrows",
+        "two-way",
+        "both ways",
+        "resize",
+        "stretch"
+      ]
+    },
+    {
+      "match": "^maximize-2$",
+      "terms": [
+        "expand",
+        "fullscreen",
+        "enlarge",
+        "zoom in",
+        "open"
+      ]
+    },
+    {
+      "match": "^credit-card-2$",
+      "terms": [
+        "payment",
+        "card",
+        "billing",
+        "checkout",
+        "debit"
+      ]
+    },
+    {
+      "match": "^replay$",
+      "terms": [
+        "restart",
+        "again",
+        "rerun",
+        "rewatch",
+        "loop"
+      ]
+    },
+    {
+      "match": "^settings-dot$",
+      "terms": [
+        "update available",
+        "preferences",
+        "attention",
+        "badge",
+        "unread setting"
+      ]
+    },
+    {
+      "match": "^briefcase$",
+      "terms": [
+        "work",
+        "business",
+        "job",
+        "portfolio",
+        "case",
+        "office",
+        "career"
+      ]
+    },
+    {
+      "match": "^umbrella$",
+      "terms": [
+        "insurance",
+        "cover",
+        "protection",
+        "rain",
+        "shelter",
+        "risk"
+      ]
+    },
+    {
+      "match": "^circle-progress-play$",
+      "terms": [
+        "playing",
+        "in progress",
+        "running",
+        "now playing",
+        "live",
+        "under way"
+      ]
+    },
+    {
+      "match": "^umbrella-off$",
+      "terms": [
+        "unprotected",
+        "exposed",
+        "no cover",
+        "uncovered",
+        "unshielded",
+        "no insurance"
+      ]
+    },
+    {
+      "match": "^parasol$",
+      "terms": [
+        "shade",
+        "sunshade",
+        "beach",
+        "terrace",
+        "patio",
+        "sun",
+        "awning"
+      ]
+    },
+    {
+      "match": "^list-check$",
+      "terms": [
+        "survey",
+        "questionnaire",
+        "checklist",
+        "poll",
+        "exam",
+        "quiz",
+        "answer sheet"
+      ],
+      "note": "What people type for a form they fill in: 2 empty searches for survey in the first month."
+    },
+    {
+      "match": "^(graduation-cap|book|book-open)$",
+      "terms": [
+        "lesson",
+        "skill",
+        "study",
+        "course",
+        "learn",
+        "training",
+        "tutorial"
+      ],
+      "note": "The words a learner types: lesson, skill and study were empty searches before the shelf existed."
+    },
+    {
+      "match": "^lightbulb$",
+      "terms": [
+        "think",
+        "thought",
+        "brainstorm"
+      ]
+    },
+    {
+      "match": "^(chart-column|chart-bar|chart-line|chart-pie|chart-area|bar-chart)$",
+      "terms": [
+        "analysis",
+        "analytics",
+        "data",
+        "report",
+        "stats",
+        "analyse",
+        "analyze"
+      ],
+      "note": "Analysis and analytics are the words for a chart someone has not named yet."
+    },
+    {
+      "match": "^(wallet|dollar-sign|credit-card)$",
+      "terms": [
+        "budget",
+        "asset",
+        "bank",
+        "account",
+        "balance",
+        "funds"
+      ],
+      "note": "Budget, asset, bank and acct all came in empty; money words, not card words."
+    },
+    {
+      "match": "^(database|server)$",
+      "terms": [
+        "drive",
+        "hdd",
+        "disk",
+        "storage",
+        "hard drive",
+        "dns"
+      ]
+    },
+    {
+      "match": "^(package|archive)$",
+      "terms": [
+        "warehouse",
+        "inventory",
+        "stock",
+        "carton",
+        "supply"
+      ]
+    },
+    {
+      "match": "^(headset|headset-2)$",
+      "terms": [
+        "assistance",
+        "service",
+        "service status",
+        "help desk",
+        "customer support"
+      ]
+    },
+    {
+      "match": "^(refresh-cw|refresh-ccw|link)$",
+      "terms": [
+        "reconnect",
+        "retry connection",
+        "re-establish"
+      ]
+    },
+    {
+      "match": "^(coupon|badge-percent|gift|tag-horizontal-start-percent|tag-horizontal-end-percent)$",
+      "terms": [
+        "redeem",
+        "redemption",
+        "reward",
+        "perk",
+        "benefit",
+        "discount coupons",
+        "refer",
+        "earn"
+      ],
+      "note": "Reward and redemption vocabulary: every one of these was an empty search."
+    },
+    {
+      "match": "^(messages|message)$",
+      "terms": [
+        "communication",
+        "records",
+        "correspondence",
+        "transcript"
+      ]
+    },
+    {
+      "match": "^(sparkle|sparkles)$",
+      "terms": [
+        "magic wand",
+        "wand",
+        "llm",
+        "ai assistant",
+        "generate"
+      ]
+    },
+    {
+      "match": "^(file-text|pen-line)$",
+      "terms": [
+        "blog",
+        "article",
+        "post",
+        "essay",
+        "description",
+        "describe"
+      ]
+    },
+    {
+      "match": "^(code|code-xml)$",
+      "terms": [
+        "api",
+        "sdk",
+        "endpoint",
+        "script"
+      ]
+    },
+    {
+      "match": "^cpu$",
+      "terms": [
+        "memory",
+        "ram",
+        "processor chip",
+        "tech",
+        "technology"
+      ]
+    },
+    {
+      "match": "^bell$",
+      "terms": [
+        "subscriptions",
+        "subscribe",
+        "reminder"
+      ]
+    },
+    {
+      "match": "^(qr-code|scan-qr-code)$",
+      "terms": [
+        "qr",
+        "qr code",
+        "pr code",
+        "code scan"
+      ]
+    },
+    {
+      "match": "^(camera|scan|scan-eye)$",
+      "terms": [
+        "ai scan",
+        "capture",
+        "recognise",
+        "recognize"
+      ]
+    },
+    {
+      "match": "^(boy|girl|accessibility)$",
+      "note": "The other drawings of a whole person. human came in empty 5 times by 23 Sep while the user family answered person, profile and member, and nothing in the set answered the word itself. people asks the same question and answers the same drawings: it reached only users and contacts until 24 Sep.",
+      "terms": [
+        "human",
+        "people"
+      ]
+    },
+    {
+      "match": "^zap",
+      "note": "The bolt is the thunder drawing: thunder and its first four letters came in empty 5 times by 23 Sep, with lightning already here.",
+      "terms": [
+        "thunder"
+      ]
+    },
+    {
+      "match": "^(message|message-square|thumbs-up|thumbs-down)$",
+      "note": "The two marks a feedback button is drawn with: a bubble to say something, a thumb to rate it. 3 empty searches by 23 Sep.",
+      "terms": [
+        "feedback"
+      ]
+    },
+    {
+      "match": "^keyframes$",
+      "terms": [
+        "animate",
+        "animated"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: animate 4 and animated 2 found nothing while animation found this."
+    },
+    {
+      "match": "^lungs$",
+      "terms": [
+        "oxygen"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: oxygen 3."
+    },
+    {
+      "match": "^newspaper$",
+      "terms": [
+        "feed",
+        "news feed"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: feed 3, the word for a stream of posts."
+    },
+    {
+      "match": "^(user|users)$",
+      "terms": [
+        "client",
+        "customer"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: client 3. Not on the whole `^user` family, or every sign would answer it."
+    },
+    {
+      "match": "^(gavel|scale)$",
+      "terms": [
+        "regulatory",
+        "regulation",
+        "compliance",
+        "judgment",
+        "judgement"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: regulatory 3, judgment once."
+    },
+    {
+      "match": "^send",
+      "terms": [
+        "sending",
+        "paperplane",
+        "paper plane"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: sending 2. The singular rule folds plurals, not -ing."
+    },
+    {
+      "match": "^rotate-(cw|ccw)$",
+      "terms": [
+        "rotation",
+        "rotating"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: rotation 2."
+    },
+    {
+      "match": "^rotate-3d$",
+      "terms": [
+        "360"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: 360 2, as in a 360 view."
+    },
+    {
+      "match": "^droplet$",
+      "terms": [
+        "oil"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: oil 2."
+    },
+    {
+      "match": "^user-cog$",
+      "terms": [
+        "manager",
+        "management"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: manager 2."
+    },
+    {
+      "match": "^hand-coins$",
+      "terms": [
+        "loan",
+        "lend",
+        "lending"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: loan 2."
+    },
+    {
+      "match": "^directions$",
+      "terms": [
+        "decide",
+        "decision",
+        "choice"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: decide 3 over two exports. The signpost is the fork in the road."
+    },
+    {
+      "match": "^(flask-conical|flask-round)$",
+      "terms": [
+        "chemical",
+        "substance"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: chemical 2, chemical substance 2."
+    },
+    {
+      "match": "^tent$",
+      "terms": [
+        "camp",
+        "camping",
+        "campsite"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: camp 2."
+    },
+    {
+      "match": "^clipboard-check$",
+      "terms": [
+        "audit",
+        "inspection"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: audit 2."
+    },
+    {
+      "match": "^(book|book-open)$",
+      "terms": [
+        "catalog",
+        "catalogue",
+        "chapter"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: catalog 3, chapter once."
+    },
+    {
+      "match": "^panel-top$",
+      "terms": [
+        "hero"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: hero 4 over two exports, the page's top section."
+    },
+    {
+      "match": "^train-front$",
+      "terms": [
+        "subway",
+        "underground"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: subway once while metro found this."
+    },
+    {
+      "match": "^globe-search$",
+      "terms": [
+        "websearch"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: websearch typed as one word, which the split cannot part."
+    },
+    {
+      "match": "^app-window-2$",
+      "terms": [
+        "modal",
+        "popup"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: modal once while dialog found this."
+    },
+    {
+      "match": "^timer$",
+      "terms": [
+        "chrono",
+        "chronometer"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: chrono once while stopwatch found this."
+    },
+    {
+      "match": "^crosshair$",
+      "terms": [
+        "coordinate"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: coordinate once."
+    },
+    {
+      "match": "^image$",
+      "terms": [
+        "img"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: img 2 over two exports, the tag people know it by."
+    },
+    {
+      "match": "^(boy|girl)$",
+      "terms": [
+        "children",
+        "child"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: children 2 while kid and kids found these. The singular rule cannot reach an irregular plural."
+    },
+    {
+      "match": "^wind-turbine$",
+      "terms": [
+        "clean energy",
+        "green energy"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: clean energy 3."
+    },
+    {
+      "match": "^leaf$",
+      "terms": [
+        "environmental",
+        "environmental science",
+        "ecology"
+      ],
+      "note": "Empty searches, 16 Aug to 16 Nov 2026: environmental science 2."
+    },
+    {
+      "match": "^face-",
+      "terms": [
+        "smiley"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "^dumbbell$",
+      "terms": [
+        "barbell"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "^circle-dashed$",
+      "terms": [
+        "draft"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "^badge-check$",
+      "terms": [
+        "verified",
+        "seal"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "^corner-down-left$",
+      "terms": [
+        "return",
+        "return key"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "^history$",
+      "terms": [
+        "versions",
+        "version history"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "^puzzle$",
+      "terms": [
+        "piece",
+        "puzzle piece"
+      ],
+      "note": "The word a code editor's own icon set gives this drawing, swept 20 Nov 2026: it found nothing here, or the wrong drawing."
+    },
+    {
+      "match": "-off$",
+      "terms": [
+        "slash",
+        "slashed"
+      ],
+      "note": "The other common word for the struck-through state: eye slash, bell slash and mic slash found nothing, swept 20 Nov 2026."
+    },
+    {
+      "match": "^bar-chart-2-down$",
+      "terms": [
+        "kanban",
+        "kanban board",
+        "board"
+      ],
+      "note": "Columns hanging from the top of a frame are a kanban board; boxed, it is the board a code editor draws for its kanban view (20 Nov 2026). The base carries it, so the bare and circled bars answer too."
+    },
+    {
+      "match": "^bandage$",
+      "terms": [
+        "bandaid",
+        "band aid"
+      ],
+      "note": "The everyday name for it, a trademark gone generic; kept on his word, 20 Nov 2026. The code editor's set calls this drawing bandaid and the search found nothing."
+    }
+  ],
+  "names": {
+    "captions": [
+      "closed-caption"
+    ],
+    "audio-lines": [
+      "audio-lines-off",
+      "audio-lines-x",
+      "audio-waveform"
+    ],
+    "bookmark": [
+      "bookmark-minus",
+      "bookmark-x"
+    ],
+    "bluetooth": [
+      "bluetooth-connected",
+      "bluetooth-off",
+      "bluetooth-searching"
+    ],
+    "building": [
+      "building-2"
+    ],
+    "check": [
+      "check-line"
+    ],
+    "chevron-up": [
+      "control"
+    ],
+    "loader": [
+      "loader-pinwheel"
+    ],
+    "megaphone": [
+      "megaphone-off"
+    ],
+    "mic": [
+      "mic-audio-lines",
+      "mic-vocal"
+    ],
+    "minimize": [
+      "minimize-2"
+    ],
+    "minus": [
+      "dash",
+      "hyphen"
+    ],
+    "navigation": [
+      "navigation-2",
+      "navigation-2-off"
+    ],
+    "package": [
+      "package-2",
+      "package-search"
+    ],
+    "picture-in-picture": [
+      "picture-in-picture-2"
+    ],
+    "receipt": [
+      "receipt-cent",
+      "receipt-euro",
+      "receipt-indian-rupee",
+      "receipt-japanese-yen",
+      "receipt-pound-sterling",
+      "receipt-russian-ruble",
+      "receipt-swiss-franc",
+      "receipt-text",
+      "receipt-turkish-lira"
+    ],
+    "search": [
+      "search-alert",
+      "search-code",
+      "search-exclamation-point"
+    ],
+    "share": [
+      "share-2"
+    ],
+    "archive": [
+      "archive-arrow-up",
+      "archive-restore"
+    ],
+    "arrow-down": [
+      "arrow-down-0-1",
+      "arrow-down-1-0",
+      "arrow-down-a-z",
+      "arrow-down-from-line",
+      "arrow-down-to-dot",
+      "arrow-down-z-a"
+    ],
+    "arrow-left": [
+      "arrow-left-from-line"
+    ],
+    "arrow-right": [
+      "arrow-right-from-line",
+      "square-arrow-right-enter",
+      "square-arrow-right-exit"
+    ],
+    "arrow-up": [
+      "arrow-up-0-1",
+      "arrow-up-1-0",
+      "arrow-up-a-z",
+      "arrow-up-from-dot",
+      "arrow-up-from-line",
+      "arrow-up-z-a",
+      "arrows-up-from-line"
+    ],
+    "bar-chart": [
+      "chart-bar-decreasing",
+      "chart-bar-increasing",
+      "chart-no-axes-column"
+    ],
+    "battery": [
+      "battery-exclamation-point",
+      "battery-plus",
+      "battery-warning"
+    ],
+    "bell": [
+      "bell-electric"
+    ],
+    "calendar": [
+      "calendar-1",
+      "calendar-cog",
+      "calendar-fold",
+      "calendar-heart",
+      "calendar-range",
+      "calendar-search",
+      "calendar-sync"
+    ],
+    "calendar-check": [
+      "calendar-check-2"
+    ],
+    "calendar-minus": [
+      "calendar-minus-2"
+    ],
+    "calendar-plus": [
+      "calendar-plus-2"
+    ],
+    "calendar-x": [
+      "calendar-x-2"
+    ],
+    "chevrons-left": [
+      "chevron-first"
+    ],
+    "chevrons-left-right": [
+      "chevrons-left-right-ellipsis"
+    ],
+    "chevrons-right": [
+      "chevron-last"
+    ],
+    "clock": [
+      "clock-alert",
+      "clock-exclamation-point",
+      "clock-fading"
+    ],
+    "cloud": [
+      "cloud-backup",
+      "cloud-cog"
+    ],
+    "database": [
+      "database-backup",
+      "database-search"
+    ],
+    "eye": [
+      "eye-closed",
+      "eye-dashed"
+    ],
+    "file": [
+      "file-axis-3d",
+      "file-badge",
+      "file-box",
+      "file-braces",
+      "file-braces-corner",
+      "file-chart-line",
+      "file-chart-pie",
+      "file-clock",
+      "file-code-corner",
+      "file-digit",
+      "file-heart",
+      "file-input",
+      "file-key",
+      "file-lock",
+      "file-music",
+      "file-output",
+      "file-pen",
+      "file-pen-line",
+      "file-question-mark",
+      "file-scan",
+      "file-search-corner",
+      "file-signal",
+      "file-sliders",
+      "file-stack",
+      "file-symlink",
+      "file-user",
+      "file-video-camera",
+      "file-volume"
+    ],
+    "file-check": [
+      "file-check-corner"
+    ],
+    "file-minus": [
+      "file-minus-corner"
+    ],
+    "file-plus": [
+      "file-plus-corner"
+    ],
+    "file-x": [
+      "file-x-corner"
+    ],
+    "folder": [
+      "folder-archive",
+      "folder-bookmark",
+      "folder-clock",
+      "folder-closed",
+      "folder-code",
+      "folder-dot",
+      "folder-git",
+      "folder-git-2",
+      "folder-heart",
+      "folder-input",
+      "folder-kanban",
+      "folder-key",
+      "folder-lock",
+      "folder-output",
+      "folder-pen",
+      "folder-root",
+      "folder-search-2",
+      "folder-symlink",
+      "folder-sync"
+    ],
+    "folder-open": [
+      "folder-open-dot"
+    ],
+    "headphones-off": [
+      "headphone-off"
+    ],
+    "heart": [
+      "heart-minus",
+      "heart-x"
+    ],
+    "image": [
+      "image-play",
+      "image-upscale"
+    ],
+    "link-2-off": [
+      "link-off"
+    ],
+    "rocket-fast": [
+      "rocket-2"
+    ],
+    "bot-circle": [
+      "bot-2"
+    ],
+    "list-plus": [
+      "list-filter-plus"
+    ],
+    "list-sort": [
+      "list-sort-ascending",
+      "list-sort-descending"
+    ],
+    "lock": [
+      "lock-keyhole"
+    ],
+    "mail": [
+      "mail-exclamation-point",
+      "mail-question-mark",
+      "mail-search",
+      "mail-warning"
+    ],
+    "map": [
+      "map-pinned"
+    ],
+    "map-pin": [
+      "map-pin-house",
+      "map-pin-pen"
+    ],
+    "map-pin-check": [
+      "map-pin-check-inside"
+    ],
+    "map-pin-minus": [
+      "map-pin-minus-inside"
+    ],
+    "map-pin-plus": [
+      "map-pin-plus-inside"
+    ],
+    "map-pin-x": [
+      "map-pin-x-inside"
+    ],
+    "message": [
+      "message-circle",
+      "message-circle-code",
+      "message-circle-dashed",
+      "message-circle-exclamation-point",
+      "message-circle-heart",
+      "message-circle-more",
+      "message-circle-reply",
+      "message-circle-warning"
+    ],
+    "message-check": [
+      "message-circle-check"
+    ],
+    "message-off": [
+      "message-circle-off"
+    ],
+    "message-plus": [
+      "message-circle-plus"
+    ],
+    "message-square": [
+      "message-square-code",
+      "message-square-diff",
+      "message-square-exclamation-point",
+      "message-square-heart",
+      "message-square-lock",
+      "message-square-more",
+      "message-square-quote",
+      "message-square-reply",
+      "message-square-share",
+      "message-square-warning"
+    ],
+    "message-square-lines": [
+      "message-square-text"
+    ],
+    "message-x": [
+      "message-circle-x"
+    ],
+    "monitor": [
+      "monitor-cloud",
+      "monitor-smartphone"
+    ],
+    "panel-top": [
+      "panel-top-bottom-dashed"
+    ],
+    "pen": [
+      "pen-tool",
+      "pencil"
+    ],
+    "refresh-ccw": [
+      "refresh-ccw-dot"
+    ],
+    "repeat": [
+      "repeat-2"
+    ],
+    "rotate-ccw": [
+      "rotate-ccw-key"
+    ],
+    "rotate-cw": [
+      "rotate-cw-fading-clock"
+    ],
+    "server": [
+      "server-cog",
+      "server-crash"
+    ],
+    "signal": [
+      "signal-zero"
+    ],
+    "smartphone": [
+      "smartphone-charging"
+    ],
+    "square-dashed": [
+      "square-dashed-bottom",
+      "square-dashed-bottom-code",
+      "square-dashed-kanban",
+      "square-dashed-mouse-pointer",
+      "square-dashed-text",
+      "square-dashed-top-solid"
+    ],
+    "star": [
+      "star-check",
+      "star-half",
+      "star-minus",
+      "star-plus",
+      "star-x"
+    ],
+    "sun": [
+      "sun-moon",
+      "sun-snow"
+    ],
+    "tag": [
+      "tag-plus",
+      "tag-x"
+    ],
+    "unlock": [
+      "lock-keyhole-open",
+      "lock-open"
+    ],
+    "user": [
+      "square-user",
+      "square-user-round",
+      "user-round",
+      "user-round-arrow-left",
+      "user-round-cog",
+      "user-round-key",
+      "user-round-pen",
+      "user-round-search",
+      "user-star"
+    ],
+    "user-check": [
+      "user-round-check"
+    ],
+    "user-minus": [
+      "user-round-minus"
+    ],
+    "user-plus": [
+      "user-round-plus"
+    ],
+    "user-x": [
+      "user-round-x"
+    ],
+    "volume": [
+      "volume-1",
+      "volume-2"
+    ],
+    "wifi": [
+      "wifi-cog",
+      "wifi-pen",
+      "wifi-sync",
+      "wifi-zero"
+    ],
+    "at": [
+      "at-sign"
+    ],
+    "globe": [
+      "globe-lock"
+    ],
+    "arrow-up-left": [
+      "circle-arrow-out-up-left"
+    ],
+    "arrow-down-left": [
+      "circle-arrow-out-down-left"
+    ],
+    "arrow-down-right": [
+      "circle-arrow-out-down-right"
+    ],
+    "arrow-up-right": [
+      "circle-arrow-out-up-right"
+    ],
+    "cast": [
+      "screen-share"
+    ],
+    "broadcast": [
+      "radio-tower"
+    ],
+    "hat-glasses": [
+      "incognito"
+    ],
+    "cctv": [
+      "security-camera"
+    ],
+    "app-window": [
+      "browser"
+    ],
+    "pen-sparkles": [
+      "pencil-sparkles"
+    ],
+    "reply": [
+      "corner-up-left"
+    ],
+    "forward": [
+      "corner-up-right"
+    ],
+    "table-off": [
+      "table-slash"
+    ],
+    "panels-top-left": [
+      "layout",
+      "table-layout"
+    ],
+    "cloud-terminal": [
+      "cloud-code",
+      "cloud-shell"
+    ],
+    "bin-2": [
+      "trash-2"
+    ],
+    "lifebuoy": [
+      "life-buoy"
+    ],
+    "loader-circle": [
+      "loader-2"
+    ],
+    "file-zip": [
+      "file-archive"
+    ],
+    "circle-user": [
+      "circle-user-round"
+    ],
+    "sliders-2-horizontal": [
+      "settings-2"
+    ],
+    "circle-check": [
+      "check-circle-2",
+      "circle-check-big"
+    ],
+    "square-check": [
+      "square-check-big"
+    ],
+    "circle-question": [
+      "circle-help",
+      "circle-question-mark",
+      "help-circle"
+    ],
+    "users": [
+      "users-round"
+    ],
+    "circle-arrow-left": [
+      "arrow-left-circle"
+    ],
+    "bin": [
+      "trash"
+    ],
+    "chart-pie": [
+      "pie-chart"
+    ],
+    "square-terminal": [
+      "terminal-square"
+    ],
+    "face-smile": [
+      "face-slightly-smiling",
+      "smile"
+    ],
+    "more-vertical": [
+      "ellipsis-vertical"
+    ],
+    "search-plus": [
+      "zoom-in"
+    ],
+    "search-minus": [
+      "zoom-out"
+    ],
+    "circle-stop": [
+      "stop-circle"
+    ],
+    "circle-plus": [
+      "plus-circle"
+    ],
+    "grid-squares": [
+      "layout-grid"
+    ],
+    "language": [
+      "languages"
+    ],
+    "train-front": [
+      "train"
+    ],
+    "triangle-alert": [
+      "alert-triangle",
+      "triangle-exclamation-point"
+    ],
+    "circle-alert": [
+      "alert-circle",
+      "circle-exclamation-point"
+    ],
+    "easel": [
+      "presentation"
+    ],
+    "square-arrow-out-up-right": [
+      "external-link"
+    ],
+    "message-question": [
+      "message-circle-question",
+      "message-circle-question-mark"
+    ],
+    "file-alert": [
+      "file-exclamation-point",
+      "file-warning"
+    ],
+    "cloud-upload": [
+      "upload-cloud"
+    ],
+    "cloud-download": [
+      "download-cloud"
+    ],
+    "file-chart-column": [
+      "file-bar-chart",
+      "file-chart-column-increasing"
+    ],
+    "more-horizontal": [
+      "ellipsis"
+    ],
+    "double-check": [
+      "check-check"
+    ],
+    "cursor": [
+      "mouse-pointer-2"
+    ],
+    "filter": [
+      "funnel"
+    ],
+    "wifi-x": [
+      "wifi-off"
+    ],
+    "arrow-u-turn-left": [
+      "undo-2"
+    ],
+    "arrow-u-turn-right": [
+      "redo-2"
+    ],
+    "circle-progress-plus": [
+      "circle-fading-plus"
+    ],
+    "circle-progress-arrow-up": [
+      "circle-fading-arrow-up"
+    ],
+    "case-upper": [
+      "a-large-small"
+    ],
+    "camera-off": [
+      "video-off"
+    ],
+    "log-in": [
+      "sign-in",
+      "sign in",
+      "login",
+      "log in"
+    ],
+    "log-out": [
+      "sign-out",
+      "sign out",
+      "logout",
+      "log out"
+    ],
+    "move-right": [
+      "arrow-long-right",
+      "arrow-right-long"
+    ],
+    "move-left": [
+      "arrow-long-left",
+      "arrow-left-long"
+    ],
+    "move-up": [
+      "arrow-long-up",
+      "arrow-up-long"
+    ],
+    "move-down": [
+      "arrow-long-down",
+      "arrow-down-long"
+    ],
+    "move-horizontal": [
+      "arrows-horizontal",
+      "arrows-left-right"
+    ],
+    "move-vertical": [
+      "arrows-vertical",
+      "arrows-up-down"
+    ],
+    "move-diagonal": [
+      "arrows-diagonal"
+    ],
+    "move-diagonal-flip": [
+      "move-diagonal-2",
+      "arrows-diagonal-2"
+    ],
+    "copy-off": [
+      "copy-slash"
+    ],
+    "planet": [
+      "orbit"
+    ],
+    "circle-slash-2": [
+      "diameter"
+    ],
+    "badge-percent": [
+      "diamond-percent"
+    ],
+    "monitor-2-check": [
+      "monitor-check"
+    ],
+    "monitor-2-cog": [
+      "monitor-cog"
+    ],
+    "monitor-2-dot": [
+      "monitor-dot"
+    ],
+    "monitor-2-arrow-down": [
+      "monitor-down"
+    ],
+    "monitor-2-pause": [
+      "monitor-pause"
+    ],
+    "monitor-2-play": [
+      "monitor-play"
+    ],
+    "monitor-2-arrow-up": [
+      "monitor-up"
+    ],
+    "monitor-2-x": [
+      "monitor-x"
+    ],
+    "waves": [
+      "waves-horizontal"
+    ],
+    "bold": [
+      "letter-b"
+    ],
+    "heading": [
+      "letter-h"
+    ],
+    "badge-alert": [
+      "badge-exclamation-point"
+    ],
+    "cloud-alert": [
+      "cloud-exclamation-point"
+    ],
+    "octagon-alert": [
+      "octagon-exclamation-point"
+    ],
+    "shield-alert": [
+      "shield-exclamation-point"
+    ],
+    "history": [
+      "rotate-ccw-clock"
+    ],
+    "podcast": [
+      "mic-signal"
+    ],
+    "face-frown": [
+      "face-slightly-frowning",
+      "frown"
+    ],
+    "face-laugh": [
+      "face-grinning",
+      "laugh"
+    ],
+    "face-smile-plus": [
+      "face-slightly-smiling-plus",
+      "smile-plus"
+    ],
+    "flip-horizontal": [
+      "flip-vertical-2",
+      "triangles-centerline-dashed-vertical"
+    ],
+    "flip-vertical": [
+      "flip-horizontal-2",
+      "triangles-centerline-dashed-horizontal"
+    ],
+    "music-note": [
+      "eighth-note",
+      "music-2"
+    ],
+    "bar-chart-2": [
+      "chart-no-axes-column-increasing"
+    ],
+    "shield-question": [
+      "shield-question-mark"
+    ],
+    "file-audio": [
+      "file-headphone"
+    ],
+    "file-video": [
+      "file-play"
+    ],
+    "text-align-start": [
+      "align-left"
+    ],
+    "text-align-center": [
+      "align-center"
+    ],
+    "text-align-end": [
+      "align-right"
+    ],
+    "text-align-justify": [
+      "align-justify"
+    ],
+    "text-align-2-start": [
+      "align-left-2"
+    ],
+    "text-align-2-end": [
+      "align-right-2"
+    ],
+    "shadows": [
+      "circle-half-striped"
+    ]
+  },
+  "$names": "Names other sets use for a drawing here, keyed by the drawing. Match them against the whole query, never split into words: these are names, not keywords, and folding `message-square` into a keyword list makes a search for `square` return every message icon. A search should rank them second only to the exact name. Once the set draws one of these names itself, the row is stale and should be deleted."
+}

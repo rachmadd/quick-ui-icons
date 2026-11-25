@@ -6,11 +6,8 @@
  *   node pipeline/check-readmes.mjs --fix     # rewrite the numbers in place
  *   node pipeline/check-readmes.mjs --json    # machine-readable
  *
- * Why this exists: the set publishes to five surfaces and four of them count
- * for themselves. The site reads `loadIcons()` per request, the Figma cover and
- * the paper sheets are generated, and the Figma file is checked by
- * check-figma.mjs. The READMEs were the one place left where a number is prose,
- * and prose does not know when a drawing lands. They sat at 414 icons and 1,059
+ * Why this exists: a number in a README is prose, and prose does not know
+ * when a drawing lands. Upstream, the READMEs sat at 414 icons and 1,059
  * SVGs while the set grew past 500 — nothing failed, nothing warned, and the
  * first line of the repo's own front page was wrong for weeks.
  *
@@ -55,13 +52,13 @@ function counts() {
 
   /*
     A `square-`/`circle-` prefix only counts as a container when the base it
-    names actually exists — the same rule `lib/icons.ts` applies, and the reason
+    names actually exists, the same rule lint.mjs applies, and the reason
     the numbers here are lower than a prefix count. `circle-half` is a shape in
     its own right; there is no `half` for it to contain.
   */
   /*
-    `lib/icon-not-containers.json` is the same list `containerOf` in lib/icons.ts
-    consults, and leaving it out was worth four sets and three published numbers:
+    `data/icon-not-containers.json` is the same list lint.mjs and
+    build-keywords.mjs consult, and leaving it out was worth four sets and three published numbers:
     `square-pen`, `circle-pen`, `circle-square` and `circle-square-dashed` all
     wear a prefix over a base that exists, so a bare prefix test calls them
     container forms and subtracts them from the set count. The file listing has
@@ -71,7 +68,7 @@ function counts() {
   */
   const notContainers = new Set(
     JSON.parse(
-      readFileSync(join(ROOT, 'lib', 'icon-not-containers.json'), 'utf8')
+      readFileSync(join(ROOT, 'data', 'icon-not-containers.json'), 'utf8')
     ).names
   );
   const contained = (prefix) =>

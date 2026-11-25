@@ -4,11 +4,10 @@
  *
  *   node pipeline/parallel.mjs "<command>" "<command>" ...
  *
- * `icons:ci` ends in four checks that only read: `tsc` over the React package,
- * the geometry linter, `tsc` over the registry output and `tsc` over the site.
- * None reads what another writes, each is a single thread, and together they
- * were 120 of the 141 seconds the chain took on 2 Nov 2026. Run in a row they
- * cost the sum, run here they cost the slowest.
+ * `icons:ci` ends in two checks that only read: `tsc` over the React package
+ * and the geometry linter. Neither reads what the other writes, each is a
+ * single thread, and they are most of the time the chain takes. Run in a row
+ * they cost the sum, run here they cost the slowest.
  *
  * They still run last, after every sync check has passed, so the chain keeps
  * its order where order matters: a stale generated file fails its `--check`
@@ -16,7 +15,7 @@
  *
  * Every command runs to the end even when another fails, so one run reports
  * every failure rather than the first. Output is held per command and printed
- * whole when it finishes, because four interleaved `tsc` logs are unreadable.
+ * whole when it finishes, because interleaved logs are unreadable.
  */
 
 import { spawn } from "node:child_process"

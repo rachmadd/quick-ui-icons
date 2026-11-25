@@ -27,7 +27,7 @@ const STYLES = ['stroke', 'two-tone', 'duotone', 'fill'];
  * The corner treatments, and where each one lands.
  *
  * `regular` keeps `icons/<style>/<name>.svg` exactly as it has always been, so
- * every consumer's imports, the registry routes and the React export names go on
+ * every consumer's imports and the React export names go on
  * meaning what they meant. Sharp gets its own namespace underneath rather than a
  * `-sharp` suffix on the name: the set's naming rule is `[element]-[modifier]`,
  * and a corner treatment is neither, so a suffix would make the name lie about

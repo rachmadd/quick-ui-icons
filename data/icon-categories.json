@@ -1,0 +1,261 @@
+{
+  "$comment": "Icon categories, in resolution order: an icon belongs to the first category whose `match` pattern (a JavaScript regular expression) matches its base name, which is the name with any square- or circle- container prefix removed. A name no pattern matches is in `other`. `icon` is the drawing that represents the category in a browser. `blurb` says what is in it. Source, not generated: edit this file. Extracted from Keyline's lib/icon-taxonomy.ts and the site's category rail when the site was removed.",
+  "other": {
+    "label": "Other",
+    "icon": "circle"
+  },
+  "categories": [
+    {
+      "label": "AI",
+      "match": "(^|(?<!bubbles)-)sparkles?$|^(bot(-off|-circle|-square|-heart|-droplet|-star|-message|-cloud|-simple|-network)?$|brain-circuit|brain-cog)",
+      "icon": "bot",
+      "blurb": "The bots, the brain wired to a circuit and turning a cog, the sparkles and everything they mark as AI."
+    },
+    {
+      "label": "Arrows",
+      "match": "^(?:scale-3d)$|^(arrow|bracket-arrow|log-(in|out)$|expand|refresh|rotate|corner-|move(-|$)|square-arrow-in-|square-arrow-out-|(undo|redo)(-dot)?$|split(-2)?$|merge$)",
+      "icon": "arrow-right",
+      "blurb": "Direction, movement and resizing, short and long, with the brackets and the arrow into one, u-turns, corner turns, a fork, a merge and dashed panels."
+    },
+    {
+      "label": "Chevrons & Carets",
+      "match": "^(caret|chevron)",
+      "icon": "chevron-right",
+      "blurb": "Carets, chevrons and their doubled and opposing pairs."
+    },
+    {
+      "label": "Git",
+      "match": "^(git-|diff$)",
+      "icon": "git-branch",
+      "blurb": "Branches, commits, merges and pull requests."
+    },
+    {
+      "label": "Files",
+      "match": "^(file|folder|copy|paperclip|bin(?!oculars|ary$)|archive|book(?!mark)|pen(?!cil|tagon(-|$))|(square|circle)-pen|newspaper$|clipboard|paste$|save(-|$)|library-big$)",
+      "icon": "file",
+      "blurb": "Documents, folders, books, a newspaper, copies, clipboards, the floppy disk, the paperclip and the bin."
+    },
+    {
+      "label": "Time",
+      "match": "^(?:history-check)$|^(calendar|clock|hourglass|alarm-clock|timer|history$)",
+      "icon": "clock",
+      "blurb": "Calendars, clocks, the clock turning back, alarm clocks, stopwatches and the hourglass, with the signs that act on them."
+    },
+    {
+      "label": "Mail",
+      "match": "^(message-square|messages-square|mail|message|bell|inbox|reply|forward|send|at$|voicemail$|postcard$|hand-bell$|stamp-postage$)",
+      "icon": "mail",
+      "blurb": "Envelopes, a postcard and a postage stamp, messages, voicemail, bells and a hand bell, the paper plane and the marks that badge them."
+    },
+    {
+      "label": "Finance",
+      "match": "^(badge-)?(dollar-sign|euro|pound-sterling|japanese-yen|indian-rupee|swiss-franc|bitcoin|credit-card|card-chip$|wallet|coins|piggy-bank|banknote|money-bag|gold-bars|hand-coins$|treasure$|atm$)",
+      "icon": "wallet",
+      "blurb": "The currency marks, the banknotes, the payment cards and their chip, the wallets, the money box, the money bag with its signs, the gold bars, coins in hand, a treasure chest and the cash machine."
+    },
+    {
+      "label": "Commerce",
+      "match": "^(?:bikini|bow-tie|bra|cap|clothes-button|dress|hanger|hat|jacket|lipstick|necktie|pants|perfume-bottle|ring-diamond|shorts|skirt|sneaker|socks|underwear)$|^(shopping-|handbag|briefcase(?!-medical)|receipt|tag|package|box$|truck|gift|coupon|(badge-)?percent|store|shirt$|paper-bag$|container$|glasses$|sunglasses$|weight(-tilde)?$|luggage$|concierge-bell$)",
+      "icon": "shopping-cart",
+      "blurb": "Carts, bags and luggage, a paper bag, receipts, shipping and its container, the weights a parcel is sold by, the shopfront and the bell on its counter, a shirt and a jacket, a skirt, a bikini, a bra and underwear, a bow tie and a necktie, a cap and a hat, a clothes button, a lipstick and a perfume bottle, the tags and the discount marks."
+    },
+    {
+      "label": "Maps",
+      "match": "^(?:bridge|cabin|church|ferris-wheel|fountain|guesthouse|hotel|mosque|parking|school|shepherds-hut|temple|tower|warehouse|windmill)$|^(map|compass|locate(-fixed|-off)?$|building|landmark$|route(?!r)|radar|flag(-swallowtail|-triangle-right|-off)?$|traffic-light|traffic-cone$|construction$|milestone$|anchor(-|$)|directions$|factory$|crosshair$|footprints$|barn$|castle$|lighthouse$|tent$)",
+      "icon": "map-pin",
+      "blurb": "Pins, maps, compasses, the locate marks and the crosshair, routes, footprints, the radar, the buildings, a factory, a barn, a castle and a landmark, a lighthouse, a tent, flags, a milestone, the lights at the junction, the cone and the barrier of road works and two anchors."
+    },
+    {
+      "label": "Home",
+      "match": "^(?:armchair|bubbles|bubbles-sparkles|electric-kettle|elevator|escalator|hair-dryer|laundry-basket|rocking-chair|stairs|toaster|towel-rack|vault-2)$|^(bed|sofa|couch$|door|brick-wall|blinds$|desk(-office)?$|heater$|mirror-round$|bath$|hot-tub$|shower-head$|soap-dispenser|bottle-pump$|spray-can$|washing-machine(-off)?$|refrigerator(-mini)?$|microwave$|oven(-off)?$|air-vent$|vault$|sun-lounger$|outdoor-seating$|window(-horizontal|-awning)?(-open)?$|curtains(-open)?$|lamp(-desk|-floor)?$|sink$|garage(-open)?$)",
+      "icon": "bed",
+      "blurb": "Beds and a bunk bed, a sofa, a couch, an armchair and a rocking chair, doors and the wall behind them, stairs, an elevator and an escalator, windows, curtains and blinds, lamps, a desk, a mirror, the bath, a hot tub, a sink, the shower and the soap, a pump bottle and a spray can, the fridge and the minibar, the oven, the microwave, the toaster, the washing machine and the laundry basket, a hair dryer, a heater, an air vent, a safe, the garage, a sun lounger and a table outside."
+    },
+    {
+      "label": "Media",
+      "match": "^(?:clapperboard|clarinet|disc|drum|guitar|mask-theater)$|^(play(?!-bug$)|pause|stop|record|skip-|fast-forward|rewind|repeat|replay|volume|audio-lines|mic(?!roscope)|megaphone|headphones|headset|earbuds|airpods|shuffle|music-note|list-music|list-video|camera|image|cast|subtitles|captions|picture-in-picture|gallery-|podcast|queue|film|airplay$|video(?:-2)?$|broadcast$|radio$|eject$|keyframes$|aspect-ratio$|ratio-|speaker$|boom-box$|cassette-tape$|satellite-dish$)",
+      "icon": "play",
+      "blurb": "Playback, volume, capture, casting and AirPlay, eject, video, broadcast, the dish and the radio, the speaker, the boom box, the cassette and the disc, a guitar, a clarinet and a drum, the clapperboard and the theatre mask, the sound and image marks and what you listen through."
+    },
+    {
+      "label": "Charts",
+      "match": "^(bar-chart|bars-progress|chart-|trending|signal|progress|loader|activity|gauge(-|$))",
+      "icon": "bar-chart",
+      "blurb": "Trends, bar, column and stock charts, a pyramid, a treemap, signal strength, progress and activity markers and the gauges."
+    },
+    {
+      "label": "Diagrams",
+      "match": "^(diagram-|workflow$)",
+      "icon": "diagram-project",
+      "blurb": "Boxes on wires: a project, a subtask, and what comes before and after."
+    },
+    {
+      "label": "Devices",
+      "match": "^(?:binary|joystick|play-bug|rectangle-goggles|remote-control)$|^(smartphone|phone|tablet|laptop|monitor|terminal|database|server|battery|bluetooth|code|plug|bug|cpu|printer|keyboard|usb|calculator|qr-code|scan(?!-face|-user)|app(?=-|$)|watch$|hard-drive$|vision-pro$|cable$|cctv(-off)?$|mouse(-off)?$|shredder$|gamepad$|tv$|regex$|webcam$|card-sim$|unplug$|router$)",
+      "icon": "smartphone",
+      "blurb": "Phones, tablets, laptops, handsets, printers, keyboards, servers and a router, databases, terminals, code, binary and a regular expression, processors, bugs and a debug run, the app tiles, the QR code, the scan frame with what it reads, a watch, a hard drive, a cable, a headset visor and goggles, the app windows, a CCTV camera, a mouse, a webcam, a shredder, a gamepad, a television and its remote."
+    },
+    {
+      "label": "Pointers",
+      "match": "^(cursor|mouse-pointer$|hand-(pointer|closed|open))",
+      "icon": "cursor",
+      "blurb": "Cursors, the mouse pointer, the pointing, open and closed hands and the states they carry."
+    },
+    {
+      "label": "Text",
+      "match": "^(bold|italic|underline|strikethrough|heading|pilcrow|indent|letter-|line-height|text-|type$|type-(height|width|size|off)$|square-type$|quote|language|slash$|case-(sensitive|upper)$|a-(?:arrow-(?:up|down)|text-cursor)$|spell-check$|type-outline$|whole-word$|input(-|$)|compact$|ampersand$|accent-grave$|colon$|semicolon$|comma$|hyphen$|pipe$|tilde$)",
+      "icon": "bold",
+      "blurb": "The quotation marks and the punctuation, the formatting marks, the case marks with the text-size arrows, the type size marks, the letter at the cursor and the spell check, the slash, the alignment stack and what sets a paragraph."
+    },
+    {
+      "label": "Layout",
+      "match": "^(?:crop|guidepoint|guidepoint-arrow-down|guidepoint-arrow-up|guidepoint-vertical-arrow-left|guidepoint-vertical-arrow-right|mount|perspective|triangles-centerline-horizontal|triangles-centerline-inward-horizontal|triangles-centerline-inward-vertical|triangles-centerline-vertical|layer-boxes)$|^(panel|layout|layers|grid|table(-|$)|list|align|menu|maximize|minimize|fullscreen|columns-|blocks(-|$)|flip-|fold-|symmetry-)",
+      "icon": "panel-left",
+      "blurb": "Panels, layers, grids, blocks, columns, tables and their row, column and cell edits, lists, alignment, the flips and the symmetry axes, the menu marks and the fullscreen corners."
+    },
+    {
+      "label": "Users",
+      "match": "^(user|scan-(?:face|user)|contacts$|id-(?:card|badge)$|accessibility$|wheelchair$|fingerprint-pattern$|hat-glasses$)",
+      "icon": "user",
+      "blurb": "People, accounts, contacts, the ID card, a fingerprint, the incognito hat, the accessibility figure, the wheelchair and the signs that badge them."
+    },
+    {
+      "label": "People",
+      "match": "^(boy|girl|baby(-2)?-(boy|girl)|mustache)$",
+      "icon": "boy",
+      "blurb": "The boy, the girl and the babies, with a curl, a bow or a pacifier, and a mustache."
+    },
+    {
+      "label": "Gender",
+      "match": "^(mars|venus)$",
+      "icon": "venus",
+      "blurb": "The Mars and Venus marks."
+    },
+    {
+      "label": "Math",
+      "match": "^(?:greater-than|greater-than-equal|less-than|less-than-equal|radicand)$|^(asterisk|braces|brackets|divide|equal|hash|infinity|minus|parentheses|plus|radical|variable|x-line-top|brace-(?:left|right)|bracket-(?:left|right)|parenthesis-(?:left|right)|tally|angle|radius|lambda|omega|phi|(?:square-|circle-)?(?:sigma|pi|function))(-|$)",
+      "icon": "divide",
+      "blurb": "Plus and minus, the equals and its approximate and negated forms, divide, the radical, infinity, the asterisk, the hash, the parentheses, braces and brackets in pairs and alone, the tally from one to five, the variable and the mean, sigma, pi, lambda, omega and phi, the function sign, the angle and the radius."
+    },
+    {
+      "label": "Keyboard",
+      "match": "^(?:alt|delete-forward)$|^(command|option|escape|space)$",
+      "icon": "command",
+      "blurb": "The command and option keys, escape and the space bar."
+    },
+    {
+      "label": "Emoji",
+      "match": "^(?:ghost|party-popper)$|^(face-|thumbs-|alien$)",
+      "icon": "face-smile",
+      "blurb": "Faces, an alien's among them, and the reactions that go with them."
+    },
+    {
+      "label": "Symbols",
+      "match": "^(peace|yin-yang)$",
+      "icon": "peace",
+      "blurb": "The peace sign and the yin and yang."
+    },
+    {
+      "label": "Actions",
+      "match": "^(check|double-check|x|more|lock|unlock|key(?:-round|-square)?$|shield|badge|download|upload|filter|eye|star|heart(?!-pulse)|hand-heart|alert|octagon-(?!dot$)|triangle-alert|info|question|lightbulb|zap|flame|ban(?!ana)(?!dage)|siren$|delete$|lifebuoy$|fire-extinguisher$|bomb$)",
+      "icon": "check",
+      "blurb": "Checks, crosses, the everyday verbs, the siren, the bomb, the lifebuoy, the fire extinguisher and the marks that guard a thing."
+    },
+    {
+      "label": "Controls",
+      "match": "^(?:light-max|light-min)$|^(toggle|slider|grip(?=-|$)|power)",
+      "icon": "sliders-horizontal",
+      "blurb": "Toggles, sliders and the drag handle."
+    },
+    {
+      "label": "Education",
+      "match": "^(?:backpack|teacher)$|^graduation-cap",
+      "icon": "graduation-cap",
+      "blurb": "The mortarboard and the teacher at the board."
+    },
+    {
+      "label": "Law",
+      "match": "^(gavel|scale|scale-unbalanced|scale-unbalanced-flip|signature)$",
+      "icon": "scale",
+      "blurb": "The gavel, the balance level and tipped, and the line you sign on."
+    },
+    {
+      "label": "Science",
+      "match": "^(?:microscope)$|^(flask|test-tube|atom$|telescope$|planet$|binoculars$|dna$|magnet$)",
+      "icon": "flask-conical",
+      "blurb": "Flasks and test tubes, with the off state and the rack, the atom, the DNA helix, the magnet, the telescope, the binoculars and a planet."
+    },
+    {
+      "label": "Health",
+      "match": "^(?:blood-pressure|brain-side|cross|facemask|hospital|pill-bottle)$|^(brain$|lungs|ear(-|$)|heart-pulse$|pill$|bandage$|syringe$|stethoscope$|thermometer$|skull$|bone(-fractured)?$|briefcase-medical$|cigarette(-off)?$)",
+      "icon": "lungs",
+      "blurb": "The brain, the lungs, the skull, a bone whole and broken, the ear and what it hears, the heart's pulse, a pill, a plaster, a syringe, the stethoscope, the clinical thermometer, the first-aid kit and the cigarette, with its off state."
+    },
+    {
+      "label": "Sport",
+      "match": "^(?:bowling-ball|club|ice-skate|ping-pong|snorkel|spade|sprint|whistle)$|^(trophy|award|podium|medal|crown|flag-chequered|american-football|baseball|basketball|cricket|golf|hockey|soccer|tennis|target$|chess-|dumbbell$|ski$|waves-ladder$)",
+      "icon": "trophy",
+      "blurb": "Trophies, awards, crowns and the places on the podium, the balls of five games, a cricket bat, hockey sticks, a golf hole, a target, a chess rook, the club and the spade, a dumbbell, a skier, an ice skate, a snorkel, a sprinter, the whistle and the pool's ladder."
+    },
+    {
+      "label": "Food & Drink",
+      "match": "^(?:apple|avocado|banana|beef|beer|chef-hat|burger-box-hot|champagne|cocktail-tropical|croissant|cup-soda|cupcake|donut|drumstick|frying-pan|glass-water|grape|hot-tea|martini|pear|pitcher|popcorn|salad|slice|taco|teapot|tumbler|wine|wine-crack)$|^(coffee|cake|soup|bottle|cookie$|hamburger$|pizza$|cooking-pot(-off)?$|grill$|breakfast$|can-soda$|utensils$)",
+      "icon": "coffee",
+      "blurb": "An apple, a pear and an avocado, a chef's hat, the mug, the coffee maker and its pot, a teapot and a pitcher, breakfast, the cake and a cupcake, the bowl, a spoon and fork, a kitchen knife, a cooking pot, a frying pan, a grill, the bottles, the glasses from a tumbler to a champagne flute, a cracked wine glass, a soda can, a cookie, a burger and a slice of pizza."
+    },
+    {
+      "label": "Art",
+      "match": "^(?:brush|scribble|lasso|pipette)$|^(paint|palette|easel|swatch-book$|wand$|frame$|vector-)",
+      "icon": "palette",
+      "blurb": "The brush, the roller, the paint bucket, the palette, the pipette, the swatch book, the easel, the magic wand, the lasso, the frame tool and the vector nodes."
+    },
+    {
+      "label": "Tools",
+      "match": "^(toolbox|wrench|hammer|pencil-ruler|screwdriver|pliers|saw|ruler|scissors|broom|drafting-compass$|hook$|gripper$|flashlight(-off)?$|hard-hat$|pipe-section$|crane$)",
+      "icon": "wrench",
+      "blurb": "The toolbox, the broom and what comes out of them, a screwdriver, a drafting compass, a hook, a gripper, a flashlight, a hard hat, a crane and a pipe section."
+    },
+    {
+      "label": "Stationery",
+      "match": "^(eraser|tape|stapler|notebook|sticky-note|sticker$|pin(-|$)|stamp$)",
+      "icon": "eraser",
+      "blurb": "The desk drawer: the eraser, the roll of tape, the sticky notes, a sticker, the notebooks, the push pin and the rubber stamp."
+    },
+    {
+      "label": "Shapes",
+      "match": "^(circle|square|triangle|shapes|dashed|dice|dot$|full|half|quarter|three-quarter|hexagon|puzzle$|diamond|octagon(-dot)?$|pentagon(-dashed)?$|shadows$|cone$|cuboid$|cylinder$|pyramid$)",
+      "icon": "shapes",
+      "blurb": "Squares, circles, triangles, hexagons, a pentagon, an octagon, a diamond, a dot and the shapes that hold one, dashes and the progress states drawn from them, and the solids: a cone, a cuboid, a cylinder and a pyramid."
+    },
+    {
+      "label": "Web",
+      "match": "^(?:cog|cog-dot)$|^(globe|link|unlink|share|navigation|home|house|search|settings|bookmark|wifi|cloud-(?:check|x|plus|alert|dot|off|arrow|backup|cog|terminal|download|upload|search|network)|earth$|connections?$|webhook$|nfc$|rss$)",
+      "icon": "globe",
+      "blurb": "Globes and the earth, links, connectivity, the RSS feed, sync states and web-scoped actions."
+    },
+    {
+      "label": "Weather",
+      "match": "^(?:droplet-degree)$|^(sun|moon|cloud|umbrella|parasol|temperature|thermometer-|snowflake$|wind$|humidity$|haze$|rainbow$)",
+      "icon": "sun",
+      "blurb": "Sun, moon, clouds, snow, wind, haze, a rainbow, humidity, the temperatures and the states between them."
+    },
+    {
+      "label": "Transport",
+      "match": "^(?:baggage-claim|fire-truck|fuel|helicopter|jerry-can|moped|steering-wheel|tractor)$|^(plane|ship|train|tram|bus|bike|rocket|car|caravan|sailboat|stroller|ev-charger)(-|$)",
+      "icon": "plane",
+      "blurb": "The vehicles: plane and its two states, a helicopter, ship and a sailboat with the ship's wheel, train, tram, bus and the double-decker, bike, car, taxi, a fire truck, a caravan, a stroller and the rocket, with their off states, and the charger an electric car plugs into."
+    },
+    {
+      "label": "Nature",
+      "match": "^(?:clover|mushroom|plant-pot|shamrock|solar|solar-panel|tulip|volcano)$|^(tree|leaf|feather|flower|sprout|droplet|wind-turbine|recycle|waves|mountain)(-|s$|$)",
+      "icon": "leaf",
+      "blurb": "Trees and a pine on fire, leaves, clover and a shamrock, a flower, a tulip, a sprout and a potted plant, a mushroom, feathers, water, a snow-capped mountain and a volcano, the turbine, a solar panel and the sun rising over one, and the recycling arrows, with the off and plural forms."
+    },
+    {
+      "label": "Animals",
+      "match": "^(?:bee|beehouse|fish|whale-tail)$|^(bird|pig|paw)(-|$)",
+      "icon": "bird",
+      "blurb": "The creatures: a bird, a pig and a bee, the bees' house, and a paw print."
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-// Bake the Figma component-set descriptions into lib/icon-keywords.json.
+// Bake the Figma component-set descriptions into data/icon-keywords.json.
 //
 //   node pipeline/build-keywords.mjs --emit          # print the snippet to run in Figma
 //   node pipeline/build-keywords.mjs dump.txt        # ingest Figma's answer
@@ -10,7 +10,7 @@
 // who does not already know the set would type. Those words exist: every
 // component set in Figma carries them in its description, comma separated, and
 // that description is the one place they are curated. This bakes them out so
-// the site can search them.
+// a search can use them.
 //
 // Like pipeline/check-figma.mjs, this cannot reach Figma on its own: there is
 // no API token in this repo and the design file is not in the build. So it runs
@@ -20,7 +20,7 @@
 //
 // Keywords are attached to the BASE name, not to every variant. One set in
 // Figma covers all three containers, so `square-arrow-down` and
-// `circle-arrow-down` read their words off `arrow-down` — see `lib/icons.ts`.
+// `circle-arrow-down` read their words off `arrow-down`.
 
 import { readdir, readFile, writeFile } from "node:fs/promises"
 import { join } from "node:path"
@@ -30,16 +30,16 @@ const ROOT = fileURLToPath(new URL("..", import.meta.url))
 
 /*
  * Names that wear a container prefix without being one. Shared with
- * lib/icons.ts so every surface resolves a base the same way — the counts
+ * lint.mjs and check-readmes.mjs so every script resolves a base the same way — the counts
  * drifted apart precisely because each of these files had its own copy of the
  * rule.
  */
 const NOT_CONTAINERS = new Set(
   JSON.parse(
-    await readFile(join(ROOT, "lib", "icon-not-containers.json"), "utf8")
+    await readFile(join(ROOT, "data", "icon-not-containers.json"), "utf8")
   ).names
 )
-const OUT = join(ROOT, "lib", "icon-keywords.json")
+const OUT = join(ROOT, "data", "icon-keywords.json")
 
 const c = (n, s) => `\x1b[${n}m${s}\x1b[0m`
 
@@ -99,7 +99,7 @@ const readStdin = async () => {
 }
 
 /**
- * The base names the set actually has, by the same rule `lib/icons.ts` uses: a
+ * The base names the set actually has, by the same rule lint.mjs uses: a
  * `square-`/`circle-` prefix is only a container when the thing it wraps exists,
  * so `circle-half` is its own base and `circle-arrow-down` is not.
  */
@@ -161,7 +161,7 @@ for (const line of lines) {
 
   // The description is a comma-separated list of the words someone would search
   // by. Case and spacing are the writer's; neither is worth carrying, and the
-  // site matches lowercased.
+  // search should match lowercased.
   const terms = [
     ...new Set(
       description
@@ -196,18 +196,18 @@ if (check) {
   const have = await readFile(OUT, "utf8").catch(() => "")
   if (have !== out) {
     console.error(
-      c(31, "✗") + " lib/icon-keywords.json is stale — re-run the Figma dump"
+      c(31, "✗") + " data/icon-keywords.json is stale — re-run the Figma dump"
     )
     process.exit(1)
   }
   console.log(
-    c(32, "✓") + ` lib/icon-keywords.json up to date (${Object.keys(sorted).length} icons)`
+    c(32, "✓") + ` data/icon-keywords.json up to date (${Object.keys(sorted).length} icons)`
   )
 } else {
   await writeFile(OUT, out)
   console.log(
     c(32, "✓") +
-      ` lib/icon-keywords.json — ${Object.keys(sorted).length} of ${known.size} bases described`
+      ` data/icon-keywords.json — ${Object.keys(sorted).length} of ${known.size} bases described`
   )
 }
 

@@ -1,16 +1,15 @@
-// Generate React components from the exported SVGs.
+// Generate @quick-ui/icons (packages/react/src) from the exported SVGs.
 //
-// The SVGs in `icons/` are the source of truth; this only restates them as JSX
-// so app code can `import { Check } from "@/components/icons"` the way it would
-// import from any icon package. Run `npm run icons:react` after `icons:build`.
+// The SVGs in `icons/` are the source of truth; this only restates them as JSX,
+// one module per style and corner treatment. Run `pnpm icons:react` after
+// `icons:build`.
 //
 //   node pipeline/build-react.mjs [--check]
 //
 // --check writes nothing and exits non-zero if the output would differ, the same
 // contract `build.mjs --check` offers for icons/. It closes the window between
 // renaming an icon and regenerating: until this runs, the old component is still
-// exported, so `tsc` type-checks the app against a module the set no longer
-// backs, and the app renders a glyph that is no longer in icons/.
+// exported, and the package ships a glyph that is no longer in icons/.
 
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises"
 import { existsSync } from "node:fs"
@@ -20,24 +19,11 @@ import { fileURLToPath } from "node:url"
 const ROOT = fileURLToPath(new URL("..", import.meta.url))
 
 /**
- * One entry per generated module.
+ * One entry per generated module: eight, four styles in two corner treatments.
  *
- * `stroke` has two targets and they are byte-identical on purpose: the site
- * imports the first, the package publishes the second, and one pass writes
- * both. A package built by its own generator drifts from the app the moment
- * either is touched alone, and the drift is invisible, because both sides
- * compile and the published icons are simply a different set from the ones the
- * site demonstrates.
- *
- * `duotone` and `fill` go to the package only. The site renders those styles
- * from the raw art in `lib/icons.ts` rather than from components, so shipping
- * 645 more of them into the app would be dead weight in every page bundle.
- *
- * They are separate modules rather than one file with a `weight` prop. The
- * three styles do not cover the same icons — 414, 340 and 305 — so a single
- * component taking a weight would have to accept a combination that does not
- * exist and decide what to do at runtime. A missing import is a build error,
- * which is the right time to find out.
+ * They are separate modules rather than one file with a `weight` prop, so an app
+ * ships only the styles it imports. Quick UI plans a `variant` prop on top of
+ * this; it is not built yet, and until it is, these entry points are the API.
  */
 const pkg = (file) => [
   `packages/react/src/${file}`,
@@ -48,10 +34,7 @@ const WEB_MODULES = [
   {
     style: "stroke",
     corners: "regular",
-    outs: [
-      ["components/icons/index.tsx", join(ROOT, "components", "icons", "index.tsx")],
-      pkg("index.tsx"),
-    ],
+    outs: [pkg("index.tsx")],
   },
   { style: "two-tone", corners: "regular", outs: [pkg("two-tone.tsx")] },
   { style: "duotone", corners: "regular", outs: [pkg("duotone.tsx")] },
@@ -62,19 +45,16 @@ const WEB_MODULES = [
    *
    * The style axis is already spelled as entry points — `ArrowDown` means the
    * stroke drawing from the root and the duotone drawing from `/duotone` — so
-   * a treatment is the same move one level along: `@keyline-icons/react/sharp`
+   * a treatment is the same move one level along: `@quick-ui/icons/sharp`
    * and `/sharp/duotone`. Every existing import goes on resolving to exactly
    * the component it resolved to before, which matters more here than tidiness,
    * because a rename is a breaking change nothing in the pipeline reports (the
-   * v0.2.0 `tag-horizontal` rename is the entry in the distribution skill).
+   * v0.2.0 `tag-horizontal` rename, in data/icon-renames.json).
    *
    * Suffixed export names — `ArrowDownSharp` — were the alternative and are
    * worse twice over: they would make the treatment part of a name whose own
    * rule is `[element]-[modifier]`, and they would put two spellings of the
    * same axis in one API, since the styles would still be entry points.
-   *
-   * The site's own `components/icons/` stays rounded: its chrome is drawn in
-   * one treatment, and 1497 more components in every page bundle buys nothing.
    */
   { style: "stroke", corners: "sharp", outs: [pkg("sharp.tsx")] },
   { style: "two-tone", corners: "sharp", outs: [pkg("sharp-two-tone.tsx")] },
@@ -92,37 +72,26 @@ const c = (n, s) => `\x1b[${n}m${s}\x1b[0m`
 const ROOT_DROP = new Set(["width", "height", "xmlns", "viewBox"])
 
 /**
- * kebab-case SVG attribute -> React prop name, read from `components/glyph.tsx`
- * rather than written out again here.
+ * kebab-case SVG attribute -> React prop name.
  *
- * It was written out again here, and the two drifted: this copy was missing
- * `fill-opacity` and `stroke-opacity`, which only duotone drawings carry. The
- * site renders duotone correctly because `glyph.tsx` maps them; the package
- * emitted `fill-opacity={0.4}` as JSX, which React rejects at runtime with
- * "Invalid DOM property" and then drops. 416 attributes across 415 duotone
- * components, every one of them the muted plate that makes a duotone a duotone.
+ * A kebab-cased name left unmapped is emitted as a string-keyed JSX attribute,
+ * which typechecks clean and which React rejects at runtime with "Invalid DOM
+ * property" and then drops. Upstream shipped exactly that once: `fill-opacity`
+ * was missing here, and every duotone plate rendered at full strength. So
+ * `build()` refuses any kebab-case attribute this map does not cover, rather
+ * than trusting it to stay complete.
  *
- * `tsc` does not catch it. A kebab-cased name cannot be a JSX identifier, so it
- * is parsed as a string-keyed attribute and typechecks clean, and nothing in
- * the repository renders the generated module. Only mounting it does, which is
- * why this survived until the package was installed from a tarball and
- * server-rendered.
- *
- * Reading the map means the two cannot disagree again. `glyph.tsx` is the copy
- * that is exercised on every page of the site, so it is the one to trust.
+ * This list was the site's `REACT_ATTR` in components/glyph.tsx, which the
+ * generator read until the site was removed.
  */
-const CAMEL = Object.fromEntries(
-  [
-    ...(await readFile(join(ROOT, "components", "glyph.tsx"), "utf8")).matchAll(
-      /"([a-z]+-[a-z-]+)":\s*"([a-zA-Z]+)"/g
-    ),
-  ].map(([, kebab, prop]) => [kebab, prop])
-)
-
-if (!CAMEL["fill-opacity"] || !CAMEL["stroke-opacity"]) {
-  throw new Error(
-    "REACT_ATTR in components/glyph.tsx no longer parses: the opacity mappings are missing"
-  )
+const CAMEL = {
+  "fill-rule": "fillRule",
+  "clip-rule": "clipRule",
+  "stroke-width": "strokeWidth",
+  "stroke-linecap": "strokeLinecap",
+  "stroke-linejoin": "strokeLinejoin",
+  "fill-opacity": "fillOpacity",
+  "stroke-opacity": "strokeOpacity",
 }
 
 const ATTR = /([\w-]+)="([^"]*)"/g
@@ -150,7 +119,7 @@ const pascal = (name) =>
  * is a drawing again, under its own export, so it keeps no alias.
  */
 const ALIASES = JSON.parse(
-  await readFile(join(ROOT, "lib", "icon-renames.json"), "utf8")
+  await readFile(join(ROOT, "data", "icon-renames.json"), "utf8")
 ).renames.filter(({ version, reclaimed }) => Number(version.split(".")[0]) >= 1 && !reclaimed)
 
 /**
@@ -164,8 +133,7 @@ const ALIASES = JSON.parse(
  * A re-export rather than a `const`, so the twin is the same binding: it adds
  * nothing to a bundle, and go-to-definition lands on the drawing. Deprecated
  * names get no twin, because a name born deprecated only adds to what the next
- * major removes. The site's stroke module carries the twins as well, being the
- * same text as the package's, and a bundler drops every one it never imports.
+ * major removes. A bundler drops every twin it never imports.
  */
 const SUFFIX = "Icon"
 
@@ -193,14 +161,21 @@ function jsxValue(value) {
 }
 
 function jsxAttrs(pairs) {
-  return pairs.map(([k, v]) => ` ${CAMEL[k] ?? k}=${jsxValue(v)}`).join("")
+  return pairs.map(([k, v]) => ` ${reactName(k)}=${jsxValue(v)}`).join("")
+}
+
+function reactName(attr) {
+  if (CAMEL[attr]) return CAMEL[attr]
+  if (attr.includes("-"))
+    throw new Error(`no React name for the SVG attribute "${attr}": add it to CAMEL`)
+  return attr
 }
 
 /**
  * The wrapper is emitted into every module rather than imported from a shared
  * one. Fifteen duplicated lines buys each module the property that matters
- * more: importing `@keyline-icons/react/fill` pulls in that file and nothing
- * else, and the stroke module stays byte-identical to the copy the site holds.
+ * more: importing `@quick-ui/icons/fill` pulls in that file and nothing
+ * else.
  */
 const header = (dir) => `// GENERATED BY pipeline/build-react.mjs — DO NOT EDIT.
 // Source: ${dir}/*.svg. Regenerate with \`npm run icons:react\`.
