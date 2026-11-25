@@ -1,1 +1,9 @@
 packages: []
+
+# esbuild (used by the size test) runs an install script that pnpm blocks by
+# default. `allowBuilds` is the pnpm 11+ setting, `onlyBuiltDependencies` the
+# pnpm 10 one that CI uses.
+allowBuilds:
+  esbuild: true
+onlyBuiltDependencies:
+  - esbuild

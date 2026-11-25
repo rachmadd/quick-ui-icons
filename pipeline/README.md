@@ -13,6 +13,9 @@ pnpm readmes:fix       # rewrite those counts in place
 pnpm icons:figma       # check the Figma file against raw/ (two steps, see below)
 pnpm icons:ci          # sync checks, README counts, lint, typecheck (for CI)
 pnpm build             # compile packages/react to dist/
+pnpm test              # build, then render, size and tree-shaking tests
+pnpm size:budget       # rerecord per-icon size budgets after an intended change
+node fixtures/bundle-size/measure.mjs   # Vite and Next bundle sizes (not in CI)
 ```
 
 `icons:figma` is deliberately not in `icons:ci`: it needs the Figma file, which CI does not have. Everything else here reads
@@ -58,8 +61,12 @@ pipeline/
   parallel.mjs                runs the last icons:ci checks at once
 scripts/
   generate.mjs                icons/ -> packages/react/src
-  lib/source.mjs              reads icons/, rounds path data to 2 decimals
+  lib/source.mjs              reads icons/
+  lib/precision.mjs           rounds path data to 2 decimals, more where a stroke end would turn
   lib/emit.mjs                writes the wrapper, icon modules and barrels
+  size-budget.mjs             records each icon's gzipped size budget for the size test
+  lib/size.mjs                measures icon modules minified and gzipped
+fixtures/bundle-size/         Vite and Next apps importing 1, 3 and 30 icons (see its README)
 ```
 
 `scripts/generate.mjs` is a restatement, not a transform: it emits one module
