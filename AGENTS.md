@@ -7,7 +7,9 @@ that builds them and one package, `@quick-ui/icons` (`packages/react`). There is
 no site.
 
 In progress: one component per icon with a `variant` prop (outline, fill,
-duotone, rounded only), built in phases from `docs/plans/icons-package.md`.
+duotone), rounded from `@quick-ui/icons` and sharp from
+`@quick-ui/icons/sharp`, with no two-tone. It's built in phases from
+`docs/plans/icons-package.md`, which also records the decisions.
 Today the package still has one entry point per style and corner treatment.
 Each phase gets its own branch and PR. Stop at the end of each one and wait for
 the owner.

@@ -20,21 +20,26 @@ measurements go in `.work/`, which is gitignored.
 ## Goal
 
 One React component per icon. The style is chosen with a prop instead of one
-import per style:
+import per style, and the corner treatment is chosen by the import path:
 
 ```tsx
-import { StarIcon } from '@quick-ui/icons'
+import { StarIcon } from '@quick-ui/icons'        // rounded
+import { StarIcon } from '@quick-ui/icons/sharp'  // sharp, same names
 
 <StarIcon />                 // outline
 <StarIcon variant="fill" />
 <StarIcon variant="duotone" />
 ```
 
-- Styles: outline, fill and duotone only, all rounded. Sharp and two-tone
-  aren't built, though their sources stay in the repo. "Outline" is the
-  `stroke` style in `icons/`.
-- Every icon tree-shakes on its own: an app that imports one icon ships that
-  icon's three styles and nothing else.
+- Styles: outline, fill and duotone. "Outline" is the `stroke` style in
+  `icons/`.
+- Corners: rounded from `@quick-ui/icons`, sharp from `@quick-ui/icons/sharp`.
+  Both entry points export the same names with the same `variant` prop.
+- Two-tone isn't built. Its sources stay in `raw/` and `icons/two-tone/` for
+  now (see the decisions below).
+- Every icon tree-shakes on its own: an app that imports one icon from one
+  entry point ships that icon's three styles in that corner treatment and
+  nothing else.
 - Each icon is a 24px grid, colored with `currentColor`, `aria-hidden` by
   default, and takes every `<svg>` prop. It has no `'use client'`, so server
   components can render it.
@@ -47,6 +52,27 @@ import { StarIcon } from '@quick-ui/icons'
   directly. Use that shape with `sideEffects: false` unless phase 0 finds a
   better one.
 
+## Decisions
+
+Recorded with the date and the reason, so a later phase doesn't reopen them.
+
+- **2026-11-25: sharp ships, chosen by import path, not by prop.** The owner
+  wants people to choose between sharp and rounded. A `corners` prop is
+  decided at runtime, so the bundler can't drop the treatment an app doesn't
+  use. Every icon would ship six drawings instead of three, and the sharp
+  modules are 83 to 88% the size of the rounded ones. Corners are also an
+  app-wide choice, while `variant` changes per instance (outline at rest,
+  fill when active). Because both entry points export the same names, an app
+  switches by changing the import path or with one bundler alias.
+- **2026-11-25: two-tone is dropped from the package.** Its sources stay for
+  now. Removing them from `raw/` and the pipeline would be a separate cleanup
+  PR, and only if the owner asks. Without them, the upstream sync script
+  would have to filter two-tone out of each Keyline release.
+
+Still open from the phase 0 audit (PR #2): the `size` prop, the duotone
+fallback on 79 closed icons, the deprecated aliases, the license header form,
+the file layout and where the generator lives.
+
 ## Phases
 
 **0. Audit (no code).** The source format, with a count of each primitive per
@@ -56,13 +82,16 @@ which names exist. A recommended file layout, and anything in the goal that
 looks wrong.
 
 **1. The generator and the package.** `scripts/generate.*` reads the outline,
-fill and duotone sources and writes one function per icon taking `variant`,
-named `{Name}Icon` with a plain `{Name}` alias. Generated files get a header
+fill and duotone sources, rounded and sharp, and writes two entry points,
+`@quick-ui/icons` and `@quick-ui/icons/sharp`. Each has one function per icon
+taking `variant`, named `{Name}Icon` with a plain `{Name}` alias, and the same
+names in both. Today's other entry points, including two-tone, go. Generated files get a header
 saying they're generated, with Keyline's MIT notice. Coordinates are rounded
 (2 decimals unless phase 0 says otherwise), with the bytes saved reported and
 a sample rendered at 24px and 48px. TypeScript types, ESM only,
 `sideEffects: false`, `"private": true`. Tests: every icon renders all three
-variants with the right root attributes, the variant defaults to outline,
+variants in both entry points with the right root attributes, both entry
+points export the same names, the variant defaults to outline,
 props pass through, `aria-hidden` can be overridden, and running the
 generator again leaves no diff.
 
@@ -70,9 +99,10 @@ generator again leaves no diff.
 built with Vite (Rollup) and a Next.js production build, with bytes and
 gzipped bytes recorded for each. The same set compared against
 `@keyline-icons/react` importing the same icons in outline and fill. A check
-that unused icons are absent from the output, not only small. The dev-mode
-cost recorded. A size test that fails if one icon goes over its measured
-budget.
+that unused icons are absent from the output, not only small, and that an app
+importing from one entry point ships nothing from the other. Both entry
+points are measured. The dev-mode cost recorded. A size test that fails if one
+icon goes over its measured budget.
 
 **3. The built-in subset for Quick UI.** A generator output that writes Quick
 UI's `packages/react/src/components/icons/icons.tsx` from this set's data. It
@@ -84,18 +114,20 @@ along with a note on how quick-ui should take it in. The quick-ui repo isn't
 edited.
 
 **4. "Slightly rounder", as a trial.** Rounder corners on about 35 common
-icons, with every style of an icon keeping the same shape. A gallery shows
+icons in the rounded set only, with every style of an icon keeping the same
+shape. Sharp isn't touched. A gallery shows
 original and rounder side by side, at 16, 24 and 48px, in light and dark. The
 work stops there for the owner to decide whether to go on, and by how much.
 
 **5. Apply the rounding (only if phase 4 is approved).** The rounding goes
-through the generator, so it can be reproduced from the upstream sources. A
+through the generator to the rounded set only, so it can be reproduced from
+the upstream sources and sharp stays as drawn. A
 before-and-after of every icon flags where the change goes wrong (crossed
 strokes, lost detail, a fill that no longer matches its outline). Each one is
 fixed or excluded, and listed.
 
 **6. Release readiness (no publishing).** A README covering usage, the
-`variant` prop and the credits, following Quick UI's writing guide
+`variant` prop, the two entry points and the credits, following Quick UI's writing guide
 (`docs/plans/06-docs-style-guide.md` in quick-ui). A sync script that pulls a
 new upstream Keyline release, runs the generator and reports new, changed and
 removed icons. A CHANGELOG. Nothing is published, versioned or tagged, and the
