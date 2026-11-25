@@ -26,6 +26,10 @@
 packages/react/src/
 packages/*/dist
 
+# Working logs and measurements for the phased plan in docs/plans/. Results
+# that matter go into the PR and the plan, so nothing here needs a history.
+.work/
+
 # misc
 .DS_Store
 *.pem

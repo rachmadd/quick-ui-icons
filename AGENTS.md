@@ -6,10 +6,11 @@ rounded and sharp corners, so eight styles in all. It also holds the pipeline
 that builds them and one package, `@quick-ui/icons` (`packages/react`). There is
 no site.
 
-Planned, not built: a `variant` prop to choose the style, with
-`@quick-ui/icons` for rounded corners and `@quick-ui/icons/sharp` for sharp.
-Today the package has one entry point per style and corner treatment. Don't
-build the prop unless the owner asks.
+In progress: one component per icon with a `variant` prop (outline, fill,
+duotone, rounded only), built in phases from `docs/plans/icons-package.md`.
+Today the package still has one entry point per style and corner treatment.
+Each phase gets its own branch and PR. Stop at the end of each one and wait for
+the owner.
 
 ## Where things live
 
@@ -24,6 +25,9 @@ build the prop unless the owner asks.
   descriptions and renames. A future icon browser on quick-ui.com reads it.
   Edit it by hand.
 - `pipeline/README.md` explains the build and the drawing rules.
+- `docs/plans/` holds the owner's briefs and their status.
+- `.work/` holds logs and measurements. It's gitignored, so put anything the
+  owner needs into the PR as well.
 
 Run `pnpm icons:ci` and `pnpm build` before you finish. CI runs both.
 
