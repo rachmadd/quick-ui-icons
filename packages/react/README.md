@@ -81,9 +81,11 @@ over every knockout.
 **`sideEffects: false` and ESM.** Named imports from the single entry point
 tree-shake in any modern bundler, so an app importing three icons ships three.
 
-**Generated, not written.** The components come from `icons/stroke/*.svg` via
-`pipeline/build-react.mjs`, which emits this package and the site's own module
-in one pass so the two cannot drift.
+**Generated, not written.** The components come from `icons/` via
+`pipeline/build-react.mjs`, one module per style and corner treatment.
+
+**Coming, not built yet:** a `variant` prop to choose the style, with
+`@quick-ui/icons` for rounded corners and `@quick-ui/icons/sharp` for sharp.
 
 ## License
 

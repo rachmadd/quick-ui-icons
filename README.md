@@ -1,57 +1,57 @@
 # Quick UI Icons
 
 The icon set for Quick UI. **2,013 icons, drawn on one 24px grid** with a 2px
-stroke.
+stroke, in four styles, each with rounded and sharp corners.
 
-Quick UI uses two styles: the rounded outline, and the rounded fill for anything
-active, such as a selected tab or a pressed toggle. The repo still holds the
-other styles it came with:
-
-| Style | Icons | Used by Quick UI |
+| Style | Icons | What it is |
 | --- | --- | --- |
-| `stroke` | 2,013 | Yes, the default |
-| `two-tone` | 2,013 | No |
-| `duotone` | 2,013 | No |
-| `fill` | 2,013 | Yes, for active states |
+| `stroke` | 2,013 | 2px outlines. The default. |
+| `two-tone` | 2,013 | The outline over a flat plate at reduced opacity. |
+| `duotone` | 2,013 | No outline: a grey body with the detail at full strength. |
+| `fill` | 2,013 | Solid, with the detail knocked out of the shape. |
 
-Each drawing also comes with sharp corners, which Quick UI doesn't use, so the
-repo holds 16,104 SVGs in total.
+Every style comes with rounded corners and with sharp ones, so the repo holds
+16,104 SVGs in total.
 
 67 icons come in a `square-` form and 72 in a `circle-` form, which wrap the
 base drawing in a container.
 
-The plan is to choose the style with a prop on each icon, instead of importing
-it from a different entry point. That prop isn't built yet. Today
-`packages/react` exports one entry point per style.
+## The package
 
-Nothing is published yet, and every package is private.
+`@quick-ui/icons` (`packages/react`) is the React package. It isn't published
+yet. Today it has one entry point per style and corner treatment:
+`@quick-ui/icons`, `/two-tone`, `/duotone` and `/fill`, and the same four under
+`/sharp`.
+
+Coming, not built yet: a `variant` prop to choose the style, and two entry
+points for the corners, `@quick-ui/icons` for rounded and `@quick-ui/icons/sharp`
+for sharp.
 
 ## Layout
 
 ```
 raw/<name>/          Figma exports. The source of truth.
-icons/               SVGs built from raw/. Don't edit them.
-components/icons/    React components built from icons/. Don't edit them.
+icons/               SVGs built from raw/, rounded and sharp. Don't edit them.
+packages/react/      @quick-ui/icons. Its src/ is built from icons/.
+data/                Search tags, aliases, categories and descriptions.
 pipeline/            The build, the linter and the checks.
-packages/            @quick-ui/icons (packages/react) and the other packages.
-app/, components/    The site that browses the set. It still carries Keyline's
-                     name and domain until a later task rebrands it.
+tools/               Scripts that drew past batches of icons.
 ```
 
 `pipeline/README.md` explains the build and the drawing rules. Before you open a
-PR, run `pnpm icons:ci`. CI also runs `pnpm lint` and `pnpm build`.
+PR, run `pnpm icons:ci` and `pnpm build`. CI runs both.
 
 ## Credits
 
 Quick UI Icons is based on [Keyline Icons](https://keylineicons.com)
 ([keyline-icons/keyline-icons](https://github.com/keyline-icons/keyline-icons)),
 which is MIT licensed. The drawings and the pipeline are theirs. Keyline's
-copyright notice stays in [LICENSE](LICENSE) and in the header of every
-generated file, and new icons come from their repo through the `upstream`
-remote.
+copyright notice stays in [LICENSE](LICENSE), and new icons come from their repo
+through the `upstream` remote.
 
-We change the name, the package names and the repo metadata, and we narrow the
-set Quick UI uses to the rounded `stroke` and `fill` styles. The style prop
+We changed the name, the package name and the repo metadata. We removed
+Keyline's website, its shadcn registry, and its React Native, CLI, MCP and Figma
+plugin packages, and moved the icon metadata to `data/`. The `variant` prop
 will be ours too, once it's built.
 
 ## License

@@ -1,44 +1,26 @@
 # Icon pipeline
 
-Turns raw Figma exports into publishable icons, then checks them against the
-variant architecture. No dependencies — plain Node ESM.
-
-One exception, and it is an external tool rather than a package: `build-brand.mjs`
-rasterises a vector, which plain Node cannot do, so it drives headless Chrome.
-Nothing else here needs it, and it tells you where to point `CHROME` if it cannot
-find one.
+Turns raw Figma exports into the SVGs in `icons/` and the React package in
+`packages/react`, then checks them against the variant architecture. Plain Node
+ESM, no dependencies.
 
 ```bash
-pnpm icons:build     # raw/ -> icons/
-pnpm icons:lint      # check icons/
-pnpm icons:react     # icons/stroke/ -> components/icons/index.tsx
-pnpm icons:demos     # check the demo pages against icons/
-pnpm readmes:check   # check the counts typed into the READMEs against icons/
-pnpm readmes:fix     # rewrite those counts in place
-pnpm icons:figma     # check the Figma file against raw/ (two steps, see below)
-pnpm icons:ci        # sync checks, lint, demo and README checks, typecheck (for CI)
-pnpm brand:build     # public/logo/logo.svg -> app/ icons
-pnpm paper:build     # icons/ -> previews/paper/ (sheets for paper.design)
-pnpm paper:import    # write those sheets into the paper.design file
-pnpm paper:verify    # check the paper.design file against those sheets
+pnpm icons:build       # raw/ -> icons/
+pnpm icons:lint        # check icons/
+pnpm icons:react       # icons/ -> packages/react/src (eight modules)
+pnpm readmes:check     # check the counts typed into the READMEs against icons/
+pnpm readmes:fix       # rewrite those counts in place
+pnpm keywords:emit     # print the Figma snippet that reads the search tags
+pnpm keywords:build    # write its output to data/icon-keywords.json
+pnpm icons:figma       # check the Figma file against raw/ (two steps, see below)
+pnpm icons:ci          # sync checks, README counts, lint, typecheck (for CI)
+pnpm build             # compile packages/react to dist/
 ```
 
-`icons:figma` is the odd one out and is deliberately not in `icons:ci`: it needs
-the Figma file, which CI does not have. Everything else here reads `icons/`, so
-a defect that exists only in the design file passes every check — which is how
-twelve `smartphone-<modifier>` fills once sat in Figma with their arrows and
-ticks missing while the shipped SVGs were perfect. Since 29 Aug 2026 it is also
-blind to the `Corners` axis the component sets now carry, so it cannot match
-today's variant names until the sharp release teaches it the third property.
-Run it after a drawing session:
-
-`brand:check` sits out of `icons:ci` for the same reason, and the reason is
-worth naming precisely: not that the check is unimportant, but that it cannot
-answer the question CI is asking. It rasterises through headless Chrome, so its
-output depends on the renderer as much as on the mark — two Chrome versions can
-disagree by a pixel on identical input. In CI that reads as "the logo changed"
-when nothing did, and a check that cries wolf gets switched off, after which
-the real drift ships too. Run it after touching the logo.
+`icons:figma` and the `keywords:*` scripts are deliberately not in `icons:ci`:
+they need the Figma file, which CI does not have. Everything else here reads
+`icons/`, so a defect that exists only in the design file passes every check.
+Run `icons:figma` after a drawing session:
 
 ```bash
 pnpm icons:figma --emit          # prints a snippet
@@ -51,41 +33,38 @@ chunks. It stops short of the limit and ends with `#NEXT=<name>`; put that name
 in its `AFTER`, run it again, and append each run to the same file until no
 `#NEXT` comes back. A file that still ends in one is refused rather than
 diffed, because a part-digest otherwise reports every icon it never reached as
-deleted from Figma, which is the loudest possible way to say "keep pasting".
+deleted from Figma.
 
 Both generators take `--check`, which writes nothing and exits non-zero if the
-output would differ — `build.mjs --check` for `icons/`, `build-react.mjs --check`
-for `components/icons/index.tsx`. The second matters because a stale generated
-module fails silently: the old component is still exported, so `tsc` happily
-checks the app against a module the set no longer backs.
-
-```bash
-pnpm icons:react:check
-```
+output would differ: `build.mjs --check` for `icons/`, `build-react.mjs --check`
+for `packages/react/src`. The second matters because a stale generated module
+fails silently: the old component is still exported, so `tsc` checks clean
+against a module the set no longer backs.
 
 ## Layout
 
 ```
-raw/<style>/<name>.svg      Figma exports, untouched
-icons/<style>/<name>.svg    generated — do not hand-edit
+raw/<name>/*.svg              Figma exports, untouched
+icons/<style>/<name>.svg      generated, rounded: do not hand-edit
+icons/sharp/<style>/<name>.svg  generated, sharp: do not hand-edit
+data/                         icon metadata: search tags, aliases, categories,
+                              descriptions, renames
 pipeline/
-  lib/geom.mjs              path parsing, exact bboxes, closed-subpath detection
-  lib/svg.mjs               SVG reader + normalizer
-  build.mjs                 raw/ -> icons/
-  lint.mjs                  geometry + coverage rules
-  build-react.mjs           icons/stroke/ -> components/icons/index.tsx
-  build-brand.mjs           public/logo/logo.svg -> app/ icons
-  build-paper.mjs           icons/ -> previews/paper/ HTML sheets
-  check-paper.mjs           check the Paper file against previews/paper/
-  import-paper.mjs          write previews/paper/ into the Paper file
-  build-community.mjs       icons/ -> previews/community/ carousel sheets
-  check-search.mjs          the four searches agree, and are right
-  check-versions.mjs        each package, and the MCP listing, names the version it ships as
-  check-categories.mjs      every category label has an icon to draw it
+  lib/geom.mjs                path parsing, exact bboxes, closed-subpath detection
+  lib/svg.mjs                 SVG reader + normalizer
+  build.mjs                   raw/ -> icons/
+  build-sharp.mjs             one-off: derive sharp drawings from stroke
+  split-sets.mjs              one-off: split a flat Figma export into raw/<name>/
+  lint.mjs                    geometry + coverage rules
+  build-react.mjs             icons/ -> packages/react/src
+  build-keywords.mjs          Figma descriptions -> data/icon-keywords.json
+  check-readmes.mjs           README counts against icons/
+  check-figma.mjs             the Figma file against raw/
+  parallel.mjs                runs the last icons:ci checks at once
 ```
 
 `build-react` is a restatement, not a transform: it emits one component per
-stroke SVG so app code can `import { Check } from "@/components/icons"`. Each
+SVG, in one module per style and corner treatment. Each
 component spreads its own root attributes rather than a shared preset, because
 some drawings in `icons/stroke/` carry no stroke of their own — `square-half`
 and the other fraction sectors are solid by definition — and painting one on
@@ -622,34 +601,14 @@ rather than stacking — the solid `circle-user` already does this with
 > existed in every style to test a check against; they have since 1.0.0, and
 > no check has been written yet.
 
-## What `check-demos` checks
-
-The demo pages under `app/demo/` name the glyphs they draw as literal arrays in
-`lib/*-demo.ts` — `MOBILE_ICON_NAMES` — and type their screen
-data against that union. TypeScript therefore already guarantees every *use*
-site matches the list. It cannot know whether the list matches `icons/`, because
-those are strings resolved against the filesystem when the page renders.
-
-That gap is exactly what a rename opens, and it has already bitten once:
-`circle-trending-up-2` became `circle-trending-2-up` in the set and the demo
-kept the old name, taking down `/demo/mobile`.
-
-| | |
-|---|---|
-| `UNKNOWN` | the name is not in the set. `pickMobileIcons` throws on this, so the page 500s — loud, but only once someone opens it |
-| `NOSTROKE` | the name exists but has no stroke drawing |
-| `NOTCONST` | the list lost its `as const`, so the screen data silently stopped being checked against it |
-
 ## What `check-readmes` checks
 
 Eleven numbers, spread across `README.md` and `packages/react/README.md`: the
 icon count, the three per-style counts, the SVG total and the two container
 counts, plus the four the React package repeats.
 
-They are the only counts in the project that are *prose*. The site calls
-`loadIcons()` per request, the Figma cover and the paper sheets are generated,
-and the Figma file has `check-figma`. A README has none of that, so it sat at
-414 icons and 1,059 SVGs while the set grew past 500. Nothing failed and nothing
+They are the only counts in the project that are *prose*, so upstream they sat
+at 414 icons and 1,059 SVGs while the set grew past 500. Nothing failed and nothing
 warned; the first line of the repo's front page was simply wrong.
 
 Two things about how it is written:
@@ -728,190 +687,17 @@ same tokens in a different order first, then the longest shared prefix.
 New demos are picked up automatically — any `export const <X>_ICON_NAMES` under
 `lib/` is checked, so this does not need editing when a page is added.
 
-## What `build-paper` emits
-
-The set as HTML, for paper.design. One sheet per catalogue section, plus a
-manifest, under `previews/paper/`.
-
-```bash
-pnpm paper:build
-pnpm paper:check     # in icons:ci, so a redrawn icon fails here
-```
-
-Paper's canvas is HTML and CSS rather than a scene graph, and the only write its
-MCP server exposes is `write_html`, so the unit it imports is a document. There
-is no "import 1,231 SVGs" call to aim at; a sheet of inline drawings is what the
-tool accepts, which is why this is a generator rather than a pointer at
-`icons/`.
-
-Three things about the output are decisions rather than defaults:
-
-- **The sheets are fragments with every rule inline**, no doctype and no
-  `<style>` block. `write_html` places a fragment into a node and parses inline
-  styles only: the first import that carried a stylesheet arrived as a single
-  unstyled column, with the drawings themselves perfect, so nothing about the
-  result named the CSS as the cause. A browser wraps a fragment on its own, so
-  they still open locally for review.
-- **The card is Figma's card, measured rather than designed.** 742 wide, 28 of
-  padding, a 14 corner; a header with the counts pushed right, the category's
-  `blurb` from `lib/icon-taxonomy.ts`, the legend, a hairline, the column
-  headings, then rows. Rows are 38 tall on a 10 corner, striped `#f5f5f5` on the
-  even ones. The ink is `#111111`, which is Figma's rather than the site's
-  `#0a0a0a`. All of it was read out of the catalogue cards themselves: the two
-  surfaces are meant to be indistinguishable and only one of them gets to
-  decide.
-- **A row is a name, and it draws the matrix.** The name and its badge on the
-  left, a spacer, then `Regular` and `Sharp`, each four 24px cells in stroke,
-  two-tone, duotone, fill order: eight cells, 6 apart within a group and 28
-  between the groups. A heading is exactly as wide as its own group, four cells
-  and three gaps (114), because `GROUP_WIDTH` counts `STYLES`. So `arrow-down`, `square-arrow-down` and
-  `circle-arrow-down` are three rows rather than one row of twenty-four
-  drawings, and the card's header counts both: sets as `icons`, rows as `names`.
-- **A cell a name does not own is drawn empty**, rather than dropped, which
-  would slide the later columns left and stop the eight reading as a grid.
-  Since parity every name owns all eight, so a hole anywhere on a board is a
-  defect the board makes visible.
-- **The layer name carries the treatment.** `arrow-down stroke` for a rounded
-  drawing and `arrow-down stroke sharp` for its sharp sibling. `check-paper`
-  compares those strings against the file position for position, and two layers
-  called the same thing on one board would make a swapped pair unreportable.
-- **One card per category**, cut into parts only for the wire. The first part
-  carries the card and an empty rows container; the rest are bare rows the
-  importer appends into that container, so the board holds one card however many
-  calls built it.
-- **The artboard behind a card must be transparent**, and `create_artboard`
-  ignores that and paints white. It has to be set again with `update_styles`
-  afterwards or the card reads as rounded on top and square at the bottom, since
-  an opaque board is a square rectangle filling the corners back in.
-
-## What `check-paper` checks
-
-`paper:check` proves the sheets match `icons/`. It says nothing about the file
-they were written into, and that is where the drift lives: an artboard is
-written once and then sits there while the set moves under it. A board of 48
-icons against a sheet of 51 looks exactly like a board that is up to date.
-
-```bash
-pnpm paper:verify              # needs Paper Desktop open with the file
-pnpm paper:verify --json
-```
-
-Not in `icons:ci`, for the reason `icons:figma` and `brand:check` are not: it
-needs an application CI does not have. Unlike `icons:figma` it is one step
-rather than two, because Paper's MCP server is local HTTP with no auth, so the
-script talks to it directly instead of emitting a snippet to paste.
-
-**It checks every file the set is in, which is two.** `SET_PAPER_FILES` in
-`lib/site-chrome.ts` names them and says where each one starts; the set outgrew
-one Paper file, whose ceiling is on the file rather than on a page.
-`pipeline/lib/paper-files.mjs` turns that into a board-to-file answer, and every
-board is looked for in both files and then judged on whether it turned up in
-the right one. `--file <id>` narrows the run to one file and `PAPER_MCP`
-overrides the endpoint.
-
-Seven findings, and the distinction between them is the useful part:
-
-| | |
-| --- | --- |
-| `MISSING` | a sheet's artboard is in neither file |
-| `STRAY` | the board is in the other file, or in both |
-| `ORPHAN` | an artboard no sheet builds |
-| `STALE` | the board holds a different number of drawings than its sheet |
-| `DRIFT` | same count, different icons, reported with the first disagreement |
-| `UNNAMED` | written but never named, so every layer still reads `SVG` |
-| `UNREADABLE` | the tree summary came back partial, so nothing can be concluded |
-
-**What it cannot see is the drawings.** Paper will not hand geometry back:
-`get_jsx` returns the layout with the paths stripped, and `export` answers a
-node with an empty list. So this compares composition and names, which catches
-an icon added, removed, renamed, a category re-split and a board built from an
-older sheet, but not a drawing redrawn under the same name in the same place.
-That is a real hole and it is better stated than papered over: `icons:figma`
-compares geometry, this compares inventory.
-
-Categories come from `lib/icon-taxonomy.ts`, parsed rather than copied, and the
-parse asserts it read a pattern for every label. Without that check a regex
-written across two lines hands its whole category to `Other`, which looks like a
-grouping decision rather than a broken read. `paper-files.mjs` reads
-`lib/site-chrome.ts` the same way and asserts the same kind of thing, with one
-extra trap: a comment stripper that treats every `//` as a comment takes each
-URL in that array down to `https:`.
-
-**A `STRAY` is two steps and only the first is an import.** Write the board into
-the file it belongs in with `--create`, then delete the copy it left behind by
-hand. Neither script deletes a board on a name match, for the same reason
-neither touches an `ORPHAN`: a name is not evidence about what is in a board.
-
-## What `import-paper` writes
-
-The other half of the Paper loop: `paper:build` writes the sheets, this writes
-them into the file.
-
-```bash
-pnpm paper:import              # the boards that are behind, and only those
-pnpm paper:import --dry-run    # name them without writing
-pnpm paper:import --all
-pnpm paper:import --board Media --board Files
-pnpm paper:import --changed HEAD
-```
-
-It was a person following a recipe until 24 Aug 2026, and the reason it is a
-script now is worth stating plainly, because the shape of the problem argues the
-other way: Paper is a desktop app, so a session concludes it cannot be reached
-and writes a warning instead. It can. Paper Desktop is a local HTTP server on
-`127.0.0.1:29979` with no auth, which is how `check-paper.mjs` has always talked
-to it, and the import is four tool calls per board.
-
-**Which boards it writes is a union of two questions, because neither answers
-the other.** `check-paper`'s findings say what the *file* is missing, which
-catches a board never imported, imported from an older sheet, or half-renamed,
-including drift this commit had nothing to do with. But that comparison is
-composition only, so a drawing redrawn under the same name in the same place is
-invisible to it, and a redraw commit is exactly that. `--changed <rev>` adds the
-boards whose sheets the commit touched. Re-importing a board that was already
-current costs a few seconds and nothing else: the write is a replace.
-
-**It will not create a board that is not in the file.** `--create` does, and
-warns, because nothing in the repo records where a board sits on the canvas, so
-a created one lands at the origin on whatever page is active and someone has to
-place it. That is a decision rather than a step.
-
-The traps are the ones `previews/paper/manifest.json` lists, now in code:
-
-- **Replace the artboard's child, never the artboard.** Deleting it loses the
-  canvas position, and nothing here records it.
-- **The replace mints a new node**, so the card has to be read again before its
-  rows container can be found for parts 2 and up.
-- **`update_styles` takes `nodeIds` plural and `rename_nodes` takes `nodeId`
-  singular**, and each answers the other's shape with a schema complaint inside
-  a *successful* result. Only a caller that reads `isError` sees it; one that
-  does not reports a write that never happened as done.
-- **Drawings arrive named `SVG`**, after their type, and are renamed from the
-  sheet in document order. Match `component === "SVG"` exactly: the nested paths
-  come back as `SVGVisualElement`, and a loose filter finds 18 candidates on a
-  sheet with 7 drawings.
-
-Exit codes carry the distinction `ship` needs: 2 means Paper was not listening,
-which is a step waiting on an app rather than a failure, and 1 means an import
-was attempted and went wrong.
-
 ## Adding icons
 
 1. In Figma, select the **Components** page and Export → SVG.
 2. Drop the result into `raw/`.
 3. `pnpm icons:lint` and fix what it reports.
-4. `pnpm ship -m "Draw sun"`
-
-`ship` does the rest: every generator, the checks, the commit, and then the icon
-dates and the Paper boards folded into it. If Paper Desktop is open it writes the
-changed boards into the file too and verifies them; if it is not, it says so and
-the step waits. Step 3 is separate only because a drawing that fails the linter
-should be fixed before it is committed, not after.
-
-Figma is the one surface `ship` can only talk about. Writing drawings into the
-file is the plugin API, and the REST API will not carry a vector, so a commit
-that touches `raw/` ends with a warning that Figma is behind and the command
-that proves it.
+4. `pnpm icons:build && pnpm icons:react`, then `pnpm readmes:fix` if the
+   counts moved.
+5. `pnpm icons:ci`, then commit `raw/`, `icons/`, `packages/react/src` and the
+   READMEs together.
+6. Add the new name's search tags, aliases, category and description to the
+   files in `data/`.
 
 Figma exports component-set variants as one folder per set, with the variant
 properties as the filename:
@@ -941,252 +727,10 @@ days and is a renaming step nobody needs now.
 > Export from the Components page, not the catalogue. The catalogue's frames
 > carry no style information — that is what the component sets encode.
 
-## Cutting a release
+## Releases
 
-Nothing in the pipeline does this. `ship` deliberately stops at the commit, so
-the steps below are the only record of the order, and the order is the whole
-difficulty.
-
-**The version is not typed anywhere.** `build-history.mjs` reads it from
-`packages/react/package.json`, and takes the release *date* from the git tag. So
-a release is a tag plus a rebuild, and bumping the React package is what decides
-what the next version is called.
-
-**Any new icon moves the second number.** 0.3.0 plus 44 new drawings is 0.4.0,
-never 0.3.1; the third number is only for a release that adds no icons. The tag
-list is not precedent for this — 0.1.1 through 0.1.4 each carried new drawings
-and should have moved the second number, which is a mistake this file is
-recording rather than repeating. `lib/icon-history.json`'s `unreleased.names`
-answers it: non-empty means the second number moves.
-
-```bash
-git checkout main && git pull
-git tag v0.1.1 && git push origin v0.1.1
-# move the note: lib/icon-release-notes.json, "unreleased" -> "0.1.1"
-pnpm history:build          # releasedVersion and releasedAt, off the new tag
-pnpm paper:build            # the boards are dated by the release
-pnpm icons:ci
-```
-
-Then commit `lib/icon-history.json` and `previews/paper/`, run
-`pnpm paper:import` with the file open, and confirm with `pnpm paper:verify`.
-
-**Sections are keyed by version already.** `lib/icon-release-topics.json` splits
-an entry into titled shelves of new drawings plus one `Redrawn` section holding
-shelves of redraws, and every surface prints them in place of the note, section
-by section. Each gets an `anchor` the site links its title to. It is
-keyed by the version the work ships as, like `lib/icon-release-order.json`, so it
-needs nothing at the tag. A name no section claims is appended and reported.
-
-**The note does not graduate on its own, and nothing fails when it doesn't.**
-`lib/icon-release-notes.json` is hand-written and keyed by version, with an
-`unreleased` key for work that has no version yet. Tagging does not move it, so
-`history:build` reads a release with no note and an unreleased block that still
-has one. Re-key the string to the version — the text does not change, and
-graduating it is not editing a published entry, it is giving it the version it
-turned out to be.
-
-The reason this needs writing down is that every changelog surface is generated,
-so the mistake renders perfectly. v0.3.0 was published announcing nothing but a
-redraw count, under a heading nobody reads twice, while an otherwise-empty
-"Unreleased" block below it carried the sharp announcement and its thirty-drawing
-preview. The page, the board and `history:check` were all green.
-
-**Anything hung off the note's presence has to hang off the version instead.**
-The changelog's sharp preview was gated on `unreleased.note`, so it vanished
-with the block the moment the tag existed; it is pinned to `SHARP_RELEASE` in
-`lib/changelog.ts` now, and stays on that entry for good, because a changelog
-only grows and the release that announced a thing goes on showing what it
-announced.
-
-**The tag cannot contain the file the tag produces**, and this reads as a
-mistake every time. `history:build` needs the tag to exist before it can date
-the release, so the history commit necessarily lands after the tag and the tag
-does not include it. That is not a corner anyone cut: `git show
-v0.1.0:lib/icon-history.json` says `released: false`, because at the moment
-v0.1.0 was tagged it was true.
-
-**A release does NOT touch the "new" dot, and this paragraph used to say the
-opposite.** It once read "a release clears every new dot, and that is the
-point", because `isNewSince` compared each drawing's added date against
-`releasedAt`. That rule is gone, for the two reasons `lib/icon-badges.json`
-records: it cleared the badges of the very drawings the release was announcing,
-and a set shipping twice in a week showed a badge for about a day.
-
-The badge is an **age**. `isNewSince` asks whether a drawing was added inside
-`newForDays`, floored by `clearedBefore`, both in `lib/icon-badges.json`, which
-is source rather than generated and which only Zafar changes, stated explicitly,
-every time. `clearedExcept` lists names the floor skips (the window still
-applies): a date floor cannot follow a release, and `car` and `rocket` were first
-drawn on a branch on 4 and 9 Sep 2026 and shipped in 1.0.0, so the v0.8.0 floor
-of 22 Sep would have cleared two of the release's own badges. **Cutting a release must never touch either value.** Read that file
-before saying anything about what a badge does; the sentence above stood here
-wrong for long enough to mislead a session into offering to clear 78 of them.
-
-**A changelog only ever grows. Never delete or reword a published entry.** Every
-changelog surface is generated and redrawn from scratch on every build, so a bug
-in the *shape* of the data does not fail, it silently publishes less history than
-yesterday. Both surfaces were built from `releasedVersion` and
-`previousReleasedVersion` — two scalars, therefore two entries — and cutting
-v0.1.2 deleted v0.1.0 from the board and printed "Initial release" over v0.1.1.
-It survived v0.1.1 only because with two tags the wrong shape and the right one
-agree.
-
-Anything that lists releases reads `HISTORY.releases` / `SET_RELEASES`, which
-holds all of them with per-tag counts and membership; `initial` marks the oldest
-tag and nothing else. `build-history.mjs` reads the file already on disk and
-refuses to write one that has lost a release it previously recorded, so the
-committed file is the record. If a tag is genuinely being retracted, delete its
-entry deliberately in a commit that says so.
-
-> Deleting a tag to test that guard rewrites its date, because a lightweight
-> tag's `creatordate` is its commit's. Recover the original from
-> `git show v<older-tag>:lib/icon-history.json`, which recorded the date and lets
-> you find the commit by it. Better: don't delete the tag.
-
-**A redrawn icon belongs in every changelog, shown before against after.** A
-release is not always drawings added, and naming a correction is not announcing
-it: "shuffle redrawn" asks the reader to remember what `shuffle` used to look
-like, which nobody can, and remembering is the whole thing the drawing changed.
-So each entry carries both documents and every surface prints them side by side,
-same size, same ink, same ground.
-
-`build-history.mjs` bakes them into `updated` on each release and on
-`unreleased`, out of the two refs that bound the window — the previous tag and
-this one, or the newest tag and the working tree. Both sides come off the refs,
-never off disk for a released entry, so redrawing the same icon again does not
-rewrite what an older entry was published showing. The pair shown is the first
-of a name's **eight** files that genuinely differs across the window (stroke,
-two-tone, duotone and fill, rounded first and then sharp), and `updated` carries both
-`style` and `corners` to say which. Where nothing differs, the pair is null and
-the surfaces fall back to naming the icon. Where the window did not open with
-the drawing at all, it is an addition rather than a redraw, whatever its dates
-say — `megaphone` was drawn, retired and drawn again across v0.1.4.
-
-**A sharp pair is labelled sharp, on every surface.** Rounded first is what
-makes the label mean something: a correction that moved both treatments shows
-the rounded drawing, the one a reader recognises, and sharp is reached only
-where the rounded files are identical across the window — a change confined to
-the treatment, whose pair is the only pair there is. Shown unlabelled, those
-read as corrections to drawings nobody touched, which is what the diagonal end
-cut would have published across 304 names.
-
-**Candidates are nominated by `git diff --diff-filter=M` over exactly those six
-folders, and the filter is load-bearing.** A redraw is a file both trees carry
-whose content differs, and `M` is that sentence: nominating from it means every
-candidate has a pair before `redrawn` is called, which is what keeps the rule
-that a changelog never names a redraw it cannot show. Drop the filter and
-v0.3.0 — which *added* a sharp drawing for every name — nominates 585 names
-against the 48 it published, 537 of them with nothing to look at, and rewrites
-an entry that has already shipped.
-
-**A release's membership is a fact about its tree, not about dates.** The same
-`megaphone` decides this one too, and it was wrong on every generated surface
-until 26 Aug 2026. Windows used to be computed by comparing each drawing's
-`added` date against the two tags, which is only the same question while nothing
-is ever retired: `megaphone` was drawn on 24 August, retired forty minutes
-before v0.1.2 was cut and drawn again after v0.1.4, so the arithmetic counted it
-into three releases whose trees do not contain it. Every generated surface
-published 548 where `git ls-tree v0.1.2:icons/stroke` says 547, and announced 21
-drawings added where the tag added 20.
-
-The Figma Changelog page — the one surface with no generator, written by hand off
-the tags — was the one that was right, and it had been sitting there disagreeing
-with the other four. So `held(ref)` now answers membership and counts straight
-off `git ls-tree`, one subprocess per tag: `names` is what this tag holds and the
-previous one did not, `count` is the whole tree including drawings retired since,
-and an icon's `version` is the first tag whose tree actually carries it. Dates
-still nominate redraw candidates, cheaply, but they no longer decide anything.
-
-> The general form, worth applying to the next surface that counts something:
-> where a fact is recorded in the repository itself, ask the repository. A date
-> is a proxy for membership and proxies drift.
-
-Two ways this went wrong before, both guarded now:
-
-- **A release that both added and corrected announced only the additions.** The
-  copy and the tiles each picked whichever list was non-empty and dropped the
-  other, so v0.1.2's redrawn `shuffle` shipped unmentioned on both surfaces
-  while 21 added drawings were listed above it. Print both lists, always.
-- **The redraws are read off git every build**, so anything that stops a window
-  reading publishes an entry announcing fewer corrections than yesterday — the
-  same failure as a dropped release, one level down. `build-history.mjs` refuses
-  to write a file in which a recorded entry has lost redraws.
-
-**`paper:check` is the only check that drifts** when the date moves. The rest,
-`cover`, `data`, `community` and `readmes`, are counted off `icons/` and do not
-care when the release was.
-
-### Publishing the packages
-
-Needed only when a package's contents changed. The CLI and the MCP server each
-bundle their own `icons.json`, so new drawings mean a new version of both; React
-ships its components and needs one too.
-
-**Pushing a `v*` tag publishes them.** `.github/workflows/publish.yml` runs on
-the tag and publishes every package whose version npm does not have yet, by
-trusted publishing (OIDC), so no token is involved and nobody approves it with
-2FA. A package that kept its version is skipped, and re-running the workflow
-after a failure carries on from where it stopped. npm ends direct publishing
-with tokens that bypass 2FA in January 2027, which is why this moved off a
-laptop. The trust is set per package on npm and names the workflow file; the
-command that sets it is at the top of that file.
-
-By hand, from a machine signed in to npm, the same thing is the lines below.
-There is no npm `workspaces` field in the root manifest, only a
-`pnpm-workspace.yaml`, so `npm publish --workspace` does not work. Publish from
-each directory:
-
-```bash
-cd packages/react && npm publish && cd ../..
-cd packages/react-native && npm install && npm publish && cd ../..
-cd packages/cli && npm publish && cd ../..
-cd packages/mcp && npm publish && cd ../..
-```
-
-The MCP server is also listed on the official MCP Registry, as
-`com.keylineicons/mcp`, from `packages/mcp/server.json`. Every new MCP version
-is published there too, with `mcp-publisher publish` from `packages/mcp`,
-signed in by DNS for keylineicons.com. It goes **after** npm, never before: the
-registry proves the name by reading `mcpName` out of the published package, so
-a listing sent ahead of its npm version is refused. A version there can never
-be replaced, only followed by a higher one.
-
-Two things that cost time when they go wrong:
-
-- **A version bump is two edits per package, three for the MCP server.** The
-  manifest is what npm reads; the `VERSION` constant in `src/index.mjs` is what
-  the binaries answer with; `server.json`'s two versions are what the registry
-  installs. 0.1.1 shipped with the first two disagreeing. `check-versions`
-  exists for that, and holds all three together.
-- **npm reports a rejected publish as `E404`, not `401`.** A 404 on a `PUT` to a
-  package that plainly exists means the token was refused, not that the package
-  is missing. Check with `npm whoami` before believing the error, and re-run
-  `npm login` if it answers 401.
-- **`react-native` installs its own devDependencies.** Its build needs the
-  types of `react-native` and `react-native-svg`, which the site has no use
-  for, so they live in the package rather than the root manifest, and the root
-  `tsconfig.json` excludes the package so `icons:ci` does not need them.
-  `build-react --check` still guards it against drift, and it is written from
-  the same pass as `react`, so the two cannot diverge. What only `npm publish`
-  proves is that it compiles, which is why the `npm install` sits in the line
-  above.
-- **The root `tsconfig.json` leaves out `packages/react` too**, for time rather
-  than dependencies. Its eight generated modules were about 80% of every root
-  type check, and `next build` repeated that check on each deploy. `icons:ci`
-  compiles the package on its own instead (`tsc -p packages/react`, once the
-  sync checks have passed), so a generator change that breaks the types of one
-  style module still fails CI and not only `npm publish`.
-- **And it leaves out `registry/`, for the same reason.** The 13,536 standalone
-  components `build-github-registry` writes were 53 of the 65 seconds of a cold
-  root type check on 2 Nov 2026, and `next build` checked them a second time.
-  They have their own project, `tsconfig.registry.json`, which `icons:ci` and
-  `ship` run. The exclusion was meant from the start: `registry/icons` was left
-  out when the registry landed on 16 Oct 2026, and went stale the same day when
-  the files moved to one folder per style, so for two weeks every root check
-  and every build paid for them.
-
-`react` builds its `dist/` from `prepublishOnly`, so the directory is
-gitignored and never commits; a stale local build cannot ship. `npm publish
---dry-run` runs that build and prints the tarball without authenticating, which
-makes it a real check of the contents and no check at all of the credentials.
+Nothing is published yet. Every package.json is `"private": true` and
+`.github/workflows/publish.yml` is disabled. Upstream's release process (tags,
+`build-history`, `ship`, the Paper and Figma storefronts) was removed with the
+site; it is in git history and in the upstream repo if it's needed again.
+Never publish or push a tag without the owner's approval.

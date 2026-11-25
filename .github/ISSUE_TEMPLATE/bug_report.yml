@@ -14,8 +14,8 @@ body:
       label: Where is it
       options:
         - An icon is drawn wrong
-        - The site (browsing, search, copying)
         - The React package
+        - The icon metadata (search tags, categories, descriptions)
         - The build pipeline
     validations:
       required: true
