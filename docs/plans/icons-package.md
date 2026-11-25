@@ -9,7 +9,7 @@ measurements go in `.work/`, which is gitignored.
 
 | Phase | What | Status |
 | --- | --- | --- |
-| 0 | Audit, no code | Done on `phase-0-audit`. The report is in the PR, and a local copy is in `.work/phase-0.md`. Waiting on the owner's decisions |
+| 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Waiting on the owner's decisions |
 | 1 | Generator and package | Not started |
 | 2 | Tree-shaking and size | Not started |
 | 3 | Built-in subset for Quick UI | Not started |
