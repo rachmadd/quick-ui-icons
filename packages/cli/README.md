@@ -1,14 +1,12 @@
-<img src="https://keylineicons.com/icon.svg" width="56" height="56" alt="Keyline Icons logo">
+# @quick-ui/icons-cli
 
-# @keyline-icons/cli
-
-Search [Keyline Icons](https://keylineicons.com) and copy them into your project
+Search Quick UI's icon set and copy icons into your project
 from the terminal. No install, no dependencies, no network.
 
 ```bash
-npx @keyline-icons/cli search arrow
-npx @keyline-icons/cli add circle-arrow-down bell --out src/icons
-npx @keyline-icons/cli show check > check.svg
+npx @quick-ui/icons-cli search arrow
+npx @quick-ui/icons-cli add circle-arrow-down bell --out src/icons
+npx @quick-ui/icons-cli show check > check.svg
 ```
 
 ## Commands
@@ -34,9 +32,9 @@ hints go to stderr, so redirecting gets you a file rather than a file with a
 banner stuck to the top:
 
 ```bash
-keyline-icons show check > check.svg
-keyline-icons list | grep chart
-keyline-icons show mail --style fill | pbcopy
+quick-ui-icons show check > check.svg
+quick-ui-icons list | grep chart
+quick-ui-icons show mail --style fill | pbcopy
 ```
 
 Colour is switched off automatically when stdout is not a terminal.
@@ -54,12 +52,8 @@ container.
 **Typos resolve.** `chekc` suggests `check`; `arow` suggests the `arrow-*`
 family, even though there is no bare `arrow` icon.
 
-## Custom icons
+## License
 
-Need icons the set does not have, drawn for your own product?
-[Custom sets](https://keylineicons.com/custom?ref=npm) are drawn on the same
-grid and delivered as SVG, a Figma file and a React package.
-
-## Licence
-
-MIT.
+MIT. Based on [Keyline Icons](https://keylineicons.com)
+([keyline-icons/keyline-icons](https://github.com/keyline-icons/keyline-icons)),
+also MIT. Keyline's license doesn't grant rights in the name "Keyline Icons".

@@ -1,21 +1,17 @@
-<img src="https://keylineicons.com/icon.svg" width="56" height="56" alt="Keyline Icons logo">
-
-# @keyline-icons/react-native
+# @quick-ui/icons-react-native
 
 2,013 icons on one 24×24 grid, as React Native components. Works in Expo,
 free under MIT.
 
-[keylineicons.com](https://keylineicons.com) to browse the full set.
-
 ```bash
-npm i @keyline-icons/react-native react-native-svg
+npm i @quick-ui/icons-react-native react-native-svg
 ```
 
 In Expo, `npx expo install react-native-svg` picks the version your SDK
 expects.
 
 ```tsx
-import { ArrowUpRight, Check, Menu } from "@keyline-icons/react-native"
+import { ArrowUpRight, Check, Menu } from "@quick-ui/icons-react-native"
 
 export function Example() {
   return (
@@ -51,32 +47,32 @@ pass `aria-hidden={false}` and an `aria-label`.
 **Four styles, two corner treatments, eight entry points.**
 
 ```tsx
-import { Bell } from "@keyline-icons/react-native"          // stroke,  2,013 icons
-import { Bell } from "@keyline-icons/react-native/two-tone" // two-tone, 2,013 icons
-import { Bell } from "@keyline-icons/react-native/duotone"  // duotone, 2,013 icons
-import { Bell } from "@keyline-icons/react-native/fill"     // fill,    2,013 icons
+import { Bell } from "@quick-ui/icons-react-native"          // stroke,  2,013 icons
+import { Bell } from "@quick-ui/icons-react-native/two-tone" // two-tone, 2,013 icons
+import { Bell } from "@quick-ui/icons-react-native/duotone"  // duotone, 2,013 icons
+import { Bell } from "@quick-ui/icons-react-native/fill"     // fill,    2,013 icons
 
-import { Bell } from "@keyline-icons/react-native/sharp"           // the same four,
-import { Bell } from "@keyline-icons/react-native/sharp/two-tone"  // cut sharp,
-import { Bell } from "@keyline-icons/react-native/sharp/duotone"  // with butt caps and
-import { Bell } from "@keyline-icons/react-native/sharp/fill"     // square corners
+import { Bell } from "@quick-ui/icons-react-native/sharp"           // the same four,
+import { Bell } from "@quick-ui/icons-react-native/sharp/two-tone"  // cut sharp,
+import { Bell } from "@quick-ui/icons-react-native/sharp/duotone"  // with butt caps and
+import { Bell } from "@quick-ui/icons-react-native/sharp/fill"     // square corners
 ```
 
-The entry points and export names are the same as `@keyline-icons/react`, so
+The entry points and export names are the same as `@quick-ui/icons`, so
 code shared between a web app and a native one changes the package name and
 nothing else. That includes the `Icon`-suffixed twin every icon carries,
 `CheckIcon` for `Check`.
 
 **One path per icon, because Metro keeps everything.** Metro does not leave
 out the icons a module exports and nobody imports, so
-`import { Check } from "@keyline-icons/react-native"` bundles every stroke
+`import { Check } from "@quick-ui/icons-react-native"` bundles every stroke
 drawing, about 1 MB minified, to show one. Each drawing also has a module of its
 own, under the style it belongs to:
 
 ```tsx
-import { Check } from "@keyline-icons/react-native/icons/check"
-import { Folder } from "@keyline-icons/react-native/duotone/icons/folder"
-import { Bell } from "@keyline-icons/react-native/sharp/fill/icons/bell"
+import { Check } from "@quick-ui/icons-react-native/icons/check"
+import { Folder } from "@quick-ui/icons-react-native/duotone/icons/folder"
+import { Bell } from "@quick-ui/icons-react-native/sharp/fill/icons/bell"
 ```
 
 The file is the icon's name as the site spells it, `circle-check` for
@@ -97,16 +93,11 @@ an older Metro, set `resolver.unstable_enablePackageExports = true` in
 icons carry nothing that only makes sense on a phone.
 
 **Generated, not written.** The components come from the same SVGs as
-`@keyline-icons/react`, in the same pass of `pipeline/build-react.mjs`, so a new
+`@quick-ui/icons`, in the same pass of `pipeline/build-react.mjs`, so a new
 drawing reaches both packages or neither.
 
-## Custom icons
+## License
 
-Need icons the set does not have, drawn for your own product?
-[Custom sets](https://keylineicons.com/custom?ref=npm) are drawn on the same
-grid and delivered as SVG, a Figma file and a React package.
-
-## Licence
-
-MIT. Use them in anything, commercial included, without attribution. The licence
-does not grant rights in the name "Keyline Icons".
+MIT. Based on [Keyline Icons](https://keylineicons.com)
+([keyline-icons/keyline-icons](https://github.com/keyline-icons/keyline-icons)),
+also MIT. Keyline's license doesn't grant rights in the name "Keyline Icons".

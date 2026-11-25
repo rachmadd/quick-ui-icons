@@ -1,8 +1,6 @@
-<img src="https://keylineicons.com/icon.svg" width="56" height="56" alt="Keyline Icons logo">
+# @quick-ui/icons-mcp
 
-# @keyline-icons/mcp
-
-An MCP server for [Keyline Icons](https://keylineicons.com). Lets an agent
+An MCP server for Quick UI's icon set. Lets an agent
 search the set, read an icon's SVG, and get the right React import, without
 guessing at names.
 
@@ -11,7 +9,7 @@ guessing at names.
 Claude Code:
 
 ```bash
-claude mcp add keyline-icons -- npx -y @keyline-icons/mcp
+claude mcp add quick-ui-icons -- npx -y @quick-ui/icons-mcp
 ```
 
 Anything else that speaks MCP over stdio:
@@ -19,9 +17,9 @@ Anything else that speaks MCP over stdio:
 ```json
 {
   "mcpServers": {
-    "keyline-icons": {
+    "quick-ui-icons": {
       "command": "npx",
-      "args": ["-y", "@keyline-icons/mcp"]
+      "args": ["-y", "@quick-ui/icons-mcp"]
     }
   }
 }
@@ -36,7 +34,7 @@ No API key, no network. The whole set ships inside the package.
 | `describe_set` | Counts, styles, and the rule deciding which icons have which style. Worth calling first. |
 | `search_icons` | Find icons by name. Returns which styles each has. |
 | `get_icon` | Full SVG source for one name, style and corner treatment, `regular` or `sharp`. |
-| `get_react_usage` | The import line and JSX from `@keyline-icons/react`, sharp entry points included. |
+| `get_react_usage` | The import line and JSX from `@quick-ui/icons`, sharp entry points included. |
 
 ## Why the tools are shaped this way
 
@@ -55,12 +53,8 @@ comes from the glyph's own enclosed area or from a square/circle container.
 by edit distance, then by leading segment, so `chekc` suggests `check` and
 `arow` suggests the `arrow-*` family even though there is no bare `arrow` icon.
 
-## Custom icons
+## License
 
-Need icons the set does not have, drawn for your own product?
-[Custom sets](https://keylineicons.com/custom?ref=npm) are drawn on the same
-grid and delivered as SVG, a Figma file and a React package.
-
-## Licence
-
-MIT.
+MIT. Based on [Keyline Icons](https://keylineicons.com)
+([keyline-icons/keyline-icons](https://github.com/keyline-icons/keyline-icons)),
+also MIT. Keyline's license doesn't grant rights in the name "Keyline Icons".
