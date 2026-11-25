@@ -7,7 +7,7 @@ ESM, no dependencies.
 ```bash
 pnpm icons:build       # raw/ -> icons/
 pnpm icons:lint        # check icons/
-pnpm icons:react       # icons/ -> packages/react/src (eight modules)
+pnpm icons:react       # icons/ -> packages/react/src (eight modules, not committed)
 pnpm readmes:check     # check the counts typed into the READMEs against icons/
 pnpm readmes:fix       # rewrite those counts in place
 pnpm icons:figma       # check the Figma file against raw/ (two steps, see below)
@@ -32,11 +32,12 @@ in its `AFTER`, run it again, and append each run to the same file until no
 diffed, because a part-digest otherwise reports every icon it never reached as
 deleted from Figma.
 
-Both generators take `--check`, which writes nothing and exits non-zero if the
-output would differ: `build.mjs --check` for `icons/`, `build-react.mjs --check`
-for `packages/react/src`. The second matters because a stale generated module
-fails silently: the old component is still exported, so `tsc` checks clean
-against a module the set no longer backs.
+`build.mjs --check` writes nothing and exits non-zero if `icons/` no longer
+matches `raw/`; `icons:ci` runs it first. `packages/react/src` isn't committed,
+so there is nothing to check it against: `icons:ci`, `pnpm build` and the
+package's `prepublishOnly` all regenerate it from `icons/` before `tsc` reads
+it, which means a stale module can't reach a build. `build-react.mjs --check`
+still works locally, against whatever is on disk.
 
 ## Layout
 
@@ -686,9 +687,8 @@ New demos are picked up automatically — any `export const <X>_ICON_NAMES` unde
 1. In Figma, select the **Components** page and Export → SVG.
 2. Drop the result into `raw/`.
 3. `pnpm icons:lint` and fix what it reports.
-4. `pnpm icons:build && pnpm icons:react`, then `pnpm readmes:fix` if the
-   counts moved.
-5. `pnpm icons:ci`, then commit `raw/`, `icons/`, `packages/react/src` and the
+4. `pnpm icons:build`, then `pnpm readmes:fix` if the counts moved.
+5. `pnpm icons:ci` and `pnpm build`, then commit `raw/`, `icons/` and the
    READMEs together.
 6. Add the new name's search tags, aliases, category and description to the
    files in `data/`.

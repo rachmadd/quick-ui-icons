@@ -74,7 +74,7 @@
     "react": ">=18"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "prepublishOnly": "tsc -p tsconfig.json"
+    "build": "node ../../pipeline/build-react.mjs && tsc -p tsconfig.json",
+    "prepublishOnly": "node ../../pipeline/build-react.mjs && tsc -p tsconfig.json"
   }
 }

@@ -16,7 +16,8 @@ build the prop unless the owner asks.
 - `raw/<name>/` holds the Figma exports and is the source of truth.
 - `icons/` (rounded) and `icons/sharp/` are built from `raw/` by
   `pipeline/build.mjs`.
-- `packages/react/src/` is built from `icons/` by `pipeline/build-react.mjs`.
+- `packages/react/src/` is built from `icons/` by `pipeline/build-react.mjs`
+  during `pnpm build` and `pnpm icons:ci`. It's gitignored, not committed.
 - `icons/` and `packages/react/src/` are generated, so never edit them by hand.
   Change `raw/` or the generator, then rebuild.
 - `data/` holds the icon metadata: search tags, aliases, categories,

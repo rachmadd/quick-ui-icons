@@ -6,10 +6,9 @@
 //
 //   node pipeline/build-react.mjs [--check]
 //
-// --check writes nothing and exits non-zero if the output would differ, the same
-// contract `build.mjs --check` offers for icons/. It closes the window between
-// renaming an icon and regenerating: until this runs, the old component is still
-// exported, and the package ships a glyph that is no longer in icons/.
+// The output isn't committed: `pnpm build`, `pnpm icons:ci` and the package's
+// prepublishOnly run this before `tsc`, so a stale module can't reach a build.
+// --check writes nothing and exits non-zero if what's on disk would differ.
 
 import { mkdir, readdir, readFile, writeFile } from "node:fs/promises"
 import { existsSync } from "node:fs"

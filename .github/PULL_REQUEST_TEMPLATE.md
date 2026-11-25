@@ -10,7 +10,7 @@ rediscovered from the diff a year later.
 ## Checks
 
 - [ ] `pnpm icons:ci` and `pnpm build` pass locally
-- [ ] No generated file was hand-edited (`icons/`, `packages/react/src/`)
+- [ ] No generated file was hand-edited (`icons/`)
 
 <!--
 If this adds or redraws an icon:

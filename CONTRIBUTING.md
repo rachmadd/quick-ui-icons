@@ -5,8 +5,9 @@ to know up front is where the rules live and which files you're allowed to edit.
 
 ## Generated files
 
-**`icons/` and `packages/react/src/` are generated. Don't edit them.** The
-source of truth is `raw/`, and the rest is built from it:
+**`icons/` and `packages/react/src/` are generated. Don't edit them.**
+`packages/react/src/` isn't even committed: `pnpm build` and `pnpm icons:ci`
+generate it. The source of truth is `raw/`, and the rest is built from it:
 
 ```
 raw/<name>/*.svg  ->  icons/[sharp/]<style>/<name>.svg  ->  packages/react/src/*.tsx

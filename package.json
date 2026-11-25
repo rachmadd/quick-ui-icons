@@ -19,17 +19,16 @@
   },
   "bugs": "https://github.com/rachmadd/quick-ui-icons/issues",
   "scripts": {
-    "build": "tsc -p packages/react",
-    "typecheck": "tsc -p packages/react --noEmit --declaration false",
+    "build": "node pipeline/build-react.mjs && tsc -p packages/react",
+    "typecheck": "node pipeline/build-react.mjs && tsc -p packages/react --noEmit --declaration false",
     "icons:build": "node pipeline/build.mjs",
     "icons:check": "node pipeline/build.mjs --check",
     "icons:lint": "node pipeline/lint.mjs",
     "icons:react": "node pipeline/build-react.mjs",
-    "icons:react:check": "node pipeline/build-react.mjs --check",
     "icons:figma": "node pipeline/check-figma.mjs",
     "readmes:check": "node pipeline/check-readmes.mjs",
     "readmes:fix": "node pipeline/check-readmes.mjs --fix",
-    "icons:ci": "node pipeline/build.mjs --check && node pipeline/build-react.mjs --check && node pipeline/check-readmes.mjs && node pipeline/parallel.mjs \"tsc -p packages/react --noEmit --declaration false\" \"node pipeline/lint.mjs\""
+    "icons:ci": "node pipeline/build.mjs --check && node pipeline/build-react.mjs && node pipeline/check-readmes.mjs && node pipeline/parallel.mjs \"tsc -p packages/react --noEmit --declaration false\" \"node pipeline/lint.mjs\""
   },
   "devDependencies": {
     "@types/react": "^19",
