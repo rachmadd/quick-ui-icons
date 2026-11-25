@@ -11,7 +11,7 @@ measurements go in `.work/`, which is gitignored.
 | --- | --- | --- |
 | 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Every decision is made (see Decisions) |
 | 1 | Generator and package | Done on `phase-1-generator`, PR #3. The report is in the PR, and a local copy is in `.work/phase-1.md`. Waiting on the owner |
-| 2 | Tree-shaking and size | Not started |
+| 2 | Tree-shaking and size | Done on `phase-2-size`, PR #4. The report is in the PR, and a local copy is in `.work/phase-2.md`. Waiting on the owner |
 | 3 | Built-in subset for Quick UI | Not started |
 | 4 | "Slightly rounder" trial | Not started |
 | 5 | Apply the rounding | Only if phase 4 is approved |
