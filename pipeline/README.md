@@ -7,7 +7,7 @@ ESM, no dependencies.
 ```bash
 pnpm icons:build       # raw/ -> icons/
 pnpm icons:lint        # check icons/
-pnpm icons:react       # icons/ -> packages/react/src (eight modules, not committed)
+pnpm icons:react       # icons/ -> packages/react/src (scripts/generate.mjs, not committed)
 pnpm readmes:check     # check the counts typed into the READMEs against icons/
 pnpm readmes:fix       # rewrite those counts in place
 pnpm icons:figma       # check the Figma file against raw/ (two steps, see below)
@@ -36,8 +36,9 @@ deleted from Figma.
 matches `raw/`; `icons:ci` runs it first. `packages/react/src` isn't committed,
 so there is nothing to check it against: `icons:ci`, `pnpm build` and the
 package's `prepublishOnly` all regenerate it from `icons/` before `tsc` reads
-it, which means a stale module can't reach a build. `build-react.mjs --check`
-still works locally, against whatever is on disk.
+it, which means a stale module can't reach a build. `scripts/generate.mjs
+--check` still works locally, against whatever is on disk, and `pnpm test`
+runs it.
 
 ## Layout
 
@@ -52,15 +53,20 @@ pipeline/
   lib/svg.mjs                 SVG reader + normalizer
   build.mjs                   raw/ -> icons/
   lint.mjs                    geometry + coverage rules
-  build-react.mjs             icons/ -> packages/react/src
   check-readmes.mjs           README counts against icons/
   check-figma.mjs             the Figma file against raw/
   parallel.mjs                runs the last icons:ci checks at once
+scripts/
+  generate.mjs                icons/ -> packages/react/src
+  lib/source.mjs              reads icons/, rounds path data to 2 decimals
+  lib/emit.mjs                writes the wrapper, icon modules and barrels
 ```
 
-`build-react` is a restatement, not a transform: it emits one component per
-SVG, in one module per style and corner treatment. Each
-component spreads its own root attributes rather than a shared preset, because
+`scripts/generate.mjs` is a restatement, not a transform: it emits one module
+per icon, for rounded and for sharp, whose function picks its outline, fill or
+duotone drawing by `variant`. Two-tone isn't built. The only change to the
+drawing is rounding path data to 2 decimals, at most 0.005 units. Each
+drawing spreads its own root attributes rather than a shared preset, because
 some drawings in `icons/stroke/` carry no stroke of their own — `square-half`
 and the other fraction sectors are solid by definition — and painting one on
 would outline every knockout.

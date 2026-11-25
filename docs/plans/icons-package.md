@@ -10,7 +10,7 @@ measurements go in `.work/`, which is gitignored.
 | Phase | What | Status |
 | --- | --- | --- |
 | 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Every decision is made (see Decisions) |
-| 1 | Generator and package | Not started |
+| 1 | Generator and package | Done on `phase-1-generator`, PR #3. The report is in the PR, and a local copy is in `.work/phase-1.md`. Waiting on the owner |
 | 2 | Tree-shaking and size | Not started |
 | 3 | Built-in subset for Quick UI | Not started |
 | 4 | "Slightly rounder" trial | Not started |
@@ -100,6 +100,14 @@ Recorded with the date and the reason, so a later phase doesn't reopen them.
   notes the difference from lucide and Keyline.
 
 Every phase 0 question is answered.
+
+- **2026-11-25 (phase 1): rounding is 2 decimals, adaptive at stroke ends.**
+  Plain 2-decimal rounding visibly turned the butt cap on 10 sharp drawings,
+  among them a 0.02-unit stub in `brain-side` that grew a tick. So a subpath
+  whose open end would turn by more than 1° keeps 3 decimals, or its
+  original data. That's 218 of 48,317 subpaths, and the savings stay at
+  27.5% (rounded) and 25.9% (sharp). `scripts/lib/precision.mjs` has the
+  rule.
 
 ## Phases
 

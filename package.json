@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "license": "MIT",
-  "description": "Quick UI's icon set: 24px icons in eight styles, and the pipeline that builds them into @quick-ui/icons.",
+  "description": "Quick UI's icon set: 24px icons in outline, fill and duotone, rounded and sharp, and the pipeline that builds them into @quick-ui/icons.",
   "keywords": [
     "quick-ui",
     "icons",
@@ -19,19 +19,22 @@
   },
   "bugs": "https://github.com/rachmadd/quick-ui-icons/issues",
   "scripts": {
-    "build": "node pipeline/build-react.mjs && tsc -p packages/react",
-    "typecheck": "node pipeline/build-react.mjs && tsc -p packages/react --noEmit --declaration false",
+    "build": "node scripts/generate.mjs && node scripts/clean-dist.mjs && tsc -p packages/react",
+    "typecheck": "node scripts/generate.mjs && tsc -p packages/react --noEmit --declaration false",
     "icons:build": "node pipeline/build.mjs",
     "icons:check": "node pipeline/build.mjs --check",
     "icons:lint": "node pipeline/lint.mjs",
-    "icons:react": "node pipeline/build-react.mjs",
+    "icons:react": "node scripts/generate.mjs",
     "icons:figma": "node pipeline/check-figma.mjs",
     "readmes:check": "node pipeline/check-readmes.mjs",
     "readmes:fix": "node pipeline/check-readmes.mjs --fix",
-    "icons:ci": "node pipeline/build.mjs --check && node pipeline/build-react.mjs && node pipeline/check-readmes.mjs && node pipeline/parallel.mjs \"tsc -p packages/react --noEmit --declaration false\" \"node pipeline/lint.mjs\""
+    "icons:ci": "node pipeline/build.mjs --check && node scripts/generate.mjs && node pipeline/check-readmes.mjs && node pipeline/parallel.mjs \"tsc -p packages/react --noEmit --declaration false\" \"node pipeline/lint.mjs\"",
+    "test": "pnpm build && node --test \"packages/react/test/*.test.mjs\""
   },
   "devDependencies": {
     "@types/react": "^19",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "typescript": "^5"
   }
 }

@@ -1,10 +1,11 @@
 # The checks that have to pass before anything lands on `main`.
 #
 # `icons:ci` is the real gate and it is a chain, not a suite: `build --check`
-# proves icons/ still matches raw/, `build-react` then generates
+# proves icons/ still matches raw/, `scripts/generate.mjs` then generates
 # packages/react/src from icons/ (it isn't committed), and `tsc` checks those
 # modules. `build` generates the same modules on its own runner before
-# compiling them.
+# compiling them, and `test` builds and then renders every icon in every
+# variant against its source SVG.
 #
 # Deliberately absent: `icons:figma` needs the Figma file, which CI does not
 # have. pipeline/README.md documents it as a run-it-locally check.
@@ -41,14 +42,14 @@ jobs:
   # publish would.
   #
   # A matrix rather than jobs written out, so the setup below exists once and
-  # another command is one line. `fail-fast: false` because the two answer
-  # different questions, and one failing is no reason to hide the other.
+  # another command is one line. `fail-fast: false` because each answers a
+  # different question, and one failing is no reason to hide the other.
   check:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        command: [icons:ci, build]
+        command: [icons:ci, build, test]
     # All three actions are on v5, the first major of each that runs on Node 24;
     # every earlier one runs on Node 20 and warns on every run. None of the
     # three renamed an input between v4 and v5.

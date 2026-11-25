@@ -1,7 +1,7 @@
 {
   "name": "@quick-ui/icons",
   "version": "3.0.0",
-  "description": "Quick UI's icon set as React components, on a 24px grid.",
+  "description": "Quick UI's icon set as React components on a 24px grid: outline, fill and duotone, rounded or sharp.",
   "license": "MIT",
   "private": true,
   "publishConfig": {
@@ -31,33 +31,17 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./two-tone": {
-      "types": "./dist/two-tone.d.ts",
-      "default": "./dist/two-tone.js"
-    },
-    "./duotone": {
-      "types": "./dist/duotone.d.ts",
-      "default": "./dist/duotone.js"
-    },
-    "./fill": {
-      "types": "./dist/fill.d.ts",
-      "default": "./dist/fill.js"
-    },
     "./sharp": {
-      "types": "./dist/sharp.d.ts",
-      "default": "./dist/sharp.js"
+      "types": "./dist/sharp/index.d.ts",
+      "default": "./dist/sharp/index.js"
     },
-    "./sharp/two-tone": {
-      "types": "./dist/sharp-two-tone.d.ts",
-      "default": "./dist/sharp-two-tone.js"
+    "./icons/*": {
+      "types": "./dist/icons/*.d.ts",
+      "default": "./dist/icons/*.js"
     },
-    "./sharp/duotone": {
-      "types": "./dist/sharp-duotone.d.ts",
-      "default": "./dist/sharp-duotone.js"
-    },
-    "./sharp/fill": {
-      "types": "./dist/sharp-fill.d.ts",
-      "default": "./dist/sharp-fill.js"
+    "./sharp/icons/*": {
+      "types": "./dist/sharp/icons/*.d.ts",
+      "default": "./dist/sharp/icons/*.js"
     },
     "./package.json": "./package.json"
   },
@@ -65,7 +49,8 @@
   "main": "./dist/index.js",
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "LICENSE"
   ],
   "engines": {
     "node": ">=20.9.0"
@@ -74,7 +59,7 @@
     "react": ">=18"
   },
   "scripts": {
-    "build": "node ../../pipeline/build-react.mjs && tsc -p tsconfig.json",
-    "prepublishOnly": "node ../../pipeline/build-react.mjs && tsc -p tsconfig.json"
+    "build": "node ../../scripts/generate.mjs && node ../../scripts/clean-dist.mjs && tsc -p tsconfig.json",
+    "prepublishOnly": "node ../../scripts/generate.mjs && node ../../scripts/clean-dist.mjs && tsc -p tsconfig.json"
   }
 }
