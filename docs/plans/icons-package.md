@@ -9,7 +9,7 @@ measurements go in `.work/`, which is gitignored.
 
 | Phase | What | Status |
 | --- | --- | --- |
-| 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Waiting on the owner's decisions |
+| 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Every decision is made (see Decisions) |
 | 1 | Generator and package | Not started |
 | 2 | Tree-shaking and size | Not started |
 | 3 | Built-in subset for Quick UI | Not started |
@@ -91,7 +91,15 @@ Recorded with the date and the reason, so a later phase doesn't reopen them.
   proper duotones can be drawn in Figma later. The generator doesn't
   substitute the fill, because that would hide the gap instead of fixing it.
 
-Still open from the phase 0 audit (PR #2): whether to keep the `size` prop.
+- **2026-11-25: no `size` prop.** Icons take plain `<svg>` props only and
+  default to `width="24" height="24"`. They're sized with `className`, with
+  `width` and `height`, or with CSS from a parent such as `[&_svg]:size-4`,
+  which is how Quick UI's components already do it. `size` would only repeat
+  `width` and `height`, and CSS would override it inside Quick UI components
+  without any warning. The README in phase 6 shows how to size icons and
+  notes the difference from lucide and Keyline.
+
+Every phase 0 question is answered.
 
 ## Phases
 
