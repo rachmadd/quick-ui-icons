@@ -1,18 +1,14 @@
-<img src="https://keylineicons.com/icon.svg" width="56" height="56" alt="Keyline Icons logo">
-
-# @keyline-icons/react
+# @quick-ui/icons
 
 2,013 icons on one 24×24 grid, as React components. Built for shadcn/ui, free
 under MIT.
 
-[keylineicons.com](https://keylineicons.com) to browse the full set.
-
 ```bash
-npm i @keyline-icons/react
+npm i @quick-ui/icons
 ```
 
 ```tsx
-import { ArrowUpRight, Check, Menu } from "@keyline-icons/react"
+import { ArrowUpRight, Check, Menu } from "@quick-ui/icons"
 
 export function Example() {
   return (
@@ -43,15 +39,15 @@ scope. There is no provider, no context and no theme object.
 **Four styles, two corner treatments, eight entry points.**
 
 ```tsx
-import { Bell } from "@keyline-icons/react"          // stroke,  2,013 icons
-import { Bell } from "@keyline-icons/react/two-tone" // two-tone, 2,013 icons
-import { Bell } from "@keyline-icons/react/duotone"  // duotone, 2,013 icons
-import { Bell } from "@keyline-icons/react/fill"     // fill,    2,013 icons
+import { Bell } from "@quick-ui/icons"          // stroke,  2,013 icons
+import { Bell } from "@quick-ui/icons/two-tone" // two-tone, 2,013 icons
+import { Bell } from "@quick-ui/icons/duotone"  // duotone, 2,013 icons
+import { Bell } from "@quick-ui/icons/fill"     // fill,    2,013 icons
 
-import { Bell } from "@keyline-icons/react/sharp"           // the same four,
-import { Bell } from "@keyline-icons/react/sharp/two-tone"  // cut sharp,
-import { Bell } from "@keyline-icons/react/sharp/duotone"  // with butt caps and
-import { Bell } from "@keyline-icons/react/sharp/fill"     // square corners
+import { Bell } from "@quick-ui/icons/sharp"           // the same four,
+import { Bell } from "@quick-ui/icons/sharp/two-tone"  // cut sharp,
+import { Bell } from "@quick-ui/icons/sharp/duotone"  // with butt caps and
+import { Bell } from "@quick-ui/icons/sharp/fill"     // square corners
 ```
 
 Sharp covers exactly the names the rounded entry point beside it does, and the
@@ -71,7 +67,7 @@ shadcn/ui's own components import, so a project from shadcn/create switches
 with one find-and-replace on the import path:
 
 ```tsx
-import { CheckIcon, ChevronDownIcon } from "@keyline-icons/react"
+import { CheckIcon, ChevronDownIcon } from "@quick-ui/icons"
 ```
 
 The one name those components use that the set spells differently is
@@ -85,17 +81,14 @@ over every knockout.
 **`sideEffects: false` and ESM.** Named imports from the single entry point
 tree-shake in any modern bundler, so an app importing three icons ships three.
 
-**Generated, not written.** The components come from `icons/stroke/*.svg` via
-`pipeline/build-react.mjs`, which emits this package and the site's own module
-in one pass so the two cannot drift.
+**Generated, not written.** The components come from `icons/` via
+`pipeline/build-react.mjs`, one module per style and corner treatment.
 
-## Custom icons
+**Coming, not built yet:** a `variant` prop to choose the style, with
+`@quick-ui/icons` for rounded corners and `@quick-ui/icons/sharp` for sharp.
 
-Need icons the set does not have, drawn for your own product?
-[Custom sets](https://keylineicons.com/custom?ref=npm) are drawn on the same
-grid and delivered as SVG, a Figma file and a React package.
+## License
 
-## Licence
-
-MIT. Use them in anything, commercial included, without attribution. The licence
-does not grant rights in the name "Keyline Icons".
+MIT. Based on [Keyline Icons](https://keylineicons.com)
+([keyline-icons/keyline-icons](https://github.com/keyline-icons/keyline-icons)),
+also MIT. Keyline's license doesn't grant rights in the name "Keyline Icons".

@@ -4,8 +4,8 @@
 blank_issues_enabled: true
 contact_links:
   - name: Browse the set
-    url: https://keylineicons.com
-    about: Search every icon, switch styles, and copy the SVG.
+    url: https://github.com/rachmadd/quick-ui-icons/tree/main/icons/stroke
+    about: Every icon in the default style, as SVG.
   - name: The drawing standard
-    url: https://github.com/keyline-icons/keyline-icons/blob/main/pipeline/README.md
+    url: https://github.com/rachmadd/quick-ui-icons/blob/main/pipeline/README.md
     about: What the build normalises, every rule the linter enforces, and why.

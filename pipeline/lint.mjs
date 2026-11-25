@@ -668,9 +668,9 @@ function onlyDots(src) {
   return dots > 0 && dotSizes(src).length === dots;
 }
 
-// A prefix counts as a container only off the list lib/icons.ts reads: `square-pen` and 2.5.0's
+// A prefix counts as a container only off data/icon-not-containers.json: `square-pen` and 2.5.0's
 // `square-sparkles` wear the prefix over a base that exists and are drawings of their own.
-const NOT_CONTAINERS = new Set(JSON.parse(readFileSync(new URL('../lib/icon-not-containers.json', import.meta.url), 'utf8')).names);
+const NOT_CONTAINERS = new Set(JSON.parse(readFileSync(new URL('../data/icon-not-containers.json', import.meta.url), 'utf8')).names);
 const container = (name) =>
   NOT_CONTAINERS.has(name) ? 'bare' : name.startsWith('circle-') ? 'circle' : name.startsWith('square-') ? 'square' : 'bare';
 

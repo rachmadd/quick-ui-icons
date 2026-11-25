@@ -6,11 +6,8 @@
  *   node pipeline/check-readmes.mjs --fix     # rewrite the numbers in place
  *   node pipeline/check-readmes.mjs --json    # machine-readable
  *
- * Why this exists: the set publishes to five surfaces and four of them count
- * for themselves. The site reads `loadIcons()` per request, the Figma cover and
- * the paper sheets are generated, and the Figma file is checked by
- * check-figma.mjs. The READMEs were the one place left where a number is prose,
- * and prose does not know when a drawing lands. They sat at 414 icons and 1,059
+ * Why this exists: a number in a README is prose, and prose does not know
+ * when a drawing lands. Upstream, the READMEs sat at 414 icons and 1,059
  * SVGs while the set grew past 500 — nothing failed, nothing warned, and the
  * first line of the repo's own front page was wrong for weeks.
  *
@@ -55,12 +52,12 @@ function counts() {
 
   /*
     A `square-`/`circle-` prefix only counts as a container when the base it
-    names actually exists — the same rule `lib/icons.ts` applies, and the reason
+    names actually exists, the same rule lint.mjs applies, and the reason
     the numbers here are lower than a prefix count. `circle-half` is a shape in
     its own right; there is no `half` for it to contain.
   */
   /*
-    `lib/icon-not-containers.json` is the same list `containerOf` in lib/icons.ts
+    `data/icon-not-containers.json` is the same list lint.mjs
     consults, and leaving it out was worth four sets and three published numbers:
     `square-pen`, `circle-pen`, `circle-square` and `circle-square-dashed` all
     wear a prefix over a base that exists, so a bare prefix test calls them
@@ -71,7 +68,7 @@ function counts() {
   */
   const notContainers = new Set(
     JSON.parse(
-      readFileSync(join(ROOT, 'lib', 'icon-not-containers.json'), 'utf8')
+      readFileSync(join(ROOT, 'data', 'icon-not-containers.json'), 'utf8')
     ).names
   );
   const contained = (prefix) =>
@@ -82,25 +79,8 @@ function counts() {
         names.has(n.slice(prefix.length + 1))
     ).length;
 
-  /*
-    The number of names carrying searchable words, off the generated bundle
-    rather than off `lib/icon-keywords.json`. The bundle is the merge of Figma's
-    descriptions and the alias patterns, which is the number the listing quotes,
-    and `build-data.mjs --check` already guards the bundle itself.
-  */
-  const bundle = join(ROOT, 'packages', 'figma-plugin', 'icons.json');
-  const keywords = existsSync(bundle)
-    ? Object.keys(JSON.parse(readFileSync(bundle, 'utf8')).keywords ?? {}).length
-    : 0;
-
   return {
-    keywords,
     icons: names.size,
-    /* Component sets rather than names: a contained form lives inside its base
-       set as a variant, so it is a name the site counts and not a set the Figma
-       file holds. The file listing quotes this one and the plugin listing does
-       not, which is why it only appears now. */
-    sets: names.size - contained('square') - contained('circle'),
     /*
       Every file under `icons/`, both corner treatments. The per-style numbers
       above describe one treatment, because coverage is a fact about a drawing
@@ -148,57 +128,6 @@ const CLAIMS = [
   ['packages/react/README.md', /\/\/ two-tone, ([\d,]+) icons/, 'two-tone'],
   ['packages/react/README.md', /\/\/ duotone, ([\d,]+) icons/, 'duotone'],
   ['packages/react/README.md', /\/\/ fill, +([\d,]+) icons/, 'fill'],
-  ['packages/react-native/README.md', /^([\d,]+) icons on one/m, 'icons'],
-  ['packages/react-native/README.md', /\/\/ stroke, +([\d,]+) icons/, 'stroke'],
-  ['packages/react-native/README.md', /\/\/ two-tone, ([\d,]+) icons/, 'two-tone'],
-  ['packages/react-native/README.md', /\/\/ duotone, ([\d,]+) icons/, 'duotone'],
-  ['packages/react-native/README.md', /\/\/ fill, +([\d,]+) icons/, 'fill'],
-  /* This one was not here, and it went stale exactly as predicted: the plugin
-     README said 484 names against an actual 503, and nothing caught it because
-     nothing was looking. Every README that states a count belongs in this list,
-     which is the whole argument the file opens with. `packages/mcp` and
-     `packages/cli` state none, deliberately, and so have nothing to add. */
-  ['packages/figma-plugin/README.md', /canvas\. ([\d,]+) names/, 'icons'],
-  /* The Community listing copy. It is published prose on someone else's page
-     and cannot be corrected without going back through the modal, which is
-     exactly the reason it belongs here rather than in a scratch file. */
-  ['packages/figma-plugin/LISTING.md', /^([\d,]+) icons in four styles/m, 'icons'],
-  ['packages/figma-plugin/LISTING.md', /Search ([\d,]+) icons and drop/, 'icons'],
-  /* The style block is a bulleted list rather than the indented table it was
-     drafted as, because that is what the modal's own editor produces. These
-     matched runs of spaces and would have gone MISSING on the reformat. */
-  ['packages/figma-plugin/LISTING.md', /\* Stroke: ([\d,]+) icons, 2px/, 'stroke'],
-  ['packages/figma-plugin/LISTING.md', /\* Two-tone: ([\d,]+) icons, a 40%/, 'two-tone'],
-  ['packages/figma-plugin/LISTING.md', /\* Duotone: ([\d,]+) icons, no outline/, 'duotone'],
-  ['packages/figma-plugin/LISTING.md', /\* Fill: ([\d,]+) icons, solid/, 'fill'],
-  ['packages/figma-plugin/LISTING.md', /([\d,]+) icons also come in a square- form/, 'square'],
-  ['packages/figma-plugin/LISTING.md', /form and ([\d,]+) in a circle- form/, 'circle'],
-  ['packages/figma-plugin/LISTING.md', /([\d,]+) icons carry curated words/, 'keywords'],
-  /* The file's own listing, which is a second modal with its own prose. It went
-     stale at 503 while the plugin's was current, because only the plugin's was
-     written down and therefore only the plugin's was checked. */
-  ['packages/figma-plugin/LISTING.md', /^([\d,]+) icons on a 24×24 grid/m, 'icons'],
-  ['packages/figma-plugin/LISTING.md', /^([\d,]+) component sets, each with/m, 'sets'],
-  ['packages/figma-plugin/LISTING.md', /without swapping components\. ([\d,]+) icons carry a square- form/, 'square'],
-  ['packages/figma-plugin/LISTING.md', /square- form and ([\d,]+) a circle-/, 'circle'],
-  /* `\s+` rather than `\n`: this pattern was written against a wrapped copy of
-     the listing and broke the moment the paragraph was unwrapped, reporting a
-     MISSING count on prose whose number was correct. A claim is about the words
-     and the number, never about where the line happens to end. */
-  ['packages/figma-plugin/LISTING.md', /four counts: stroke\s+([\d,]+), two-tone/, 'stroke'],
-  ['packages/figma-plugin/LISTING.md', /, two-tone ([\d,]+), duotone/, 'two-tone'],
-  ['packages/figma-plugin/LISTING.md', /, duotone ([\d,]+), fill/, 'duotone'],
-  ['packages/figma-plugin/LISTING.md', /, fill ([\d,]+)\./, 'fill'],
-  /* Four more that were NOT here and went stale exactly as the note above
-     predicts: the tagline said 585 while the description beside it said 629,
-     the plugin's own total and the file description's both said 2,994 after
-     the set reached 3,250, and the tag rationale argued from 480 duotone
-     drawings when there were 522. Every claim, not the convenient ones. */
-  ['packages/figma-plugin/LISTING.md', /^([\d,]+) icons, four styles, rounded/m, 'icons'],
-  ['packages/figma-plugin/LISTING.md', /costs you a drawing\. ([\d,]+) SVGs in total/, 'files'],
-  ['packages/figma-plugin/LISTING.md', /icon plugins, ([\d,]+) duotone drawings are rare/, 'duotone'],
-  ['packages/figma-plugin/LISTING.md', /a second library: ([\d,]+) variants over the same/, 'files'],
-  ['packages/figma-plugin/LISTING.md', /variants over the same ([\d,]+) names\./, 'icons'],
 ];
 
 /* The prose commas are part of the claim: "1,286 SVGs" reads as prose and
