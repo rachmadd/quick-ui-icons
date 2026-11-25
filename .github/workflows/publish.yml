@@ -4,7 +4,7 @@
 # Every package.json is also `"private": true`, so `npm publish` refuses
 # anyway.
 #
-# Publishes the four npm packages when a release tag is pushed.
+# Publishes @quick-ui/icons when a release tag is pushed.
 #
 # Why from here and not from a laptop: npm ends direct publishing with tokens
 # that skip 2FA in January 2027. A token that keeps 2FA either asks for a code
@@ -34,8 +34,7 @@ on:
   #   tags: ["v*"]
   workflow_dispatch:
 
-# Never cancel a publish half way: two of four packages out is worse than a
-# second run that finds all four already there.
+# Never cancel a publish half way.
 concurrency:
   group: publish
   cancel-in-progress: false
@@ -72,40 +71,17 @@ jobs:
       # React types, so the root install has to come first.
       - run: pnpm install --frozen-lockfile
 
-      # The manifest, the binaries' VERSION constant and the MCP server.json
-      # have to agree before anything leaves; 0.1.1 shipped with two of them
-      # apart.
-      - run: node pipeline/check-versions.mjs
-
-      # Only versions npm does not have yet. A package whose contents did not
-      # change keeps its version (pipeline/README.md, "Publishing the
-      # packages"), so a tag that bumps two packages publishes two, and a re-run
-      # after a failure picks up where the last one stopped.
-      #
-      # `npm view` on a version that does not exist prints nothing and exits 0,
-      # so the test is on its output, not its status.
-      #
-      # `react-native` installs its own devDependencies: its build needs the
-      # types of react-native and react-native-svg, which the root has no use
-      # for. It has no lockfile, the same as when it is published by hand.
-      - name: Publish new versions
+      # Only a version npm does not have yet, so a re-run after a failure is
+      # safe. `npm view` on a version that does not exist prints nothing and
+      # exits 0, so the test is on its output, not its status.
+      - name: Publish a new version
         run: |
           set -euo pipefail
-          for dir in react react-native cli mcp; do
-            name=$(node -p "require('./packages/$dir/package.json').name")
-            version=$(node -p "require('./packages/$dir/package.json').version")
-            if [ -n "$(npm view "$name@$version" version 2>/dev/null)" ]; then
-              echo "$name@$version is already on npm."
-              continue
-            fi
-            echo "::group::$name@$version"
-            (
-              cd "packages/$dir"
-              if [ "$dir" = react-native ]; then
-                npm install --no-audit --no-fund
-              fi
-              npm publish
-            )
-            echo "::endgroup::"
-            echo "Published $name@$version" >> "$GITHUB_STEP_SUMMARY"
-          done
+          name=$(node -p "require('./packages/react/package.json').name")
+          version=$(node -p "require('./packages/react/package.json').version")
+          if [ -n "$(npm view "$name@$version" version 2>/dev/null)" ]; then
+            echo "$name@$version is already on npm."
+            exit 0
+          fi
+          (cd packages/react && npm publish)
+          echo "Published $name@$version" >> "$GITHUB_STEP_SUMMARY"
