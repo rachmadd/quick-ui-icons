@@ -10,7 +10,6 @@ In progress: one component per icon with a `variant` prop (outline, fill,
 duotone), rounded from `@quick-ui/icons` and sharp from
 `@quick-ui/icons/sharp`, with no two-tone. It's built in phases from
 `docs/plans/icons-package.md`, which also records the decisions.
-Today the package still has one entry point per style and corner treatment.
 Each phase gets its own branch and PR. Stop at the end of each one and wait for
 the owner.
 
@@ -22,6 +21,11 @@ the owner.
 - `packages/react/src/` is built from `icons/` and `icons/sharp/` by
   `scripts/generate.mjs` during `pnpm build`, `pnpm test` and `pnpm icons:ci`.
   It's gitignored, not committed. Tests are in `packages/react/test/`.
+- `packages/react/test/size-budget.json` holds each icon's size budget. The
+  size test fails if an icon grows past it. After an intended change, run
+  `pnpm size:budget` and commit the new budget with the change.
+- `fixtures/bundle-size/` measures real Vite and Next bundles. Run it by hand;
+  it isn't in CI.
 - `icons/` and `packages/react/src/` are generated, so never edit them by hand.
   Change `raw/` or the generator, then rebuild.
 - `data/` holds the icon metadata: search tags, aliases, categories,

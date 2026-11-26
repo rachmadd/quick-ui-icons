@@ -29,10 +29,12 @@
     "readmes:check": "node pipeline/check-readmes.mjs",
     "readmes:fix": "node pipeline/check-readmes.mjs --fix",
     "icons:ci": "node pipeline/build.mjs --check && node scripts/generate.mjs && node pipeline/check-readmes.mjs && node pipeline/parallel.mjs \"tsc -p packages/react --noEmit --declaration false\" \"node pipeline/lint.mjs\"",
-    "test": "pnpm build && node --test \"packages/react/test/*.test.mjs\""
+    "test": "pnpm build && node --test \"packages/react/test/*.test.mjs\"",
+    "size:budget": "pnpm build && node scripts/size-budget.mjs"
   },
   "devDependencies": {
     "@types/react": "^19",
+    "esbuild": "0.28.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "typescript": "^5"
