@@ -19,13 +19,18 @@ base drawing in a container.
 ## The package
 
 `@quick-ui/icons` (`packages/react`) is the React package. It isn't published
-yet. Today it has one entry point per style and corner treatment:
-`@quick-ui/icons`, `/two-tone`, `/duotone` and `/fill`, and the same four under
-`/sharp`.
+yet. Each icon is one component, and its `variant` prop picks the outline, fill
+or duotone drawing. Rounded corners come from `@quick-ui/icons` and sharp ones
+from `@quick-ui/icons/sharp`, under the same names:
 
-Coming, not built yet: a `variant` prop to choose the style, and two entry
-points for the corners, `@quick-ui/icons` for rounded and `@quick-ui/icons/sharp`
-for sharp.
+```tsx
+import { BellIcon } from '@quick-ui/icons'
+
+<BellIcon variant="fill" className="size-4" />
+```
+
+The package doesn't include two-tone, though its drawings stay in `raw/` and
+`icons/`. [packages/react/README.md](packages/react/README.md) covers usage.
 
 ## Layout
 
@@ -38,7 +43,11 @@ pipeline/            The build, the linter and the checks.
 ```
 
 `pipeline/README.md` explains the build and the drawing rules. Before you open a
-PR, run `pnpm icons:ci` and `pnpm build`. CI runs both.
+PR, run `pnpm icons:ci`, `pnpm build` and `pnpm test`. CI runs all three.
+
+To pick up a new Keyline release, run `pnpm sync:upstream`. It copies the
+release's drawings into `raw/`, rebuilds, and lists the icons that are new,
+changed or removed, with the steps that follow. It doesn't commit anything.
 
 ## Credits
 
@@ -50,8 +59,9 @@ through the `upstream` remote.
 
 We changed the name, the package name and the repo metadata. We removed
 Keyline's website, its shadcn registry, and its React Native, CLI, MCP and Figma
-plugin packages, and moved the icon metadata to `data/`. The `variant` prop
-will be ours too, once it's built.
+plugin packages, and moved the icon metadata to `data/`. The package's shape is
+ours: one component per icon with a `variant` prop, and the generator that
+builds it.
 
 ## License
 

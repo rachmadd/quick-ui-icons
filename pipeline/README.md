@@ -614,9 +614,9 @@ rather than stacking — the solid `circle-user` already does this with
 
 ## What `check-readmes` checks
 
-Eleven numbers, spread across `README.md` and `packages/react/README.md`: the
-icon count, the three per-style counts, the SVG total and the two container
-counts, plus the four the React package repeats.
+Nine numbers, spread across `README.md` and `packages/react/README.md`: the
+icon count, the four per-style counts, the SVG total and the two container
+counts, plus the icon count the React package repeats.
 
 They are the only counts in the project that are *prose*, so upstream they sat
 at 414 icons and 1,059 SVGs while the set grew past 500. Nothing failed and nothing
