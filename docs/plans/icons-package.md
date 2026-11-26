@@ -130,6 +130,11 @@ Every phase 0 question is answered.
 - **2026-11-26: no "slightly rounder" pass.** The owner is happy with the
   current rounded style, so phases 4 and 5 are skipped and the drawings stay as
   Keyline drew them.
+- **2026-11-26: synced Keyline 3.1.0 before the first release** (owner). That
+  brought 156 new icons, 2,169 in all, and changed or removed none. `data/` took upstream's
+  keywords, usage, aliases and category rules for them. The category rules
+  were converted from upstream's TypeScript after checking that the fork point
+  reproduces the current file.
 
 ## Phases
 

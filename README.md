@@ -1,17 +1,17 @@
 # Quick UI Icons
 
-The icon set for Quick UI. **2,013 icons, drawn on one 24px grid** with a 2px
+The icon set for Quick UI. **2,169 icons, drawn on one 24px grid** with a 2px
 stroke, in four styles, each with rounded and sharp corners.
 
 | Style | Icons | What it is |
 | --- | --- | --- |
-| `stroke` | 2,013 | 2px outlines. The default. |
-| `two-tone` | 2,013 | The outline over a flat plate at reduced opacity. |
-| `duotone` | 2,013 | No outline: a grey body with the detail at full strength. |
-| `fill` | 2,013 | Solid, with the detail knocked out of the shape. |
+| `stroke` | 2,169 | 2px outlines. The default. |
+| `two-tone` | 2,169 | The outline over a flat plate at reduced opacity. |
+| `duotone` | 2,169 | No outline: a grey body with the detail at full strength. |
+| `fill` | 2,169 | Solid, with the detail knocked out of the shape. |
 
 Every style comes with rounded corners and with sharp ones, so the repo holds
-16,104 SVGs in total.
+17,352 SVGs in total.
 
 67 icons come in a `square-` form and 72 in a `circle-` form, which wrap the
 base drawing in a container.
