@@ -4,8 +4,9 @@
 # proves icons/ still matches raw/, `scripts/generate.mjs` then generates
 # packages/react/src from icons/ (it isn't committed), and `tsc` checks those
 # modules. `build` generates the same modules on its own runner before
-# compiling them, and `test` builds and then renders every icon in every
-# variant against its source SVG.
+# compiling them, `test` builds and then renders every icon in every
+# variant against its source SVG, and `site:build` typechecks and builds the
+# icon site in site/.
 #
 # Deliberately absent: `icons:figma` needs the Figma file, which CI does not
 # have. pipeline/README.md documents it as a run-it-locally check.
@@ -49,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        command: [icons:ci, build, test]
+        command: [icons:ci, build, test, site:build]
     # All three actions are on v5, the first major of each that runs on Node 24;
     # every earlier one runs on Node 20 and warns on every run. None of the
     # three renamed an input between v4 and v5.

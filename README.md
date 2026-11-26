@@ -45,6 +45,9 @@ pipeline/            The build, the linter and the checks.
 `pipeline/README.md` explains the build and the drawing rules. Before you open a
 PR, run `pnpm icons:ci`, `pnpm build` and `pnpm test`. CI runs all three.
 
+To browse every icon and read the usage docs, run `pnpm site` and open the
+local address it prints.
+
 To pick up a new Keyline release, run `pnpm sync:upstream`. It copies the
 release's drawings into `raw/`, rebuilds, and lists the icons that are new,
 changed or removed, with the steps that follow. It doesn't commit anything.
