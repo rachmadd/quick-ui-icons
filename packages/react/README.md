@@ -1,6 +1,6 @@
 # @quick-ui/icons
 
-2,013 icons on one 24px grid, as React components. Each one comes in outline,
+2,169 icons on one 24px grid, as React components. Each one comes in outline,
 fill and duotone, with rounded or sharp corners.
 
 ```bash

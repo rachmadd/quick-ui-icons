@@ -6,11 +6,11 @@ All notable changes to `@quick-ui/icons`. The format follows
 
 ## Unreleased
 
-The first release of `@quick-ui/icons`, Quick UI's fork of Keyline Icons 3.0.
+The first release of `@quick-ui/icons`, Quick UI's fork of Keyline Icons 3.1.
 
 ### Added
 
-- 2,013 icons on a 24px grid, each one component with a `variant` prop:
+- 2,169 icons on a 24px grid, each one component with a `variant` prop:
   `"outline"` (the default), `"fill"` or `"duotone"`.
 - Rounded corners from `@quick-ui/icons`, and sharp corners from
   `@quick-ui/icons/sharp` under the same names.
@@ -19,6 +19,9 @@ The first release of `@quick-ui/icons`, Quick UI's fork of Keyline Icons 3.0.
   icons it imports. Each icon also has its own path:
   `@quick-ui/icons/icons/star` and `@quick-ui/icons/sharp/icons/star`.
 - `IconProps` and `IconVariant` types.
+- The 156 icons Keyline 3.1 added, among them the logic gates, the flowchart
+  shapes, the zodiac signs, the layer and image-wrap marks, and `aperture`,
+  `gem`, `kerning`, `subscript` and `superscript`.
 
 ### Compared with @keyline-icons/react
 

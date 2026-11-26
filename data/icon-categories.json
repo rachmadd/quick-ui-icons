@@ -13,7 +13,7 @@
     },
     {
       "label": "Arrows",
-      "match": "^(?:scale-3d)$|^(arrow|bracket-arrow|log-(in|out)$|expand|refresh|rotate|corner-|move(-|$)|square-arrow-in-|square-arrow-out-|(undo|redo)(-dot)?$|split(-2)?$|merge$)",
+      "match": "^(?:scale-3d)$|^(arrow|bracket-arrow|log-(in|out)$|expand|refresh|rotate|corner-(?!sharp$)|move(-|$)|square-arrow-in-|square-arrow-out-|(undo|redo)(-dot)?$|split(-2)?$|merge$)",
       "icon": "arrow-right",
       "blurb": "Direction, movement and resizing, short and long, with the brackets and the arrow into one, u-turns, corner turns, a fork, a merge and dashed panels."
     },
@@ -31,9 +31,9 @@
     },
     {
       "label": "Files",
-      "match": "^(file|folder|copy|paperclip|bin(?!oculars|ary$)|archive|book(?!mark)|pen(?!cil|tagon(-|$))|(square|circle)-pen|newspaper$|clipboard|paste$|save(-|$)|library-big$)",
+      "match": "^(file|folder|copy|paperclip|bin(?!oculars|ary$)|archive|book(?!mark)|pen(?!cil|tagon(-|$))|(square|circle)-pen|newspaper$|clipboard|paste$|save(-|$)|library-big$|scroll$)",
       "icon": "file",
-      "blurb": "Documents, folders, books, a newspaper, copies, clipboards, the floppy disk, the paperclip and the bin."
+      "blurb": "Documents, folders, books, a scroll, a newspaper, copies, clipboards, the floppy disk, the paperclip and the bin."
     },
     {
       "label": "Time",
@@ -55,9 +55,9 @@
     },
     {
       "label": "Commerce",
-      "match": "^(?:bikini|bow-tie|bra|cap|clothes-button|dress|hanger|hat|jacket|lipstick|necktie|pants|perfume-bottle|ring-diamond|shorts|skirt|sneaker|socks|underwear)$|^(shopping-|handbag|briefcase(?!-medical)|receipt|tag|package|box$|truck|gift|coupon|(badge-)?percent|store|shirt$|paper-bag$|container$|glasses$|sunglasses$|weight(-tilde)?$|luggage$|concierge-bell$)",
+      "match": "^(?:bikini|bow-tie|bra|cap|clothes-button|dress|gem|hanger|hat|jacket|lipstick|necktie|pants|perfume-bottle|ring-diamond|shorts|skirt|sneaker|socks|underwear)$|^(shopping-|handbag|briefcase(?!-medical)|receipt|tag|package|box$|truck|gift|coupon|(badge-)?percent|store|shirt$|paper-bag$|container$|glasses$|sunglasses$|weight(-tilde)?$|luggage$|concierge-bell$)",
       "icon": "shopping-cart",
-      "blurb": "Carts, bags and luggage, a paper bag, receipts, shipping and its container, the weights a parcel is sold by, the shopfront and the bell on its counter, a shirt and a jacket, a skirt, a bikini, a bra and underwear, a bow tie and a necktie, a cap and a hat, a clothes button, a lipstick and a perfume bottle, the tags and the discount marks."
+      "blurb": "Carts, bags and luggage, a paper bag, receipts, shipping and its container, the weights a parcel is sold by, the shopfront and the bell on its counter, a shirt and a jacket, a skirt, a bikini, a bra and underwear, a bow tie and a necktie, a cap and a hat, a clothes button, a lipstick and a perfume bottle, a gem, the tags and the discount marks."
     },
     {
       "label": "Maps",
@@ -73,9 +73,9 @@
     },
     {
       "label": "Media",
-      "match": "^(?:clapperboard|clarinet|disc|drum|guitar|mask-theater)$|^(play(?!-bug$)|pause|stop|record|skip-|fast-forward|rewind|repeat|replay|volume|audio-lines|mic(?!roscope)|megaphone|headphones|headset|earbuds|airpods|shuffle|music-note|list-music|list-video|camera|image|cast|subtitles|captions|picture-in-picture|gallery-|podcast|queue|film|airplay$|video(?:-2)?$|broadcast$|radio$|eject$|keyframes$|aspect-ratio$|ratio-|speaker$|boom-box$|cassette-tape$|satellite-dish$)",
+      "match": "^(?:aperture|clapperboard|clarinet|disc|drum|ease-in|ease-linear|ease-out|guitar|mask-theater)$|^(play(?!-bug$)|pause|stop|record|skip-|fast-forward|rewind|repeat|replay|volume|audio-lines|mic(?!roscope)|megaphone|headphones|headset|earbuds|airpods|shuffle|music-note|list-music|list-video|camera|image|cast|subtitles|captions|picture-in-picture|gallery-|podcast|queue|film|airplay$|video(?:-2)?$|broadcast$|radio$|eject$|keyframes$|aspect-ratio$|ratio-|speaker$|boom-box$|cassette-tape$|satellite-dish$)",
       "icon": "play",
-      "blurb": "Playback, volume, capture, casting and AirPlay, eject, video, broadcast, the dish and the radio, the speaker, the boom box, the cassette and the disc, a guitar, a clarinet and a drum, the clapperboard and the theatre mask, the sound and image marks and what you listen through."
+      "blurb": "Playback, volume, capture, casting and AirPlay, eject, video, broadcast, the dish and the radio, the speaker, the boom box, the cassette and the disc, a guitar, a clarinet and a drum, the clapperboard and the theatre mask, the sound and image marks, the aperture and the easing curves, and what you listen through."
     },
     {
       "label": "Charts",
@@ -85,15 +85,15 @@
     },
     {
       "label": "Diagrams",
-      "match": "^(diagram-|workflow$)",
+      "match": "^(diagram-|workflow$|flow-|gate-|wave-square$)",
       "icon": "diagram-project",
-      "blurb": "Boxes on wires: a project, a subtask, and what comes before and after."
+      "blurb": "Boxes on wires: a project, a subtask, and what comes before and after; the flowchart's shapes, the logic gates and the square wave they switch on."
     },
     {
       "label": "Devices",
-      "match": "^(?:binary|joystick|play-bug|rectangle-goggles|remote-control)$|^(smartphone|phone|tablet|laptop|monitor|terminal|database|server|battery|bluetooth|code|plug|bug|cpu|printer|keyboard|usb|calculator|qr-code|scan(?!-face|-user)|app(?=-|$)|watch$|hard-drive$|vision-pro$|cable$|cctv(-off)?$|mouse(-off)?$|shredder$|gamepad$|tv$|regex$|webcam$|card-sim$|unplug$|router$)",
+      "match": "^(?:binary|focus|joystick|play-bug|rectangle-goggles|remote-control)$|^(smartphone|phone|tablet|laptop|monitor|terminal|database|server|battery|bluetooth|code|plug|bug|cpu|printer|keyboard|usb|calculator|qr-code|scan(?!-face|-user)|app(?=-|$)|watch$|hard-drive$|vision-pro$|cable$|cctv(-off)?$|mouse(-off)?$|shredder$|gamepad$|tv$|regex$|webcam$|card-sim$|unplug$|router$)",
       "icon": "smartphone",
-      "blurb": "Phones, tablets, laptops, handsets, printers, keyboards, servers and a router, databases, terminals, code, binary and a regular expression, processors, bugs and a debug run, the app tiles, the QR code, the scan frame with what it reads, a watch, a hard drive, a cable, a headset visor and goggles, the app windows, a CCTV camera, a mouse, a webcam, a shredder, a gamepad, a television and its remote."
+      "blurb": "Phones, tablets, laptops, handsets, printers, keyboards, servers and a router, databases, terminals, code, binary and a regular expression, processors, bugs and a debug run, the app tiles, the QR code, the scan frame with what it reads, the focus frame, a watch, a hard drive, a cable, a headset visor and goggles, the app windows, a CCTV camera, a mouse, a webcam, a shredder, a gamepad, a television and its remote."
     },
     {
       "label": "Pointers",
@@ -103,15 +103,15 @@
     },
     {
       "label": "Text",
-      "match": "^(bold|italic|underline|strikethrough|heading|pilcrow|indent|letter-|line-height|text-|type$|type-(height|width|size|off)$|square-type$|quote|language|slash$|case-(sensitive|upper)$|a-(?:arrow-(?:up|down)|text-cursor)$|spell-check$|type-outline$|whole-word$|input(-|$)|compact$|ampersand$|accent-grave$|colon$|semicolon$|comma$|hyphen$|pipe$|tilde$)",
+      "match": "^(bold|italic|underline|strikethrough|heading|pilcrow|kerning$|baseline-shift$|subscript$|superscript$|indent|letter-|line-height|text-|type$|type-(height|width|size|off)$|square-type$|quote|language|slash$|case-(sensitive|upper)$|a-(?:arrow-(?:up|down)|text-cursor)$|spell-check$|type-outline$|whole-word$|input(-|$)|compact$|ampersand$|accent-grave$|colon$|semicolon$|comma$|hyphen$|pipe$|tilde$)",
       "icon": "bold",
-      "blurb": "The quotation marks and the punctuation, the formatting marks, the case marks with the text-size arrows, the type size marks, the letter at the cursor and the spell check, the slash, the alignment stack and what sets a paragraph."
+      "blurb": "The quotation marks and the punctuation, the formatting marks, the case marks with the text-size arrows, the type size marks, kerning and the baseline shift, the letter at the cursor and the spell check, the slash, the alignment stack and what sets a paragraph."
     },
     {
       "label": "Layout",
-      "match": "^(?:crop|guidepoint|guidepoint-arrow-down|guidepoint-arrow-up|guidepoint-vertical-arrow-left|guidepoint-vertical-arrow-right|mount|perspective|triangles-centerline-horizontal|triangles-centerline-inward-horizontal|triangles-centerline-inward-vertical|triangles-centerline-vertical|layer-boxes)$|^(panel|layout|layers|grid|table(-|$)|list|align|menu|maximize|minimize|fullscreen|columns-|blocks(-|$)|flip-|fold-|symmetry-)",
+      "match": "^(?:crop|guidepoint|guidepoint-arrow-down|guidepoint-arrow-up|guidepoint-vertical-arrow-left|guidepoint-vertical-arrow-right|mount|perspective|triangles-centerline-horizontal|triangles-centerline-inward-horizontal|triangles-centerline-inward-vertical|triangles-centerline-vertical|layer-boxes|before-and-after|group|ungroup)$|^(layer-(?:mask|arrow)|separator-|unfold-|panel|layout|layers|grid|table(-|$)|list|align|menu|maximize|minimize|fullscreen|columns-|blocks(-|$)|flip-|fold-|symmetry-)",
       "icon": "panel-left",
-      "blurb": "Panels, layers, grids, blocks, columns, tables and their row, column and cell edits, lists, alignment, the flips and the symmetry axes, the menu marks and the fullscreen corners."
+      "blurb": "Panels, layers, grids, blocks, columns, tables and their row, column and cell edits, lists, alignment, the flips and the symmetry axes, the folds and unfolds, grouping, the layer masks, a separator, a before and after split, the menu marks and the fullscreen corners."
     },
     {
       "label": "Users",
@@ -121,9 +121,9 @@
     },
     {
       "label": "People",
-      "match": "^(boy|girl|baby(-2)?-(boy|girl)|mustache)$",
+      "match": "^(person-standing|boy|girl|baby(-2)?-(boy|girl)|mustache)$",
       "icon": "boy",
-      "blurb": "The boy, the girl and the babies, with a curl, a bow or a pacifier, and a mustache."
+      "blurb": "A standing person, the boy, the girl and the babies, with a curl, a bow or a pacifier, and a mustache."
     },
     {
       "label": "Gender",
@@ -133,9 +133,9 @@
     },
     {
       "label": "Math",
-      "match": "^(?:greater-than|greater-than-equal|less-than|less-than-equal|radicand)$|^(asterisk|braces|brackets|divide|equal|hash|infinity|minus|parentheses|plus|radical|variable|x-line-top|brace-(?:left|right)|bracket-(?:left|right)|parenthesis-(?:left|right)|tally|angle|radius|lambda|omega|phi|(?:square-|circle-)?(?:sigma|pi|function))(-|$)",
+      "match": "^(?:greater-than|greater-than-equal|less-than|less-than-equal|math-symbols|radicand)$|^(asterisk|braces|brackets|divide|equal|hash|infinity|minus|parentheses|plus|radical|variable|x-line-top|brace-(?:left|right)|bracket-(?:left|right)|parenthesis-(?:left|right)|tally|angle|radius|lambda|omega|phi|(?:square-|circle-)?(?:sigma|pi|function))(-|$)",
       "icon": "divide",
-      "blurb": "Plus and minus, the equals and its approximate and negated forms, divide, the radical, infinity, the asterisk, the hash, the parentheses, braces and brackets in pairs and alone, the tally from one to five, the variable and the mean, sigma, pi, lambda, omega and phi, the function sign, the angle and the radius."
+      "blurb": "Plus and minus, the equals and its approximate and negated forms, divide, the four operators together, the radical, infinity, the asterisk, the hash, the parentheses, braces and brackets in pairs and alone, the tally from one to five, the variable and the mean, sigma, pi, lambda, omega and phi, the function sign, the angle and the radius."
     },
     {
       "label": "Keyboard",
@@ -151,15 +151,15 @@
     },
     {
       "label": "Symbols",
-      "match": "^(peace|yin-yang)$",
+      "match": "^(peace|yin-yang)$|^zodiac-",
       "icon": "peace",
-      "blurb": "The peace sign and the yin and yang."
+      "blurb": "The peace sign, the yin and yang and the twelve signs of the zodiac."
     },
     {
       "label": "Actions",
-      "match": "^(check|double-check|x|more|lock|unlock|key(?:-round|-square)?$|shield|badge|download|upload|filter|eye|star|heart(?!-pulse)|hand-heart|alert|octagon-(?!dot$)|triangle-alert|info|question|lightbulb|zap|flame|ban(?!ana)(?!dage)|siren$|delete$|lifebuoy$|fire-extinguisher$|bomb$)",
+      "match": "^(check|double-check|x|more|lock|unlock|key(?:-round|-square)?$|shield|badge|download|upload|filter|eye|star|heart(?!-pulse)|hand-heart|alert|octagon-(?!dot$)|triangle-alert|info|question|lightbulb|zap|flame|ban(?!ana)(?!dage)|siren$|delete$|lifebuoy$|fire-extinguisher$|bomb$|explosion$)",
       "icon": "check",
-      "blurb": "Checks, crosses, the everyday verbs, the siren, the bomb, the lifebuoy, the fire extinguisher and the marks that guard a thing."
+      "blurb": "Checks, crosses, the everyday verbs, the siren, the bomb and its blast, the lifebuoy, the fire extinguisher and the marks that guard a thing."
     },
     {
       "label": "Controls",
@@ -193,9 +193,9 @@
     },
     {
       "label": "Sport",
-      "match": "^(?:bowling-ball|club|ice-skate|ping-pong|snorkel|spade|sprint|whistle)$|^(trophy|award|podium|medal|crown|flag-chequered|american-football|baseball|basketball|cricket|golf|hockey|soccer|tennis|target$|chess-|dumbbell$|ski$|waves-ladder$)",
+      "match": "^(?:bowling-ball|club|gun|ice-skate|ping-pong|snorkel|spade|sprint|sword|swords|whistle)$|^(trophy|award|podium|medal|crown|flag-chequered|american-football|baseball|basketball|cricket|golf|hockey|soccer|tennis|target(-arrow)?$|chess-|dumbbell$|ski$|waves-ladder$)",
       "icon": "trophy",
-      "blurb": "Trophies, awards, crowns and the places on the podium, the balls of five games, a cricket bat, hockey sticks, a golf hole, a target, a chess rook, the club and the spade, a dumbbell, a skier, an ice skate, a snorkel, a sprinter, the whistle and the pool's ladder."
+      "blurb": "Trophies, awards, crowns and the places on the podium, the balls of five games, a cricket bat, hockey sticks, a golf hole, a target and one with its arrow home, a chess rook, a sword, crossed swords and a pistol, the club and the spade, a dumbbell, a skier, an ice skate, a snorkel, a sprinter, the whistle and the pool's ladder."
     },
     {
       "label": "Food & Drink",
@@ -205,31 +205,31 @@
     },
     {
       "label": "Art",
-      "match": "^(?:brush|scribble|lasso|pipette)$|^(paint|palette|easel|swatch-book$|wand$|frame$|vector-)",
+      "match": "^(?:blur|brush|brush-minus|brush-plus|corner-sharp|curves|lasso|pipette|scribble|spline|square-round-corner)$|^(stroke-line-join-|paint|palette|easel|swatch-book$|wand$|frame$|vector-)",
       "icon": "palette",
-      "blurb": "The brush, the roller, the paint bucket, the palette, the pipette, the swatch book, the easel, the magic wand, the lasso, the frame tool and the vector nodes."
+      "blurb": "The brush, the roller, the paint bucket, the palette, the pipette, the swatch book, the easel, the magic wand, the lasso, the frame tool and the vector nodes, the brush's add and subtract, blur, curves, the spline, the corner radius controls and the stroke joins."
     },
     {
       "label": "Tools",
-      "match": "^(toolbox|wrench|hammer|pencil-ruler|screwdriver|pliers|saw|ruler|scissors|broom|drafting-compass$|hook$|gripper$|flashlight(-off)?$|hard-hat$|pipe-section$|crane$)",
+      "match": "^(toolbox|wrench|hammer|pencil-ruler|screwdriver|pliers|saw|ruler|scissors|broom|drafting-compass$|hook$|gripper$|flashlight(-off)?$|hard-hat$|pipe-section$|crane$|tools$|bolt$)",
       "icon": "wrench",
-      "blurb": "The toolbox, the broom and what comes out of them, a screwdriver, a drafting compass, a hook, a gripper, a flashlight, a hard hat, a crane and a pipe section."
+      "blurb": "The toolbox, the broom and what comes out of them, a wrench crossed with a screwdriver, a bolt, a screwdriver, a drafting compass, a hook, a gripper, a flashlight, a hard hat, a crane and a pipe section."
     },
     {
       "label": "Stationery",
-      "match": "^(eraser|tape|stapler|notebook|sticky-note|sticker$|pin(-|$)|stamp$)",
+      "match": "^(eraser|tape|stapler|notebook|sticky-note|sticker$|pin(-|$)|stamp$|highlighter$)",
       "icon": "eraser",
-      "blurb": "The desk drawer: the eraser, the roll of tape, the sticky notes, a sticker, the notebooks, the push pin and the rubber stamp."
+      "blurb": "The desk drawer: the eraser, the roll of tape, the sticky notes, a sticker, the notebooks, the push pin, the rubber stamp and the highlighter."
     },
     {
       "label": "Shapes",
-      "match": "^(circle|square|triangle|shapes|dashed|dice|dot$|full|half|quarter|three-quarter|hexagon|puzzle$|diamond|octagon(-dot)?$|pentagon(-dashed)?$|shadows$|cone$|cuboid$|cylinder$|pyramid$)",
+      "match": "^(circle|square|triangle|shapes|dashed|dice|dot$|full|half|quarter|three-quarter|hexagon|puzzle$|diamond|octagon(-dot)?$|pentagon(-dashed)?$|shadows$|cone$|cuboid$|cylinder$|pyramid$|parallelogram$)",
       "icon": "shapes",
-      "blurb": "Squares, circles, triangles, hexagons, a pentagon, an octagon, a diamond, a dot and the shapes that hold one, dashes and the progress states drawn from them, and the solids: a cone, a cuboid, a cylinder and a pyramid."
+      "blurb": "Squares, circles, triangles, hexagons, a pentagon, an octagon, a parallelogram, a diamond, a dot and the shapes that hold one, dashes and the progress states drawn from them, and the solids: a cone, a cuboid, a cylinder and a pyramid."
     },
     {
       "label": "Web",
-      "match": "^(?:cog|cog-dot)$|^(globe|link|unlink|share|navigation|home|house|search|settings|bookmark|wifi|cloud-(?:check|x|plus|alert|dot|off|arrow|backup|cog|terminal|download|upload|search|network)|earth$|connections?$|webhook$|nfc$|rss$)",
+      "match": "^(?:cog|cog-dot)$|^(globe|link|unlink|share|navigation|home|house|search|settings|bookmark|wifi|cloud-(?:check|x|plus|alert|dot|off|arrow|backup|cog|terminal|download|upload|search|network|sync|clock|signal)|earth$|connections?$|webhook$|nfc$|rss$)",
       "icon": "globe",
       "blurb": "Globes and the earth, links, connectivity, the RSS feed, sync states and web-scoped actions."
     },

@@ -1,6 +1,6 @@
 # Quick UI Icons
 
-Quick UI's icon set, forked from Keyline Icons (MIT). It holds 2,013 icons on a
+Quick UI's icon set, forked from Keyline Icons (MIT). It holds 2,169 icons on a
 24px grid in four styles (`stroke`, `two-tone`, `duotone`, `fill`), each with
 rounded and sharp corners, so eight styles in all. It also holds the pipeline
 that builds them and one package, `@quick-ui/icons` (`packages/react`). There is
