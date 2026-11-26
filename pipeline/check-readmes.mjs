@@ -124,10 +124,6 @@ const CLAIMS = [
   ['README.md', /([\d,]+) icons come in a `square-` form/, 'square'],
   ['README.md', /form and ([\d,]+) in a `circle-` form/, 'circle'],
   ['packages/react/README.md', /^([\d,]+) icons on one/m, 'icons'],
-  ['packages/react/README.md', /\/\/ stroke, +([\d,]+) icons/, 'stroke'],
-  ['packages/react/README.md', /\/\/ two-tone, ([\d,]+) icons/, 'two-tone'],
-  ['packages/react/README.md', /\/\/ duotone, ([\d,]+) icons/, 'duotone'],
-  ['packages/react/README.md', /\/\/ fill, +([\d,]+) icons/, 'fill'],
 ];
 
 /* The prose commas are part of the claim: "1,286 SVGs" reads as prose and

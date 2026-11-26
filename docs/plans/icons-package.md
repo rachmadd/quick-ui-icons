@@ -9,13 +9,13 @@ measurements go in `.work/`, which is gitignored.
 
 | Phase | What | Status |
 | --- | --- | --- |
-| 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Every decision is made (see Decisions) |
-| 1 | Generator and package | Done on `phase-1-generator`, PR #3. The report is in the PR, and a local copy is in `.work/phase-1.md`. Waiting on the owner |
-| 2 | Tree-shaking and size | Done on `phase-2-size`, PR #4. The report is in the PR, and a local copy is in `.work/phase-2.md`. Waiting on the owner |
-| 3 | Built-in subset for Quick UI | Done on `phase-3-built-in`, PR #5. The report is in the PR, and a local copy is in `.work/phase-3.md`. Waiting on the owner |
-| 4 | "Slightly rounder" trial | Not started |
-| 5 | Apply the rounding | Only if phase 4 is approved |
-| 6 | Release readiness, no publishing | Not started |
+| 0 | Audit, no code | Merged, PR #2 |
+| 1 | Generator and package | Merged, PR #3 |
+| 2 | Tree-shaking and size | Merged, PR #4 |
+| 3 | Built-in subset for Quick UI | Merged, PR #5 |
+| 4 | "Slightly rounder" trial | Skipped by the owner (2026-11-26) |
+| 5 | Apply the rounding | Skipped, because phase 4 was |
+| 6 | Release readiness, no publishing | Done on `phase-6-release`, PR #6. The report is in the PR, and a local copy is in `.work/phase-6.md`. Waiting on the owner |
 
 ## Goal
 
@@ -127,6 +127,9 @@ Every phase 0 question is answered.
   Keyline's `size` prop. Of Keyline 2.6.0's exports, 17 aren't here. All 17 are its
   deprecated aliases for renamed icons (`AlignLeft` is `TextAlignStart`),
   which phase 0 dropped.
+- **2026-11-26: no "slightly rounder" pass.** The owner is happy with the
+  current rounded style, so phases 4 and 5 are skipped and the drawings stay as
+  Keyline drew them.
 
 ## Phases
 

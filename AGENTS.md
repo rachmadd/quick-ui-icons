@@ -28,6 +28,11 @@ the owner.
   icons file to `.work/built-in/icons.tsx` from the list in
   `scripts/built-in-icons.mjs`. `docs/built-in-icons.md` says how quick-ui
   takes it in. Never edit the quick-ui repo from here.
+- `scripts/sync-upstream.mjs` (`pnpm sync:upstream [ref]`) copies a Keyline
+  release's `raw/` in, rebuilds, and reports new, changed and removed icons.
+  It never commits. Pulling in a release is the owner's call.
+- `packages/react/CHANGELOG.md` gets an entry under "Unreleased" for every
+  change a user of the package would notice.
 - `fixtures/bundle-size/` measures real Vite and Next bundles. Run it by hand;
   it isn't in CI.
 - `icons/` and `packages/react/src/` are generated, so never edit them by hand.
