@@ -113,6 +113,20 @@ Every phase 0 question is answered.
   with CSS fill and stroke. The fill drawing's own `fill="currentColor"` beats
   that CSS, so empty stars would render full. The radio dot stays the fill
   drawing. One line in `scripts/built-in-icons.mjs` switches the star back.
+- **2026-11-26: the package requires React 19** (`peerDependencies.react`
+  is `>=19`). Quick UI is on 19.2, only 19 is tested, and an icon passes
+  `ref` through as a prop, which React 18 doesn't do for function
+  components.
+- **2026-11-26: every icon in Quick UI will come from this set.** That covers
+  the site, the examples and the blocks, which T23 Part B moves to
+  `@keyline-icons/react` for now, as well as the packages' built-in icons
+  from phase 3. The switch happens in quick-ui, once `@quick-ui/icons` can
+  be installed there. Phase 6 lists what that needs. Nothing in the plan
+  blocks it. Every icon name quick-ui imports from Keyline today (129, checked
+  2026-11-26) is exported here under the same name. No quick-ui file passes
+  Keyline's `size` prop. Of Keyline 2.6.0's exports, 17 aren't here. All 17 are its
+  deprecated aliases for renamed icons (`AlignLeft` is `TextAlignStart`),
+  which phase 0 dropped.
 
 ## Phases
 
