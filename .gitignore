@@ -123,3 +123,7 @@ marketing/
 # strange place to keep a stack of half-approved SVGs that no longer match what
 # shipped. The fitted result lives in `raw/`, which is the record.
 refs/
+
+# The icon site's build output and its generated icon manifest.
+site/dist/
+site/src/generated/

@@ -3,8 +3,8 @@
 Quick UI's icon set, forked from Keyline Icons (MIT). It holds 2,169 icons on a
 24px grid in four styles (`stroke`, `two-tone`, `duotone`, `fill`), each with
 rounded and sharp corners, so eight styles in all. It also holds the pipeline
-that builds them and one package, `@quick-ui/icons` (`packages/react`). There is
-no site.
+that builds them, one package, `@quick-ui/icons` (`packages/react`), and a
+basic site in `site/` for browsing the icons and reading how to use them.
 
 In progress: one component per icon with a `variant` prop (outline, fill,
 duotone), rounded from `@quick-ui/icons` and sharp from
@@ -33,6 +33,9 @@ the owner.
   It never commits. Pulling in a release is the owner's call.
 - `packages/react/CHANGELOG.md` gets an entry under "Unreleased" for every
   change a user of the package would notice.
+- `site/` is the icon browser and usage docs (`docs/plans/icon-site.md`). It
+  renders `packages/react/src` and a manifest built from `icons/` and `data/`.
+  `pnpm site` runs it, `pnpm site:build` builds it, and CI runs the build.
 - `fixtures/bundle-size/` measures real Vite and Next bundles. Run it by hand;
   it isn't in CI.
 - `icons/` and `packages/react/src/` are generated, so never edit them by hand.
@@ -45,8 +48,8 @@ the owner.
 - `.work/` holds logs and measurements. It's gitignored, so put anything the
   owner needs into the PR as well.
 
-Run `pnpm icons:ci`, `pnpm build` and `pnpm test` before you finish. CI runs
-all three.
+Run `pnpm icons:ci`, `pnpm build` and `pnpm test` before you finish, and
+`pnpm site:build` if you touched `site/`. CI runs all four.
 
 ## Rules
 
