@@ -24,6 +24,10 @@ the owner.
 - `packages/react/test/size-budget.json` holds each icon's size budget. The
   size test fails if an icon grows past it. After an intended change, run
   `pnpm size:budget` and commit the new budget with the change.
+- `scripts/generate-built-in.mjs` (`pnpm built-in`) writes quick-ui's built-in
+  icons file to `.work/built-in/icons.tsx` from the list in
+  `scripts/built-in-icons.mjs`. `docs/built-in-icons.md` says how quick-ui
+  takes it in. Never edit the quick-ui repo from here.
 - `fixtures/bundle-size/` measures real Vite and Next bundles. Run it by hand;
   it isn't in CI.
 - `icons/` and `packages/react/src/` are generated, so never edit them by hand.

@@ -15,6 +15,7 @@ pnpm icons:ci          # sync checks, README counts, lint, typecheck (for CI)
 pnpm build             # compile packages/react to dist/
 pnpm test              # build, then render, size and tree-shaking tests
 pnpm size:budget       # rerecord per-icon size budgets after an intended change
+pnpm built-in          # quick-ui's built-in icons file, to .work/built-in/icons.tsx
 node fixtures/bundle-size/measure.mjs   # Vite and Next bundle sizes (not in CI)
 ```
 
@@ -64,6 +65,8 @@ scripts/
   lib/source.mjs              reads icons/
   lib/precision.mjs           rounds path data to 2 decimals, more where a stroke end would turn
   lib/emit.mjs                writes the wrapper, icon modules and barrels
+  generate-built-in.mjs       quick-ui's built-in icons.tsx, from built-in-icons.mjs
+  lib/emit-built-in.mjs       writes that file in quick-ui's Prettier style
   size-budget.mjs             records each icon's gzipped size budget for the size test
   lib/size.mjs                measures icon modules minified and gzipped
 fixtures/bundle-size/         Vite and Next apps importing 1, 3 and 30 icons (see its README)
