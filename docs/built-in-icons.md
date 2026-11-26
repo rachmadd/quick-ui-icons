@@ -12,7 +12,7 @@ These are the steps for the T23 work there.
   exported in one `export { … }`. `IconProps` and the `Icon` wrapper are the
   same as today's file, so `index.ts` (`export * from './icons'`) doesn't
   change.
-- The rounded outline set, plus the fill set for `DotIcon`. Path data is
+- The rounded outline set, plus the fill set for `DotIcon` and `StarIcon`. Path data is
   rounded to 2 decimals, the same as `@quick-ui/icons`.
 - The header says the file is generated and where from, and carries the full
   MIT notice for Keyline Icons and Quick UI, since the registry copies this
@@ -30,19 +30,27 @@ These are the steps for the T23 work there.
    shapes are new.
 2. **Update the icons test.** `icons.test.tsx` asserts a stroked root
    (`stroke="currentColor"`, `fill="none"`) for every icon in its list. That
-   holds for 31 shapes but not for `DotIcon` and `EllipsisIcon`. Both paint
-   with fill, and their root is `stroke="none"`, the way this set draws dots.
-   If the list grows to all 33, give those two their own case: `fill` on the
-   path, `stroke="none"` on the root.
-3. **Rating's star is the outline, not the fill drawing.** The T23 table says
-   "`StarIcon` from the fill set". That doesn't work with Rating, which paints
-   one star twice with CSS on the `<svg>`: `fill-transparent` for an empty
-   star, and the checked color for a full one. The fill drawing's path
-   carries its own `fill="currentColor"`, which beats that CSS, so every
-   empty star would render full. Its contour is also a unit larger than the
-   outline. Run `pnpm built-in` and compare in Rating to see both. `StarIcon` here is the
-   outline, which is a drop-in for Lucide's `StarIcon` that Rating uses
-   today. Change the table's row to say "outline".
+   holds for 30 shapes but not for `DotIcon`, `EllipsisIcon` and `StarIcon`.
+   They paint with fill, and their root is `stroke="none"`. If the list grows
+   to all 33, give those three their own case: `fill` on the path,
+   `stroke="none"` on the root.
+3. **Rating: color the fill star with `color`.** `StarIcon` is the fill
+   drawing, as the table says. Its path paints with `fill="currentColor"`,
+   which overrides the `fill-*` and `stroke-*` classes Rating puts on the
+   `<svg>` today, so Rating has to color it through `color`. Empty stars
+   take a muted color, full stars the checked color, and the partial overlay
+   works as it does now. In Rating's classes:
+   - empty: `text-(--_rating-border)` in place of
+     `fill-transparent stroke-(--_rating-border)`;
+   - filled: `text-(--_rating-checked-bg)` in place of the `fill-*` and
+     `stroke-*` pair;
+   - disabled and forced colors: the same swap, `text-*` for `fill-*`
+     and `stroke-*`, for example `forced-colors:text-[CanvasText]`.
+   Keep today's `fill-*` and `stroke-*` classes for a user's own `icon`.
+   Rating knows when it's drawing its default star. A stroked custom icon,
+   say a heart, still needs them to fill when it's full. In quick-ui-icons, `.work/built-in/rating-fill.png` shows
+   the result: muted empty stars, full ones in the checked color, and a half
+   star.
 4. **Dropdown's radio dot.** `DotIcon` replaces Lucide's `CircleIcon` in
    `DropdownMenuRadioItem`. Keep the sizing class. `fill-current` becomes
    unnecessary, because the drawing fills itself, but it's harmless.

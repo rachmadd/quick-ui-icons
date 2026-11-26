@@ -108,11 +108,11 @@ Every phase 0 question is answered.
   original data. That's 218 of 48,317 subpaths, and the savings stay at
   27.5% (rounded) and 25.9% (sharp). `scripts/lib/precision.mjs` has the
   rule.
-- **2026-11-26 (phase 3, waiting for the owner to confirm): Rating's star is the
-  outline.** T23's table names the fill set, but Rating paints one star drawing
-  with CSS fill and stroke. The fill drawing's own `fill="currentColor"` beats
-  that CSS, so empty stars would render full. The radio dot stays the fill
-  drawing. One line in `scripts/built-in-icons.mjs` switches the star back.
+- **2026-11-26 (phase 3): Rating's star is the fill drawing,** as T23's table
+  says. The owner found the outline odd. The fill drawing paints by its own
+  `fill="currentColor"`, so quick-ui's Rating has to color stars with
+  `text-*` instead of `fill-*` and `stroke-*` classes.
+  `docs/built-in-icons.md` gives the class changes.
 - **2026-11-26: the package requires React 19** (`peerDependencies.react`
   is `>=19`). Quick UI is on 19.2, only 19 is tested, and an icon passes
   `ref` through as a prop, which React 18 doesn't do for function

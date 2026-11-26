@@ -7,14 +7,11 @@
 // which drawing. When quick-ui's table changes, change this list to match and
 // regenerate.
 //
-// One departure from the table: it names the fill set for Rating's star, but
-// Rating paints one star drawing twice with CSS on the <svg> (fill-transparent
-// for an empty star, the checked colour for a full one). The fill drawing's
-// path carries its own fill="currentColor", which beats that CSS, so every
-// empty star would render full, and its contour is a unit larger than the
-// outline the stroke goes around. The outline star renders both states right.
-// The radio dot keeps the fill drawing; the dropdown sizes it with CSS and it
-// has no empty state.
+// Rating's star and the radio dot are fill drawings, as the table says. They
+// paint with fill="currentColor" on the path, so a component colours them with
+// `color` (text-* classes), not with fill-* or stroke-* classes on the <svg>,
+// which the path's own fill overrides. docs/built-in-icons.md says what that
+// means for Rating.
 
 export const BUILT_IN_ICONS = [
   { component: "ArrowDownIcon", icon: "arrow-down", variant: "outline" },
@@ -47,12 +44,7 @@ export const BUILT_IN_ICONS = [
   { component: "PlayIcon", icon: "play", variant: "outline" },
   { component: "PlusIcon", icon: "plus", variant: "outline" },
   { component: "SpinnerIcon", icon: "loader-circle", variant: "outline", note: "Three quarters of a circle, which Spinner turns." },
-  {
-    component: "StarIcon",
-    icon: "star",
-    variant: "outline",
-    note: "Rating's star. The outline: Rating fills it with CSS, which the fill drawing would override.",
-  },
+  { component: "StarIcon", icon: "star", variant: "fill", note: "Rating's star, coloured with `color`." },
   { component: "TriangleAlertIcon", icon: "triangle-alert", variant: "outline" },
   { component: "UploadIcon", icon: "upload", variant: "outline" },
 ]

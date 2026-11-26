@@ -84,20 +84,18 @@ test("every component draws its source SVG, with the wrapper's paint where the s
   assert.deepEqual(BUILT_IN_ICONS.flatMap(problems), [])
 })
 
-test("only the radio dot is a fill drawing, and nothing takes a variant", () => {
+test("only the two listed fill shapes are fill drawings, and nothing takes a variant", () => {
   const fills = BUILT_IN_ICONS.filter((e) => e.variant === "fill").map((e) => e.component)
-  assert.deepEqual(fills, ["DotIcon"])
+  assert.deepEqual(fills.sort(), ["DotIcon", "StarIcon"])
   assert.doesNotMatch(source, /variant/)
 })
 
-test("Rating's star is a closed outline, so Rating's CSS can fill it or leave it empty", () => {
-  const star = renderToStaticMarkup(createElement(built.StarIcon))
-  const { root, paths } = parse(star)
-  assert.equal(root.fill, "none")
-  assert.equal(root.stroke, "currentColor")
-  assert.equal(paths.length, 1)
-  assert.equal(paths[0].fill, undefined, "a fill on the path would beat Rating's CSS fill")
-  assert.match(paths[0].d, /Z$/)
+test("the fill shapes paint in currentColor with no stroke, so `color` sets them", () => {
+  for (const name of ["StarIcon", "DotIcon"]) {
+    const { root, paths } = parse(renderToStaticMarkup(createElement(built[name])))
+    assert.equal(root.stroke, "none", name)
+    assert.ok(paths.every((p) => p.fill === "currentColor"), name)
+  }
 })
 
 test("carries the generated header and the full MIT notice for Keyline and Quick UI", () => {
