@@ -9,7 +9,7 @@ scope, and this request brings a basic one in.
 
 | What | Status |
 | --- | --- |
-| Icon browser and usage docs in `site/` | Built on `icon-site`, stacked on the Keyline 3.1.0 sync (PR #7). Waiting on the owner |
+| Icon browser and usage docs in `site/` | Built on `icon-site`, PR #8, stacked on the Keyline 3.1.0 sync (PR #7). Waiting on the owner |
 | Hosting | Not decided. It runs locally, and `pnpm site:build` makes a static build that any static host can serve |
 
 ## What it is
