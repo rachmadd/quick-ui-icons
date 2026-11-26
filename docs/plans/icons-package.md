@@ -12,7 +12,7 @@ measurements go in `.work/`, which is gitignored.
 | 0 | Audit, no code | Done on `phase-0-audit`, PR #2. The report is in the PR, and a local copy is in `.work/phase-0.md`. Every decision is made (see Decisions) |
 | 1 | Generator and package | Done on `phase-1-generator`, PR #3. The report is in the PR, and a local copy is in `.work/phase-1.md`. Waiting on the owner |
 | 2 | Tree-shaking and size | Done on `phase-2-size`, PR #4. The report is in the PR, and a local copy is in `.work/phase-2.md`. Waiting on the owner |
-| 3 | Built-in subset for Quick UI | Not started |
+| 3 | Built-in subset for Quick UI | Done on `phase-3-built-in`, PR #5. The report is in the PR, and a local copy is in `.work/phase-3.md`. Waiting on the owner |
 | 4 | "Slightly rounder" trial | Not started |
 | 5 | Apply the rounding | Only if phase 4 is approved |
 | 6 | Release readiness, no publishing | Not started |
@@ -108,6 +108,11 @@ Every phase 0 question is answered.
   original data. That's 218 of 48,317 subpaths, and the savings stay at
   27.5% (rounded) and 25.9% (sharp). `scripts/lib/precision.mjs` has the
   rule.
+- **2026-11-26 (phase 3, waiting for the owner to confirm): Rating's star is the
+  outline.** T23's table names the fill set, but Rating paints one star drawing
+  with CSS fill and stroke. The fill drawing's own `fill="currentColor"` beats
+  that CSS, so empty stars would render full. The radio dot stays the fill
+  drawing. One line in `scripts/built-in-icons.mjs` switches the star back.
 
 ## Phases
 

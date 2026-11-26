@@ -30,7 +30,7 @@ const CAMEL = {
   "stroke-opacity": "strokeOpacity",
 }
 
-function reactName(attr) {
+export function reactName(attr) {
   if (CAMEL[attr]) return CAMEL[attr]
   if (attr.includes("-") || attr.includes(":"))
     throw new Error(`no React name for the SVG attribute "${attr}": add it to CAMEL in scripts/lib/emit.mjs`)
@@ -38,7 +38,7 @@ function reactName(attr) {
 }
 
 /** Numbers become JSX expressions (`strokeWidth={2}`), everything else a string. */
-function jsxValue(value) {
+export function jsxValue(value) {
   if (/^-?\d+(\.\d+)?$/.test(value)) return `{${value}}`
   if (/["{}]/.test(value)) throw new Error(`unsafe attribute value: ${value}`)
   return `"${value}"`

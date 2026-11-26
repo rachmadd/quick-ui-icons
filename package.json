@@ -30,7 +30,8 @@
     "readmes:fix": "node pipeline/check-readmes.mjs --fix",
     "icons:ci": "node pipeline/build.mjs --check && node scripts/generate.mjs && node pipeline/check-readmes.mjs && node pipeline/parallel.mjs \"tsc -p packages/react --noEmit --declaration false\" \"node pipeline/lint.mjs\"",
     "test": "pnpm build && node --test \"packages/react/test/*.test.mjs\"",
-    "size:budget": "pnpm build && node scripts/size-budget.mjs"
+    "size:budget": "pnpm build && node scripts/size-budget.mjs",
+    "built-in": "node scripts/generate-built-in.mjs"
   },
   "devDependencies": {
     "@types/react": "^19",

@@ -1,0 +1,121 @@
+// Tests for quick-ui's built-in icons file (scripts/generate-built-in.mjs).
+// The generator runs into a temp folder, esbuild compiles the TSX, and every
+// component is rendered and compared with the SVG it came from.
+
+import { test } from "node:test"
+import assert from "node:assert/strict"
+import { spawnSync } from "node:child_process"
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs"
+import { tmpdir } from "node:os"
+import { join } from "node:path"
+import { fileURLToPath, pathToFileURL } from "node:url"
+import { transformSync } from "esbuild"
+import { createElement } from "react"
+import { renderToStaticMarkup } from "react-dom/server"
+import { BUILT_IN_ICONS } from "../../../scripts/built-in-icons.mjs"
+
+const ROOT = fileURLToPath(new URL("../../..", import.meta.url))
+const FOLDER = { outline: "stroke", fill: "fill" }
+const WRAPPER_ROOT = new Set(["xmlns", "width", "height", "viewBox"])
+const MAX_ROUNDING_ERROR = 0.005 + 1e-9
+const NUMBER = /-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/gi
+
+function generate(out) {
+  const result = spawnSync(process.execPath, [join(ROOT, "scripts", "generate-built-in.mjs"), "--out", out], { encoding: "utf8" })
+  assert.equal(result.status, 0, result.stderr)
+  return readFileSync(out, "utf8")
+}
+
+const dir = mkdtempSync(join(tmpdir(), "built-in-"))
+const source = generate(join(dir, "icons.tsx"))
+
+/** Compiles the generated TSX and imports it, resolving React from this repo. */
+async function load() {
+  const { code } = transformSync(source, { loader: "tsx", jsx: "automatic", format: "esm" })
+  const file = join(ROOT, "packages", "react", "test", `.built-in-${process.pid}.mjs`)
+  writeFileSync(file, code)
+  try {
+    return await import(pathToFileURL(file).href)
+  } finally {
+    rmSync(file, { force: true })
+  }
+}
+const built = await load()
+
+const attrMap = (chunk) =>
+  Object.fromEntries([...chunk.matchAll(/([\w:-]+)="([^"]*)"/g)].map(([, k, v]) => [k, /^-?[\d.]+$/.test(v) ? String(Number(v)) : v]))
+const parse = (svg) => ({
+  root: attrMap(svg.match(/<svg\b([^>]*)>/)[1]),
+  paths: [...svg.matchAll(/<path\b([^>]*?)\/?>/g)].map(([, chunk]) => attrMap(chunk)),
+})
+
+function samePath(a, b) {
+  if (a.replace(NUMBER, "#") !== b.replace(NUMBER, "#")) return false
+  const x = a.match(NUMBER) ?? []
+  const y = b.match(NUMBER) ?? []
+  return x.every((n, i) => Math.abs(Number(n) - Number(y[i])) <= MAX_ROUNDING_ERROR)
+}
+
+function problems(entry) {
+  const svg = readFileSync(join(ROOT, "icons", FOLDER[entry.variant], `${entry.icon}.svg`), "utf8")
+  const want = parse(svg)
+  const got = parse(renderToStaticMarkup(createElement(built[entry.component])))
+  const label = `${entry.component} (${entry.icon} ${entry.variant})`
+  const out = []
+  for (const [key, value] of Object.entries(want.root))
+    if (!WRAPPER_ROOT.has(key) && got.root[key] !== value) out.push(`${label}: root ${key}="${got.root[key]}", source "${value}"`)
+  if (!("stroke" in want.root) && got.root.stroke !== "none") out.push(`${label}: an unstroked source rendered with a stroke`)
+  if (got.root["aria-hidden"] !== "true" || got.root.viewBox !== "0 0 24 24") out.push(`${label}: wrapper defaults missing`)
+  if (got.paths.length !== want.paths.length) out.push(`${label}: ${got.paths.length} paths, source has ${want.paths.length}`)
+  got.paths.forEach(({ d, ...rest }, i) => {
+    const { d: wantD, ...wantRest } = want.paths[i] ?? {}
+    if (!samePath(d ?? "", wantD ?? "")) out.push(`${label}: path ${i} differs beyond rounding`)
+    if (JSON.stringify(rest) !== JSON.stringify(wantRest)) out.push(`${label}: path ${i} attributes differ`)
+  })
+  return out
+}
+
+test("exports exactly the listed components, and the IconProps type", () => {
+  assert.deepEqual(Object.keys(built).sort(), BUILT_IN_ICONS.map((e) => e.component).sort())
+  assert.match(source, /^export type IconProps = ComponentProps<'svg'>$/m)
+})
+
+test("every component draws its source SVG, with the wrapper's paint where the source has none", () => {
+  assert.deepEqual(BUILT_IN_ICONS.flatMap(problems), [])
+})
+
+test("only the radio dot is a fill drawing, and nothing takes a variant", () => {
+  const fills = BUILT_IN_ICONS.filter((e) => e.variant === "fill").map((e) => e.component)
+  assert.deepEqual(fills, ["DotIcon"])
+  assert.doesNotMatch(source, /variant/)
+})
+
+test("Rating's star is a closed outline, so Rating's CSS can fill it or leave it empty", () => {
+  const star = renderToStaticMarkup(createElement(built.StarIcon))
+  const { root, paths } = parse(star)
+  assert.equal(root.fill, "none")
+  assert.equal(root.stroke, "currentColor")
+  assert.equal(paths.length, 1)
+  assert.equal(paths[0].fill, undefined, "a fill on the path would beat Rating's CSS fill")
+  assert.match(paths[0].d, /Z$/)
+})
+
+test("carries the generated header and the full MIT notice for Keyline and Quick UI", () => {
+  assert.match(source.split("\n")[0], /^\/\/ Generated by scripts\/generate-built-in\.mjs/)
+  assert.match(source, / \* Copyright \(c\) 2026 Keyline Icons\n \* Copyright \(c\) 2026 Quick UI\n/)
+  assert.match(source, /Permission is hereby granted, free of charge/)
+  assert.doesNotMatch(source, /use client/)
+})
+
+test("props pass through and aria-hidden can be overridden", () => {
+  const props = { className: "size-4", strokeWidth: 3, "aria-hidden": undefined, "aria-label": "Done" }
+  const { root } = parse(renderToStaticMarkup(createElement(built.CheckIcon, props)))
+  assert.equal(root.class, "size-4")
+  assert.equal(root["stroke-width"], "3")
+  assert.equal(root["aria-label"], "Done")
+  assert.equal(root["aria-hidden"], undefined)
+})
+
+test("the output is the same every run", () => {
+  assert.equal(generate(join(dir, "again.tsx")), source)
+})
