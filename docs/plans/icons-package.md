@@ -201,4 +201,5 @@ report says what's left for the owner to do.
 - `variant="auto"` (filling an icon when its parent is pressed or selected).
   The owner hasn't decided, so ask before adding it.
 - Any change to the quick-ui repo.
-- An icon browsing website.
+- An icon browsing website. A basic one was asked for later, separately:
+  see `icon-site.md`.
